@@ -17,9 +17,9 @@ const GridContainer = props => (
     <Grid 
       numBeats={props.bars * 4} 
       resolution={props.resolution} 
-      instruments={props.instruments} 
-      updatePattern={props.updatePattern}
+      instruments={props.instruments}
       playSample={props.playSample} />
+      updatePattern={props.updatePattern} />
     <RightPanel />
   </Div>
 );

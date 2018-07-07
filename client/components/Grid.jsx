@@ -16,7 +16,7 @@ class Grid extends React.Component {
   }
 
   createBeats() {
-    const {numBeats, resolution, instruments} = this.props;
+    const {numBeats, resolution, instruments, updatePattern} = this.props;
     const beats = [];
     for (let i = 0; i < numBeats; i++) {
       beats.push(<Beat 
@@ -24,8 +24,8 @@ class Grid extends React.Component {
         instruments={instruments}
         beat={i + 1}
         key={i}
-        updatePattern={this.updatePattern}
-        playSample={this.playSample} />);
+        playSample={this.playSample}
+        updatePattern={updatePattern} />);
     }
     return beats;
   }
