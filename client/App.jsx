@@ -45,7 +45,7 @@ class App extends React.Component {
   updatePattern(instrument, beat, subBeat) {
     const stepNum = (beat * 4) + subBeat - 1;
     this.setState((prevState) => {
-      newPattern = [...prevState.pattern];
+      const newPattern = [...prevState.pattern];
       newPattern[stepNum][instrument] = !prevState.pattern[stepNum][instrument];
       return {
         pattern: newPattern
