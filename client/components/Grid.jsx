@@ -1,5 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import Beat from './Beat.jsx';
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 class Grid extends React.Component {
   constructor(props) {
@@ -12,16 +19,21 @@ class Grid extends React.Component {
     const {numBeats, resolution, instruments} = this.props;
     const beats = [];
     for (let i = 0; i < numBeats; i++) {
-      beats.push(<Beat resolution={resolution} instruments={instruments} key={i} />);
+      beats.push(<Beat 
+        resolution={resolution} 
+        instruments={instruments}
+        beat={i + 1}
+        key={i}
+        updatePattern={this.updatePattern} />);
     }
     return beats;
   }
 
   render() {
     return (
-      <div>
+      <Div>
         { this.createBeats() }
-      </div>
+      </Div>
     );
   }
 }

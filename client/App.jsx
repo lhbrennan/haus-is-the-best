@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import GridContainer from './components/GridContainer.jsx';
 import MasterControl from './components/MasterControl.jsx';
 
@@ -38,18 +39,30 @@ class App extends React.Component {
         {kick: false, clap: false, snare: false, openHat: false, closedHat: false},
       ],
     };
+    this.updatePattern = this.updatePattern.bind(this);
+  }
+
+  updatePattern(instrument, beat, subBeat) {
+    const stepNum = (beat * 4) + subBeat - 1;
+    this.setState((prevState) => {
+      newPattern = [...prevState.pattern];
+      newPattern[stepNum][instrument] = !prevState.pattern[stepNum][instrument];
+      return {
+        pattern: newPattern
+      };
+    });
   }
 
   render() {
     const { resolution, bars, instruments} = this.state;
     return (
       <div>
-        HOUSE IS THE BEST OF ALL TIMEEEEEEEEEEEEE
         <MasterControl />
         <GridContainer 
           resolution={resolution} 
           bars={bars} 
-          instruments={instruments} />
+          instruments={instruments}
+          updatePattern={this.updatePattern} />
       </div>
     );
   }

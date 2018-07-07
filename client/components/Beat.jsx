@@ -1,19 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import InstrumentGroup from './InstrumentGroup.jsx';
 
-// const createInstrumentGroups = (numInstrumentGroups, numPads) => {
-//   const InstrumentGroups = [];
-//   for (let i = 0; i < numInstrumentGroups; i++) {
-//     InstrumentGroups.push(<InstrumentGroup key={i} numPads={numPads} />);
-//   }
-//   return InstrumentGroups;
-// }
-
-// const Beat = props => (
-//   <div>
-//     {createInstrumentGroups(props.numInstrumentGroups, props.resolution / 4)}
-//   </div>
-// );
+const Div = styled.div`
+  padding: 5px;
+  border-radius: 8px;
+  background: ${props => props.beat % 2 === 0 ? 'gainsboro' : 'azure'};
+`;
 
 class Beat extends React.Component {
   constructor(props) {
@@ -21,20 +15,19 @@ class Beat extends React.Component {
     this.state = {};
   }
 
-  createInstrumentGroups() {
-    const instrumentGroups = [];
-    for (let i = 0; i < this.props.numInstrumentGroups; i++) {
-      InstrumentGroups.push(<InstrumentGroup key={i} numPads={this.props.resolution / 4} />);
-    }
-    return InstrumentGroups;    
-  }
-
   render() {
-    const {instruments, resolution} = this.props;
+    const { instruments, resolution, beat } = this.props;
     return (
-      <div>
-        {instruments.map(instrument => <InstrumentGroup numPads={resolution / 4} key={instrument}/>)}
-      </div>
+      <Div beat={beat}>
+        {instruments.map(instrument => {
+          return <InstrumentGroup 
+            numPads={resolution / 4}
+            instrument={instrument}
+            beat={beat}
+            key={instrument}
+            updatePattern={this.updatePattern} />})
+        }
+      </Div>
     );
   }
 }
