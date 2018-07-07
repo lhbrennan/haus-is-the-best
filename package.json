@@ -1,0 +1,32 @@
+{
+  "name": "haus-is-the-best",
+  "version": "1.0.0",
+  "description": "read the title",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react-dev": "webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lhbrennan/haus-is-the-best.git"
+  },
+  "author": "Luke <lhbrennan@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lhbrennan/haus-is-the-best/issues"
+  },
+  "homepage": "https://github.com/lhbrennan/haus-is-the-best#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}
