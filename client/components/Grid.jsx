@@ -24,7 +24,8 @@ class Grid extends React.Component {
         instruments={instruments}
         beat={i + 1}
         key={i}
-        updatePattern={this.updatePattern} />);
+        updatePattern={this.updatePattern}
+        playSample={this.playSample} />);
     }
     return beats;
   }

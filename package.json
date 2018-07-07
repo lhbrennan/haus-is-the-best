@@ -26,6 +26,7 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "pizzicato": "^0.6.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "styled-components": "^3.3.3"

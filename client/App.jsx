@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import pizz from 'pizzicato'
+
 import GridContainer from './components/GridContainer.jsx';
 import MasterControl from './components/MasterControl.jsx';
 
@@ -39,7 +41,15 @@ class App extends React.Component {
         {kick: false, clap: false, snare: false, openHat: false, closedHat: false},
       ],
     };
+
+    const kick = new pizz.Sound('../samples/SampleMagic_tr909_kick_04.wav');
+
     this.updatePattern = this.updatePattern.bind(this);
+    this.playSample = this.playSample.bind(this);
+  }
+
+  playSample() {
+    kick.play();
   }
 
   updatePattern(instrument, beat, subBeat) {
@@ -62,7 +72,8 @@ class App extends React.Component {
           resolution={resolution} 
           bars={bars} 
           instruments={instruments}
-          updatePattern={this.updatePattern} />
+          updatePattern={this.updatePattern}
+          playSample={this.playSample} />
       </div>
     );
   }

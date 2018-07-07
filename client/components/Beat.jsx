@@ -25,7 +25,8 @@ class Beat extends React.Component {
             instrument={instrument}
             beat={beat}
             key={instrument}
-            updatePattern={this.updatePattern} />})
+            updatePattern={this.updatePattern}
+            playSample={this.playSample} />})
         }
       </Div>
     );

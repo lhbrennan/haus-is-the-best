@@ -19,7 +19,10 @@ class Pad extends React.Component {
   }
 
   handler() {
-    const { instrument, beat, subBeat, updatePattern } = this.props; 
+    const { instrument, beat, subBeat, updatePattern, playSample } = this.props;
+    if(!this.state.active) {
+      playSample();
+    }
     console.log(`${instrument}: ${beat}.${subBeat}`);
     updatePattern(instrument, beat, subBeat);
     this.setState((prevState) => {

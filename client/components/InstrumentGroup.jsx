@@ -17,7 +17,8 @@ class InstrumentGroup extends React.Component {
         subBeat={i + 1} 
         instrument={instrument} 
         key={i}
-        updatePattern={this.updatePattern} />);
+        updatePattern={this.updatePattern}
+        playSample={this.playSample} />);
     }
     return pads;
   }
