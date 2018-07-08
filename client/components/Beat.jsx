@@ -16,7 +16,7 @@ class Beat extends React.Component {
   }
 
   render() {
-    const { instruments, resolution, beat, updatePattern } = this.props;
+    const { instruments, resolution, beat, updatePattern, triggerSample } = this.props;
     return (
       <Div beat={beat}>
         {instruments.map(instrument => {
@@ -25,7 +25,7 @@ class Beat extends React.Component {
             instrument={instrument}
             beat={beat}
             key={instrument}
-            playSample={this.playSample}
+            triggerSample={triggerSample}
             updatePattern={updatePattern} />})
         }
       </Div>

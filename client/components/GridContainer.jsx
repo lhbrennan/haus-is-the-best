@@ -10,7 +10,6 @@ const Div = styled.div`
   flex-direction: row;
 `;
 
-
 const GridContainer = props => (
   <Div>
     <LeftPanel />
@@ -18,7 +17,7 @@ const GridContainer = props => (
       numBeats={props.bars * 4} 
       resolution={props.resolution} 
       instruments={props.instruments}
-      playSample={props.playSample} />
+      triggerSample={props.triggerSample}
       updatePattern={props.updatePattern} />
     <RightPanel />
   </Div>

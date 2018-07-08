@@ -2,7 +2,7 @@ import React from 'react';
 
 const MasterControl = props => (
   <div>
-    Master Control goes here
+    <button onClick={props.play}>Play</button>
   </div>
 );
 
