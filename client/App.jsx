@@ -14,7 +14,7 @@ class App extends React.Component {
       bars: 1,
       resolution: 16, // steps per bar
       bpm: 120, // beats per minute
-      swing: 3,
+      swing: 2.5,
       // pattern: new Array(16).fill().map(elem => ({kick: false, clap: false, snare: false, openHat: false, closedHat: false})),
       pattern: {
         kick: new Array(16).fill(0),
@@ -122,10 +122,13 @@ class App extends React.Component {
 
   nextStep() {
     const secondsPerBeat = 60.0 / this.state.bpm;
-    this.nextStepTime += (0.25 * secondsPerBeat);
+    const secondsPer16thNote = secondsPerBeat / 4;
 
     const newActiveStep = this.activeStep + 1;
     this.activeStep = (newActiveStep === 16 ? 0 : newActiveStep);
+
+    const swingFactor = (this.activeStep % 2 ? (1+(this.state.swing/10)) : (1-(this.state.swing/10)))
+    this.nextStepTime += (secondsPer16thNote * swingFactor);
   }
 
   playOsc(time, activeStep) {
