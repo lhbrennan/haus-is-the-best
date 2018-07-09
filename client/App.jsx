@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import GridContainer from './components/GridContainer.jsx';
 import MasterControl from './components/MasterControl.jsx';
@@ -26,6 +27,8 @@ class App extends React.Component {
       }
     };
     
+    this.username = lhb;
+    this.compositionName = test1;
     this.swing = 2.5;
     this.bpm = 120;
     this.instruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
@@ -62,6 +65,7 @@ class App extends React.Component {
     this.playNote = this.playNote.bind(this);
     this.updateSwing = this.updateSwing.bind(this);
     this.updateBpm = this.updateBpm.bind(this);
+    this.saveComposition = this.saveComposition.bind(this);
   }
 
   play() {
@@ -141,6 +145,15 @@ class App extends React.Component {
     console.log('updating BPM');
     this.bpm = event.target.value;
   }
+  saveComposition() {
+    axios.post('/compositions', {
+      username: this.username,
+      compositionName: this.compositionName,
+      pattern: this.state.pattern,
+      swing: this.swing,
+      bpm: this.bpm,
+    })
+  }
   // --------------------------------------------------------------------------
 
   loadSound(instrument, samplePath) {
@@ -173,7 +186,8 @@ class App extends React.Component {
         <MasterControl play={this.play}
           swing={this.swing}
           updateSwing={this.updateSwing}
-          updateBpm={this.updateBpm} />
+          updateBpm={this.updateBpm}
+          saveComposition={this.saveComposition} />
         <GridContainer 
           resolution={resolution} 
           bars={bars} 
