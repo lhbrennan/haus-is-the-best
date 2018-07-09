@@ -8,6 +8,7 @@ import RightPanel from './RightPanel.jsx';
 const Div = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
 `;
 
 const GridContainer = props => (

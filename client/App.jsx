@@ -5,6 +5,12 @@ import styled from 'styled-components';
 import GridContainer from './components/GridContainer.jsx';
 import MasterControl from './components/MasterControl.jsx';
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -66,6 +72,8 @@ class App extends React.Component {
     this.nextStep = this.nextStep.bind(this);
     this.playOsc = this.playOsc.bind(this);
     this.playNote = this.playNote.bind(this);
+    this.updateSwing = this.updateSwing.bind(this);
+    this.updateBpm = this.updateBpm.bind(this);
   }
 
   play() {
@@ -164,6 +172,7 @@ class App extends React.Component {
 
   }
 
+  // EVENT HANDLERS -----------------------------------------------------------
   updatePattern(instrument, beat, subBeat) {
     const stepNum = ((beat - 1) * 4) + subBeat - 1;
     this.setState((prevState) => {
@@ -175,6 +184,19 @@ class App extends React.Component {
       };
     });
   }
+  
+  updateSwing(event) {
+    console.log('updating Swing');
+    const value = event.target.value;
+    this.setState({swing: value});
+  }
+
+  updateBpm(event) {
+    console.log('updating BPM');
+    const value = event.target.value;
+    this.setState({bpm: value});
+  }
+  // --------------------------------------------------------------------------
 
   loadSound(instrument, samplePath) {
     let context = this.audioContext;
@@ -205,15 +227,17 @@ class App extends React.Component {
   render() {
     const { resolution, bars} = this.state;
     return (
-      <div>
-        <MasterControl play={this.play} />
+      <Wrapper>
+        <MasterControl play={this.play}
+          updateSwing={this.updateSwing}
+          updateBpm={this.updateBpm} />
         <GridContainer 
           resolution={resolution} 
           bars={bars} 
           instruments={this.instruments}
           updatePattern={this.updatePattern}
           triggerSample={this.triggerSample} />
-      </div>
+      </Wrapper>
     );
   }
 }
