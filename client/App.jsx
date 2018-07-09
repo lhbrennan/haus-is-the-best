@@ -96,11 +96,25 @@ class App extends React.Component {
     console.log('running scheduler...');
     while (this.nextStepTime < currentTime + this.scheduleAheadTime ) {
         console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
-        if([0, 4, 8, 12].includes(this.activeStep)) {
+        // if([0, 4, 8, 12].includes(this.activeStep)) {
           // this.sounds.closedHat.clone().play(this.nextStepTime);
           // this.playOsc(this.nextStepTime, this.activeStep);
-          this.playNote('closedHat', this.nextStepTime);
-          console.log(`scheduled step ${this.activeStep} for ${this.nextStepTime}`)
+          // this.playNote('closedHat', this.nextStepTime);
+          // console.log(`scheduled step ${this.activeStep} for ${this.nextStepTime}`)
+        // }
+
+        // if (this.state.pattern.kick[this.activeStep]) {
+        //   this.playNote('kick', this.nextStepTime);
+        // }
+        // if (this.state.pattern.clap[this.activeStep]) {
+        //   this.playNote('clap', this.nextStepTime);
+        // }
+
+
+        for (let instrument in this.state.pattern) {
+          if (this.state.pattern[instrument][this.activeStep]) {
+            this.playNote(instrument, this.nextStepTime);
+          }
         }
         this.nextStep();
     }
