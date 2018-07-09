@@ -12,14 +12,13 @@ const Div = styled.div`
 
 const GridContainer = props => (
   <Div>
-    <LeftPanel />
+    <LeftPanel instruments={props.instruments} />
     <Grid 
       numBeats={props.bars * 4} 
       resolution={props.resolution} 
       instruments={props.instruments}
       triggerSample={props.triggerSample}
       updatePattern={props.updatePattern} />
-    <RightPanel />
   </Div>
 );
 

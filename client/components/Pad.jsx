@@ -34,7 +34,7 @@ class Pad extends React.Component {
 
   render() {
     return (
-      <Button onClick={this.handler} active={this.state.active} >PAD</Button>
+      <Button onClick={this.handler} active={this.state.active} ></Button>
     );
   }
 }
