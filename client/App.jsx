@@ -15,7 +15,14 @@ class App extends React.Component {
       resolution: 16, // steps per bar
       bpm: 120, // beats per minute
       swing: 3,
-      pattern: new Array(16).fill().map(elem => ({kick: false, clap: false, snare: false, openHat: false, closedHat: false})),
+      // pattern: new Array(16).fill().map(elem => ({kick: false, clap: false, snare: false, openHat: false, closedHat: false})),
+      pattern: {
+        kick: new Array(16).fill(0),
+        clap: new Array(16).fill(0),
+        snare: new Array(16).fill(0),
+        openHat: new Array(16).fill(0),
+        closedHat: new Array(16).fill(0),
+      }
     };
     
     this.instruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
@@ -126,9 +133,6 @@ class App extends React.Component {
 
   playNote(instrument, noteTime) {
     const buffer = this.buffers[instrument];
-    console.log(`instrument: ${instrument}`);
-    console.log(buffer);
-
     const voice = this.audioContext.createBufferSource();
     voice.buffer = buffer;
     voice.connect(this.audioContext.destination);
@@ -139,14 +143,16 @@ class App extends React.Component {
   triggerSample(instrument) {
     // this.sounds[instrument].clone().play();
     this.playNote(instrument, 0);
+    console.log(this.state.pattern);
 
   }
 
   updatePattern(instrument, beat, subBeat) {
     const stepNum = ((beat - 1) * 4) + subBeat - 1;
     this.setState((prevState) => {
-      const newPattern = [...prevState.pattern];
-      newPattern[stepNum][instrument] = !prevState.pattern[stepNum][instrument];
+      const newPattern = {};
+      Object.assign(newPattern, prevState.pattern);
+      newPattern[instrument][stepNum] = 1 - prevState.pattern[instrument][stepNum];
       return {
         pattern: newPattern
       };
@@ -154,7 +160,6 @@ class App extends React.Component {
   }
 
   loadSound(instrument, samplePath) {
-    console.log(`loading ${instrument} sample`);
     let context = this.audioContext;
     let buffers = this.buffers;
     let request = new XMLHttpRequest();
