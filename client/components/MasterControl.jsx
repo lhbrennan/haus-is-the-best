@@ -44,7 +44,7 @@ const MasterControl = props => (
     </div>
     <div>
       <label>Swing</label>
-      <input type="text" onChange={props.updateSwing} defaultValue="3"/>
+      <input type="text" onChange={props.updateSwing} defaultValue={props.swing} />
     </div>
     <button>Reset</button>
   </Panel>

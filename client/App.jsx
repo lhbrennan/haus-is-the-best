@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-// import pizz from 'pizzicato'
 
 import GridContainer from './components/GridContainer.jsx';
 import MasterControl from './components/MasterControl.jsx';
@@ -14,14 +13,10 @@ const Wrapper = styled.div`
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       playing: false,
       bars: 1,
       resolution: 16, // steps per bar
-      bpm: 120, // beats per minute
-      swing: 2.5,
-      // pattern: new Array(16).fill().map(elem => ({kick: false, clap: false, snare: false, openHat: false, closedHat: false})),
       pattern: {
         kick: new Array(16).fill(0),
         clap: new Array(16).fill(0),
@@ -31,6 +26,8 @@ class App extends React.Component {
       }
     };
     
+    this.swing = 2.5;
+    this.bpm = 120;
     this.instruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
     this.timerInterval = 50; // milliseconds
     this.nextStepTime = 0; // seconds
@@ -38,7 +35,6 @@ class App extends React.Component {
     this.audioContext = new AudioContext();
     this.timerId = null;
     this.scheduleAheadTime = .125; // seconds
-    this.loadSound = this.loadSound.bind(this);
 
     this.samplePaths = {
       kick: '/samples/SampleMagic_tr909_kick_04.wav',
@@ -56,21 +52,13 @@ class App extends React.Component {
       openHat: null,
     };
 
-    // this.sounds = {
-    //   kick: new pizz.Sound(this.samplePaths.kick),
-    //   clap: new pizz.Sound(this.samplePaths.clap),
-    //   snare: new pizz.Sound(this.samplePaths.clap),
-    //   closedHat: new pizz.Sound(this.samplePaths.closedHat),
-    //   openHat: new pizz.Sound(this.samplePaths.openHat),
-    // };
-
+    this.loadSound = this.loadSound.bind(this);
     this.updatePattern = this.updatePattern.bind(this);
     this.triggerSample = this.triggerSample.bind(this);
     this.play = this.play.bind(this);
     this.timer = this.timer.bind(this);
     this.scheduler = this.scheduler.bind(this);
     this.nextStep = this.nextStep.bind(this);
-    this.playOsc = this.playOsc.bind(this);
     this.playNote = this.playNote.bind(this);
     this.updateSwing = this.updateSwing.bind(this);
     this.updateBpm = this.updateBpm.bind(this);
@@ -99,26 +87,9 @@ class App extends React.Component {
 
   scheduler() {
     const currentTime = this.audioContext.currentTime;
-    // while there are notes that will need to play before the next interval, 
-    // schedule them and advance the pointer.
     console.log('running scheduler...');
     while (this.nextStepTime < currentTime + this.scheduleAheadTime ) {
         console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
-        // if([0, 4, 8, 12].includes(this.activeStep)) {
-          // this.sounds.closedHat.clone().play(this.nextStepTime);
-          // this.playOsc(this.nextStepTime, this.activeStep);
-          // this.playNote('closedHat', this.nextStepTime);
-          // console.log(`scheduled step ${this.activeStep} for ${this.nextStepTime}`)
-        // }
-
-        // if (this.state.pattern.kick[this.activeStep]) {
-        //   this.playNote('kick', this.nextStepTime);
-        // }
-        // if (this.state.pattern.clap[this.activeStep]) {
-        //   this.playNote('clap', this.nextStepTime);
-        // }
-
-
         for (let instrument in this.state.pattern) {
           if (this.state.pattern[instrument][this.activeStep]) {
             this.playNote(instrument, this.nextStepTime);
@@ -129,31 +100,14 @@ class App extends React.Component {
   }
 
   nextStep() {
-    const secondsPerBeat = 60.0 / this.state.bpm;
+    const secondsPerBeat = 60.0 / this.bpm;
     const secondsPer16thNote = secondsPerBeat / 4;
 
     const newActiveStep = this.activeStep + 1;
     this.activeStep = (newActiveStep === 16 ? 0 : newActiveStep);
 
-    const swingFactor = (this.activeStep % 2 ? (1+(this.state.swing/10)) : (1-(this.state.swing/10)))
+    const swingFactor = (this.activeStep % 2 ? (1+(this.swing/10)) : (1-(this.swing/10)))
     this.nextStepTime += (secondsPer16thNote * swingFactor);
-  }
-
-  playOsc(time, activeStep) {
-    const noteLength = .05;
-    let osc = this.audioContext.createOscillator();
-    osc.connect(this.audioContext.destination);
-
-    if (! (activeStep % 16) ) {         // beat 0 == low pitch
-      osc.frequency.value = 220.0;
-    } else if (activeStep % 4) {          // quarter notes = medium pitch
-      osc.frequency.value = 440.0;
-    } else {                           // other 16th notes = high pitch
-      osc.frequency.value = 880.0;
-    }
-
-    osc.start(time);
-    osc.stop(time + noteLength);
   }
 
   playNote(instrument, noteTime) {
@@ -164,51 +118,39 @@ class App extends React.Component {
     voice.start(noteTime);
   }
 
-
   triggerSample(instrument) {
-    // this.sounds[instrument].clone().play();
     this.playNote(instrument, 0);
-    console.log(this.state.pattern);
-
   }
 
   // EVENT HANDLERS -----------------------------------------------------------
   updatePattern(instrument, beat, subBeat) {
     const stepNum = ((beat - 1) * 4) + subBeat - 1;
     this.setState((prevState) => {
-      const newPattern = {};
-      Object.assign(newPattern, prevState.pattern);
+      const newPattern = Object.assign({}, prevState.pattern);
       newPattern[instrument][stepNum] = 1 - prevState.pattern[instrument][stepNum];
-      return {
-        pattern: newPattern
-      };
+      return { pattern: newPattern };
     });
   }
   
   updateSwing(event) {
     console.log('updating Swing');
-    const value = event.target.value;
-    this.setState({swing: value});
+    this.swing = event.target.value;
   }
 
   updateBpm(event) {
     console.log('updating BPM');
-    const value = event.target.value;
-    this.setState({bpm: value});
+    this.bpm = event.target.value;
   }
   // --------------------------------------------------------------------------
 
   loadSound(instrument, samplePath) {
-    let context = this.audioContext;
-    let buffers = this.buffers;
     let request = new XMLHttpRequest();
     request.open('GET', samplePath, true);
     request.responseType = 'arraybuffer';
 
-    // Decode asynchronously
-    request.onload = function() {
-      context.decodeAudioData(request.response, function(buffer) {
-        buffers[instrument] = buffer;
+    request.onload = () => {
+      this.audioContext.decodeAudioData(request.response, (buffer) => {
+        this.buffers[instrument] = buffer;
       }, function(err) {
         console.log('error loading sample: ', err);
         throw err;
@@ -229,6 +171,7 @@ class App extends React.Component {
     return (
       <Wrapper>
         <MasterControl play={this.play}
+          swing={this.swing}
           updateSwing={this.updateSwing}
           updateBpm={this.updateBpm} />
         <GridContainer 
