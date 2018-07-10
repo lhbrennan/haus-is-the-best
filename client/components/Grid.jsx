@@ -16,7 +16,7 @@ class Grid extends React.Component {
   }
 
   createBeats() {
-    const {numBeats, resolution, instruments, updatePattern, triggerSample} = this.props;
+    const { numBeats, resolution, instruments, updatePattern, triggerSample } = this.props;
     const beats = [];
     for (let i = 0; i < numBeats; i++) {
       beats.push(<Beat 

@@ -47,7 +47,7 @@ const MasterControl = props => (
       <input type="text" onChange={props.updateSwing} defaultValue={props.swing} />
     </div>
     <button onClick={props.saveComposition}>Save</button>
-    <button onClick={props.saveComposition}>Load</button>
+    <button onClick={props.loadComposition}>Load</button>
     <button>Reset</button>
   </Panel>
 );

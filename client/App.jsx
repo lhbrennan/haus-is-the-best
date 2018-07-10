@@ -27,8 +27,8 @@ class App extends React.Component {
       }
     };
     
-    this.username = lhb;
-    this.compositionName = test1;
+    this.username = 'lhb';
+    this.compositionName = 'test1';
     this.swing = 2.5;
     this.bpm = 120;
     this.instruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
@@ -66,6 +66,7 @@ class App extends React.Component {
     this.updateSwing = this.updateSwing.bind(this);
     this.updateBpm = this.updateBpm.bind(this);
     this.saveComposition = this.saveComposition.bind(this);
+    this.loadComposition = this.loadComposition.bind(this);
   }
 
   play() {
@@ -145,7 +146,9 @@ class App extends React.Component {
     console.log('updating BPM');
     this.bpm = event.target.value;
   }
+
   saveComposition() {
+    console.log('saveComposition...')
     axios.post('/compositions', {
       username: this.username,
       compositionName: this.compositionName,
@@ -153,6 +156,36 @@ class App extends React.Component {
       swing: this.swing,
       bpm: this.bpm,
     })
+  }
+
+  loadComposition() {
+    console.log('loadComposition...')
+    axios.get('/compositions', {
+      params: {
+        username: this.username,
+        compositionName: this.compositionName,
+      }
+    })
+      .then((results) => {
+        const composition = results.data;
+        console.log('loading composition: ');
+        console.log(composition);
+        this.setState(prevState => {
+          return {
+            pattern: composition.pattern
+          };
+        }, () => {
+          console.log('loaded pattern')
+          console.log(this.state.pattern);
+        });
+        this.swing = composition.swing;
+        this.bpm = composition.bpm;
+        this.username = composition.username;
+        this.compositionName = composition.compositionName;
+      })
+      .catch((err) => {
+        console.error(err);
+      })
   }
   // --------------------------------------------------------------------------
 
@@ -187,8 +220,10 @@ class App extends React.Component {
           swing={this.swing}
           updateSwing={this.updateSwing}
           updateBpm={this.updateBpm}
-          saveComposition={this.saveComposition} />
-        <GridContainer 
+          saveComposition={this.saveComposition}
+          loadComposition={this.loadComposition} />
+        <GridContainer
+          pattern={this.state.pattern} 
           resolution={resolution} 
           bars={bars} 
           instruments={this.instruments}

@@ -16,6 +16,7 @@ const GridContainer = props => (
     <LeftPanel instruments={props.instruments} />
     <Grid 
       numBeats={props.bars * 4} 
+      pattern={props.pattern}
       resolution={props.resolution} 
       instruments={props.instruments}
       triggerSample={props.triggerSample}
