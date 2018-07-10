@@ -16,11 +16,12 @@ class Beat extends React.Component {
   }
 
   render() {
-    const { instruments, resolution, beat, updatePattern, triggerSample } = this.props;
+    const { pattern, instruments, resolution, beat, updatePattern, triggerSample } = this.props;
     return (
       <Div beat={beat}>
         {instruments.map(instrument => {
-          return <InstrumentGroup 
+          return <InstrumentGroup
+            pattern={pattern} 
             numPads={resolution / 4}
             instrument={instrument}
             beat={beat}

@@ -48,7 +48,7 @@ const MasterControl = props => (
     </div>
     <button onClick={props.saveComposition}>Save</button>
     <button onClick={props.loadComposition}>Load</button>
-    <button>Reset</button>
+    <button onClick={props.reset}>Reset</button>
   </Panel>
 );
 

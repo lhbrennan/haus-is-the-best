@@ -11,6 +11,14 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
+const emptyPattern = {
+    kick: new Array(16).fill(0),
+    clap: new Array(16).fill(0),
+    snare: new Array(16).fill(0),
+    openHat: new Array(16).fill(0),
+    closedHat: new Array(16).fill(0),
+  }
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,13 +26,7 @@ class App extends React.Component {
       playing: false,
       bars: 1,
       resolution: 16, // steps per bar
-      pattern: {
-        kick: new Array(16).fill(0),
-        clap: new Array(16).fill(0),
-        snare: new Array(16).fill(0),
-        openHat: new Array(16).fill(0),
-        closedHat: new Array(16).fill(0),
-      }
+      pattern: emptyPattern,
     };
     
     this.username = 'lhb';
@@ -67,6 +69,9 @@ class App extends React.Component {
     this.updateBpm = this.updateBpm.bind(this);
     this.saveComposition = this.saveComposition.bind(this);
     this.loadComposition = this.loadComposition.bind(this);
+    this.reset = this.reset.bind(this);
+    this.stop = this.stop.bind(this);
+    this.scheduleActiveNotes = this.scheduleActiveNotes.bind(this);
   }
 
   play() {
@@ -80,10 +85,14 @@ class App extends React.Component {
         this.nextStepTime = 0;
         this.timer();
       } else {
-        clearInterval(this.timerId);
-        this.timerId = null;
+        this.stop();
       }
     });
+  }
+
+  stop() {
+    clearInterval(this.timerId);
+    this.timerId = null;
   }
 
   timer() {
@@ -95,12 +104,16 @@ class App extends React.Component {
     console.log('running scheduler...');
     while (this.nextStepTime < currentTime + this.scheduleAheadTime ) {
         console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
-        for (let instrument in this.state.pattern) {
-          if (this.state.pattern[instrument][this.activeStep]) {
-            this.playNote(instrument, this.nextStepTime);
-          }
-        }
+        this.scheduleActiveNotes()
         this.nextStep();
+    }
+  }
+
+  scheduleActiveNotes() {
+    for (let instrument in this.state.pattern) {
+      if (this.state.pattern[instrument][this.activeStep]) {
+        this.playNote(instrument, this.nextStepTime);
+      }
     }
   }
 
@@ -187,6 +200,13 @@ class App extends React.Component {
         console.error(err);
       })
   }
+
+  reset() {
+    this.setState({
+      pattern: emptyPattern
+    })
+    this.stop();
+  }
   // --------------------------------------------------------------------------
 
   loadSound(instrument, samplePath) {
@@ -221,7 +241,8 @@ class App extends React.Component {
           updateSwing={this.updateSwing}
           updateBpm={this.updateBpm}
           saveComposition={this.saveComposition}
-          loadComposition={this.loadComposition} />
+          loadComposition={this.loadComposition}
+          reset={this.reset} />
         <GridContainer
           pattern={this.state.pattern} 
           resolution={resolution} 

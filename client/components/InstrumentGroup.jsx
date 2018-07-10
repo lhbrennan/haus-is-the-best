@@ -9,10 +9,11 @@ class InstrumentGroup extends React.Component {
   }
 
   createPads() {
-    const { numPads, beat, instrument, updatePattern, triggerSample } = this.props;
+    const { pattern, numPads, beat, instrument, updatePattern, triggerSample } = this.props;
     const pads = [];
     for (let i = 0; i < numPads; i++) {
       pads.push(<Pad 
+        active={!!pattern[instrument][((beat - 1) * 4) + (i + 1) - 1]}
         beat={beat}
         subBeat={i + 1} 
         instrument={instrument} 

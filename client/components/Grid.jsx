@@ -16,10 +16,11 @@ class Grid extends React.Component {
   }
 
   createBeats() {
-    const { numBeats, resolution, instruments, updatePattern, triggerSample } = this.props;
+    const { pattern, numBeats, resolution, instruments, updatePattern, triggerSample } = this.props;
     const beats = [];
     for (let i = 0; i < numBeats; i++) {
-      beats.push(<Beat 
+      beats.push(<Beat
+        pattern={pattern} 
         resolution={resolution} 
         instruments={instruments}
         beat={i + 1}

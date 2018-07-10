@@ -12,29 +12,28 @@ const Button = styled.button`
 class Pad extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      active: false,
-    };
+    this.state = {};
+
     this.handler = this.handler.bind(this);
   }
 
   handler() {
     const { instrument, beat, subBeat, updatePattern, triggerSample } = this.props;
-    if(!this.state.active) {
+    if(!this.props.active) {
       triggerSample(instrument);
     }
     console.log(`${instrument}: ${beat}.${subBeat}`);
     updatePattern(instrument, beat, subBeat);
-    this.setState((prevState) => {
-      return {
-        active: !prevState.active
-      };
-    });
+    // this.setState((prevState) => {
+    //   return {
+    //     active: !prevState.active
+    //   };
+    // });
   }
 
   render() {
     return (
-      <Button onClick={this.handler} active={this.state.active} ></Button>
+      <Button onClick={this.handler} active={this.props.active} ></Button>
     );
   }
 }
