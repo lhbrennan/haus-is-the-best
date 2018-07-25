@@ -29,12 +29,12 @@ class App extends React.Component {
         closedHat: new Array(16).fill(0),
       },
       padResponse: false,
-      swing: 2.5;
+      swing: 2.5,
+      bpm: 120,
     };
     // bpm, swing, and maybe other stuff should be in state
     this.username = 'lhb';
     this.compositionName = 'test1';
-    this.bpm = 120;
     this.instruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
     this.timerInterval = 50; // milliseconds
     this.nextStepTime = 0; // seconds
@@ -121,8 +121,8 @@ class App extends React.Component {
   }
 
   nextStep() {
-    const { swing } = this.state;
-    const secondsPerBeat = 60.0 / this.bpm;
+    const { swing, bpm } = this.state;
+    const secondsPerBeat = 60.0 / bpm;
     const secondsPer16thNote = secondsPerBeat / 4;
 
     const newActiveStep = this.activeStep + 1;
@@ -159,18 +159,18 @@ class App extends React.Component {
   }
 
   updateBpm(event) {
-    console.log('updating BPM');
-    this.bpm = event.target.value;
+    this.setState({bpm: event.target.value})
   }
 
   saveComposition() {
     console.log('saveComposition...')
+    const { swing, bpm, pattern } = this.state;
     axios.post('/compositions', {
       username: this.username,
       compositionName: this.compositionName,
-      pattern: this.state.pattern,
-      swing: this.state.swing,
-      bpm: this.bpm,
+      pattern: pattern,
+      swing: swing,
+      bpm: bpm,
     })
   }
 
@@ -189,8 +189,10 @@ class App extends React.Component {
             pattern: composition.pattern
           };
         });
-        this.setState({swing: composition.swing})
-        this.bpm = composition.bpm;
+        this.setState({
+          swing: composition.swing,
+          bpm: composition.bpm,
+        })
         this.username = composition.username;
         this.compositionName = composition.compositionName;
       })
@@ -243,7 +245,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { resolution, bars, swing} = this.state;
+    const { resolution, bars, swing,padResponse, pattern, playing } = this.state;
     return (
       <Wrapper>
         <MasterControl play={this.play}
@@ -253,15 +255,15 @@ class App extends React.Component {
           saveComposition={this.saveComposition}
           loadComposition={this.loadComposition}
           reset={this.reset}
-          playing={this.state.playing}
+          playing={playing}
           togglePadResponse={this.togglePadResponse} />
         <GridContainer
-          pattern={this.state.pattern} 
+          pattern={pattern} 
           resolution={resolution} 
           bars={bars} 
           instruments={this.instruments}
           updatePattern={this.updatePattern}
-          padResponse={this.state.padResponse}
+          padResponse={padResponse}
           triggerSample={this.triggerSample} />
       </Wrapper>
     );
