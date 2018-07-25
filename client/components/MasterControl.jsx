@@ -5,50 +5,64 @@ const Panel = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-left: 200px;
-  padding-right: 200px;
+  padding: 30px 175px;
 `;
 
-// const Button = styled.button`
-//   display:inline-block;
-//   padding:0.35em 1.2em;
-//   border:0.1em solid #FFFFFF;
-//   margin:0 0.3em 0.3em 0;
-//   border-radius:0.12em;
-//   box-sizing: border-box;
-//   text-decoration:none;
-//   font-family:'Roboto',sans-serif;
-//   font-weight:300;
-//   color:#FFFFFF;
-//   text-align:center;
-//   transition: all 0.2s;
-// `;
+const AsphaultButton = styled.button`
+  position: relative;
+  vertical-align: top;
+  Width: 80px;
+  height: 45px;
+  padding: 0;
+  font-size: 22px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: #34495e;
+  border: 0;
+  border-bottom: 2px solid #263849;
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #263849;
+  box-shadow: inset 0 -2px #263849;
+`;
 
-// a.button1:hover{
-//  color:#000000;
-//  background-color:#FFFFFF;
-// }
-// @media all and (max-width:30em){
-//  a.button1{
-//   display:block;
-//   margin:0.4em auto;
-//  }
-// }
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Label = styled.label`
+  font-size: 22px;
+  margin-right: 7px;  
+`;
+
+const Input = styled.input`
+  width: 30px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+`;
 
 const MasterControl = props => (
   <Panel>
-    <button onClick={props.play}>Play</button>
-    <div>
-      <label>BPM</label>
-      <input type="text" onChange={props.updateBpm} defaultValue="120"/>
-    </div>
-    <div>
-      <label>Swing</label>
-      <input type="text" onChange={props.updateSwing} defaultValue={props.swing} />
-    </div>
-    <button onClick={props.saveComposition}>Save</button>
-    <button onClick={props.loadComposition}>Load</button>
-    <button onClick={props.reset}>Reset</button>
+    <AsphaultButton onClick={props.play}>
+      {props.playing ? 'Stop' : 'Play'}
+    </AsphaultButton>
+    <Container>
+      <Label>BPM</Label>
+      <Input type="text" onChange={props.updateBpm} defaultValue="120"/>
+    </Container>
+    <Container>
+      <Label>Swing</Label>
+      <Input type="text" onChange={props.updateSwing} defaultValue={props.swing} />
+    </Container>
+    <AsphaultButton onClick={props.saveComposition}>Save</AsphaultButton>
+    <AsphaultButton onClick={props.loadComposition}>Load</AsphaultButton>
+    <AsphaultButton onClick={props.reset}>Reset</AsphaultButton>
+    <AsphaultButton onClick={props.togglePadResponse}>Toggle</AsphaultButton>
   </Panel>
 );
 

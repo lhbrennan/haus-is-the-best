@@ -1,3 +1,6 @@
+// figure out better way of handling defaultPattern
+// combine update bpm with update swing?
+
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -11,14 +14,6 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const emptyPattern = {
-    kick: new Array(16).fill(0),
-    clap: new Array(16).fill(0),
-    snare: new Array(16).fill(0),
-    openHat: new Array(16).fill(0),
-    closedHat: new Array(16).fill(0),
-  }
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -26,9 +21,16 @@ class App extends React.Component {
       playing: false,
       bars: 1,
       resolution: 16, // steps per bar
-      pattern: emptyPattern,
+      pattern: {
+        kick: new Array(16).fill(0),
+        clap: new Array(16).fill(0),
+        snare: new Array(16).fill(0),
+        openHat: new Array(16).fill(0),
+        closedHat: new Array(16).fill(0),
+      },
+      padResponse: false,
     };
-    
+    // bpm, swing, and maybe other stuff should be in state
     this.username = 'lhb';
     this.compositionName = 'test1';
     this.swing = 2.5;
@@ -41,7 +43,7 @@ class App extends React.Component {
     this.timerId = null;
     this.scheduleAheadTime = .125; // seconds
 
-    this.samplePaths = {
+    this.pathsToSamples = {
       kick: '/samples/SampleMagic_tr909_kick_04.wav',
       clap: '/samples/SampleMagic_tr909_clap.wav',
       snare: '/samples/SampleMagic_tr909_snare_04.wav',
@@ -72,6 +74,7 @@ class App extends React.Component {
     this.reset = this.reset.bind(this);
     this.stop = this.stop.bind(this);
     this.scheduleActiveNotes = this.scheduleActiveNotes.bind(this);
+    this.togglePadResponse = this.togglePadResponse.bind(this);
   }
 
   play() {
@@ -181,15 +184,10 @@ class App extends React.Component {
     })
       .then((results) => {
         const composition = results.data;
-        console.log('loading composition: ');
-        console.log(composition);
         this.setState(prevState => {
           return {
             pattern: composition.pattern
           };
-        }, () => {
-          console.log('loaded pattern')
-          console.log(this.state.pattern);
         });
         this.swing = composition.swing;
         this.bpm = composition.bpm;
@@ -203,9 +201,21 @@ class App extends React.Component {
 
   reset() {
     this.setState({
-      pattern: emptyPattern
+      pattern: {
+        kick: new Array(16).fill(0),
+        clap: new Array(16).fill(0),
+        snare: new Array(16).fill(0),
+        openHat: new Array(16).fill(0),
+        closedHat: new Array(16).fill(0),
+      }
     })
     this.stop();
+  }
+
+  togglePadResponse() {
+    this.setState((prevState) => {
+      return { padResponse: !prevState.padResponse };
+    });
   }
   // --------------------------------------------------------------------------
 
@@ -227,7 +237,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.instruments.forEach(instrument => {
-      this.loadSound(instrument, this.samplePaths[instrument]);
+      this.loadSound(instrument, this.pathsToSamples[instrument]);
       
     })
   }
@@ -242,13 +252,16 @@ class App extends React.Component {
           updateBpm={this.updateBpm}
           saveComposition={this.saveComposition}
           loadComposition={this.loadComposition}
-          reset={this.reset} />
+          reset={this.reset}
+          playing={this.state.playing}
+          togglePadResponse={this.togglePadResponse} />
         <GridContainer
           pattern={this.state.pattern} 
           resolution={resolution} 
           bars={bars} 
           instruments={this.instruments}
           updatePattern={this.updatePattern}
+          padResponse={this.state.padResponse}
           triggerSample={this.triggerSample} />
       </Wrapper>
     );

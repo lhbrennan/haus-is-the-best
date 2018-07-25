@@ -9,7 +9,7 @@ class InstrumentGroup extends React.Component {
   }
 
   createPads() {
-    const { pattern, numPads, beat, instrument, updatePattern, triggerSample } = this.props;
+    const { pattern, numPads, beat, instrument, updatePattern, triggerSample, padResponse } = this.props;
     const pads = [];
     for (let i = 0; i < numPads; i++) {
       pads.push(<Pad 
@@ -19,6 +19,7 @@ class InstrumentGroup extends React.Component {
         instrument={instrument} 
         key={i}
         triggerSample={triggerSample}
+        padResponse={padResponse}
         updatePattern={updatePattern} />);
     }
     return pads;

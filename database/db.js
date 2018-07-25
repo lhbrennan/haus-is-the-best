@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// how will you handle credentials in deployment (this environment variables)
 mongoose.connect('mongodb://localhost/drum-machine');
 
 const db = mongoose.connection;

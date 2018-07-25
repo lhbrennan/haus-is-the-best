@@ -20,6 +20,7 @@ const GridContainer = props => (
       resolution={props.resolution} 
       instruments={props.instruments}
       triggerSample={props.triggerSample}
+      padResponse={props.padResponse}
       updatePattern={props.updatePattern} />
   </Div>
 );

@@ -19,7 +19,7 @@ class Pad extends React.Component {
 
   handler() {
     const { instrument, beat, subBeat, updatePattern, triggerSample } = this.props;
-    if(!this.props.active) {
+    if(!this.props.active && this.props.padResponse) {
       triggerSample(instrument);
     }
     console.log(`${instrument}: ${beat}.${subBeat}`);
