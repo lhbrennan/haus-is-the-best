@@ -29,11 +29,11 @@ class App extends React.Component {
         closedHat: new Array(16).fill(0),
       },
       padResponse: false,
+      swing: 2.5;
     };
     // bpm, swing, and maybe other stuff should be in state
     this.username = 'lhb';
     this.compositionName = 'test1';
-    this.swing = 2.5;
     this.bpm = 120;
     this.instruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
     this.timerInterval = 50; // milliseconds
@@ -121,13 +121,14 @@ class App extends React.Component {
   }
 
   nextStep() {
+    const { swing } = this.state;
     const secondsPerBeat = 60.0 / this.bpm;
     const secondsPer16thNote = secondsPerBeat / 4;
 
     const newActiveStep = this.activeStep + 1;
     this.activeStep = (newActiveStep === 16 ? 0 : newActiveStep);
 
-    const swingFactor = (this.activeStep % 2 ? (1+(this.swing/10)) : (1-(this.swing/10)))
+    const swingFactor = (this.activeStep % 2 ? (1+(swing/10)) : (1-(swing/10)))
     this.nextStepTime += (secondsPer16thNote * swingFactor);
   }
 
@@ -154,8 +155,7 @@ class App extends React.Component {
   }
   
   updateSwing(event) {
-    console.log('updating Swing');
-    this.swing = event.target.value;
+    this.setState({swing: event.target.value})
   }
 
   updateBpm(event) {
@@ -169,7 +169,7 @@ class App extends React.Component {
       username: this.username,
       compositionName: this.compositionName,
       pattern: this.state.pattern,
-      swing: this.swing,
+      swing: this.state.swing,
       bpm: this.bpm,
     })
   }
@@ -189,7 +189,7 @@ class App extends React.Component {
             pattern: composition.pattern
           };
         });
-        this.swing = composition.swing;
+        this.setState({swing: composition.swing})
         this.bpm = composition.bpm;
         this.username = composition.username;
         this.compositionName = composition.compositionName;
@@ -243,11 +243,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { resolution, bars} = this.state;
+    const { resolution, bars, swing} = this.state;
     return (
       <Wrapper>
         <MasterControl play={this.play}
-          swing={this.swing}
+          swing={swing}
           updateSwing={this.updateSwing}
           updateBpm={this.updateBpm}
           saveComposition={this.saveComposition}
