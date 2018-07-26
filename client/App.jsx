@@ -31,18 +31,20 @@ class App extends React.Component {
       padResponse: false,
       swing: 2.5,
       bpm: 120,
+      overallVolume: 1,
     };
-    // bpm, swing, and maybe other stuff should be in state
-    this.username = 'lhb';
-    this.compositionName = 'test1';
+
+    this.audioContext = new AudioContext();
+    this.gainNode = null;
+    this.username = 'lhb'; // default username, will change with oauth
+    this.compositionName = 'test1'; // default composition name
     this.instruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
     this.timerInterval = 50; // milliseconds
     this.nextStepTime = 0; // seconds
     this.activeStep = 0; // 16 total steps
-    this.audioContext = new AudioContext();
     this.timerId = null;
     this.scheduleAheadTime = .125; // seconds
-    this.offset = .05;
+    this.offset = .05; // seconds -- used to prevent screech on initial playback
 
     this.pathsToSamples = {
       kick: '/samples/SampleMagic_tr909_kick_04.wav',
@@ -78,6 +80,9 @@ class App extends React.Component {
     this.togglePadResponse = this.togglePadResponse.bind(this);
   }
 
+  /*---------------------------------------------------------------------------
+    AUDIO TIMING SYSTEM
+  ---------------------------------------------------------------------------*/
   play() {
     this.setState((prevState) => {
       return {
@@ -86,6 +91,9 @@ class App extends React.Component {
     }, () => {
       if (this.state.playing) {
         this.audioContext = new AudioContext();
+        this.gainNode = this.audioContext.createGain();
+        this.gainNode.connect(this.audioContext.destination);
+        this.gainNode.gain.value = this.state.overallVolume;
         this.activeStep = 0;
         this.nextStepTime = this.offset;
         this.timer();
@@ -138,15 +146,17 @@ class App extends React.Component {
     const buffer = this.buffers[instrument];
     const voice = this.audioContext.createBufferSource();
     voice.buffer = buffer;
-    voice.connect(this.audioContext.destination);
+    voice.connect(this.gainNode);
     voice.start(noteTime);
   }
 
+  /*---------------------------------------------------------------------------
+    EVENT HANDLERS
+  ---------------------------------------------------------------------------*/
   triggerSample(instrument) {
     this.playNote(instrument, 0);
   }
 
-  // EVENT HANDLERS -----------------------------------------------------------
   updatePattern(instrument, beat, subBeat) {
     const stepNum = ((beat - 1) * 4) + subBeat - 1;
     this.setState((prevState) => {
@@ -156,8 +166,8 @@ class App extends React.Component {
     });
   }
   
-  updateSwing(event) {
-    this.setState({swing: event.target.value})
+  updateSwing(event, setting) {
+    this.setState({[setting]: event.target.value})
   }
 
   updateBpm(event) {
@@ -221,7 +231,16 @@ class App extends React.Component {
       return { padResponse: !prevState.padResponse };
     });
   }
-  // --------------------------------------------------------------------------
+  /*---------------------------------------------------------------------------
+    LOADING & RENDERING
+  ---------------------------------------------------------------------------*/
+
+  componentDidMount() {
+    this.instruments.forEach(instrument => {
+      this.loadSound(instrument, this.pathsToSamples[instrument]);
+      
+    })
+  }
 
   loadSound(instrument, samplePath) {
     let request = new XMLHttpRequest();
@@ -237,13 +256,6 @@ class App extends React.Component {
       });
     }
     request.send();
-  }
-
-  componentDidMount() {
-    this.instruments.forEach(instrument => {
-      this.loadSound(instrument, this.pathsToSamples[instrument]);
-      
-    })
   }
 
   render() {

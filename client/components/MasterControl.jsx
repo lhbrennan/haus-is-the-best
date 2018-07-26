@@ -57,6 +57,10 @@ const MasterControl = props => (
     </Container>
     <Container>
       <Label>Swing</Label>
+      <Input type="text" onChange={(event) => props.updateSwing(event, 'swing')} defaultValue={props.swing} />
+    </Container>
+    <Container>
+      <Label>Volume</Label>
       <Input type="text" onChange={props.updateSwing} defaultValue={props.swing} />
     </Container>
     <AsphaultButton onClick={props.saveComposition}>Save</AsphaultButton>
