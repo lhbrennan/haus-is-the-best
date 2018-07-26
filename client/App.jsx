@@ -32,6 +32,11 @@ class App extends React.Component {
       swing: 2.5,
       bpm: 120,
       overallVolume: 1,
+      kickVolume: 1,
+      clapVolume: 1,
+      snareVolume: 1,
+      openHatVolume: .3,
+      closedHatVolume: .2,
     };
 
     this.audioContext = new AudioContext();
@@ -145,7 +150,10 @@ class App extends React.Component {
     const buffer = this.buffers[instrument];
     const voice = this.audioContext.createBufferSource();
     voice.buffer = buffer;
-    voice.connect(this.gainNode);
+    const instrumentGainNode = this.audioContext.createGain();
+    instrumentGainNode.connect(this.gainNode);
+    instrumentGainNode.gain.value = this.state[`${instrument}Volume`];
+    voice.connect(instrumentGainNode);
     voice.start(noteTime);
   }
 

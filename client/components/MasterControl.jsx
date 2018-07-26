@@ -46,27 +46,27 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-const MasterControl = props => (
+const MasterControl = ({ play, playing, updateSetting, bpm, swing, overallVolume, saveComposition, loadComposition, reset, togglePadResponse }) => (
   <Panel>
-    <AsphaultButton onClick={props.play}>
-      {props.playing ? 'Stop' : 'Play'}
+    <AsphaultButton onClick={play}>
+      {playing ? 'Stop' : 'Play'}
     </AsphaultButton>
     <Container>
       <Label>BPM</Label>
-      <Input type="text" onChange={(e) => props.updateSetting(e, 'bpm')} defaultValue={props.bpm}/>
+      <Input type="text" onChange={(e) => updateSetting(e, 'bpm')} defaultValue={bpm}/>
     </Container>
     <Container>
       <Label>Swing</Label>
-      <Input type="text" onChange={(e) => props.updateSetting(e, 'swing')} defaultValue={props.swing} />
+      <Input type="text" onChange={(e) => updateSetting(e, 'swing')} defaultValue={swing} />
     </Container>
     <Container>
       <Label>Volume</Label>
-      <Input type="text" onChange={(e) => props.updateSetting(e, 'overallVolume')} defaultValue={props.overallVolume} />
+      <Input type="text" onChange={(e) => updateSetting(e, 'overallVolume')} defaultValue={overallVolume} />
     </Container>
-    <AsphaultButton onClick={props.saveComposition}>Save</AsphaultButton>
-    <AsphaultButton onClick={props.loadComposition}>Load</AsphaultButton>
-    <AsphaultButton onClick={props.reset}>Reset</AsphaultButton>
-    <AsphaultButton onClick={props.togglePadResponse}>Toggle</AsphaultButton>
+    <AsphaultButton onClick={saveComposition}>Save</AsphaultButton>
+    <AsphaultButton onClick={loadComposition}>Load</AsphaultButton>
+    <AsphaultButton onClick={reset}>Reset</AsphaultButton>
+    <AsphaultButton onClick={togglePadResponse}>Toggle</AsphaultButton>
   </Panel>
 );
 
