@@ -27,10 +27,29 @@ const AsphaultButton = styled.button`
   box-shadow: inset 0 -2px #263849;
 `;
 
-const Container = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const SliderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  display: inline-block;
+  width: 20px;
+  height: 150px;
+  padding: 0;
+`;
+
+const Slider = styled.input`
+  width: 110px;
+  height: 20px;
+  margin: 0;
+  transform-origin: 75px 75px;
+  transform: rotate(-90deg);
 `;
 
 const Label = styled.label`
@@ -51,18 +70,22 @@ const MasterControl = ({ play, playing, updateSetting, bpm, swing, overallVolume
     <AsphaultButton onClick={play}>
       {playing ? 'Stop' : 'Play'}
     </AsphaultButton>
-    <Container>
+    <ButtonContainer>
       <Label>BPM</Label>
       <Input type="text" onChange={(e) => updateSetting(e, 'bpm')} defaultValue={bpm}/>
-    </Container>
-    <Container>
+    </ButtonContainer>
+    <ButtonContainer>
       <Label>Swing</Label>
-      <Input type="text" onChange={(e) => updateSetting(e, 'swing')} defaultValue={swing} />
-    </Container>
-    <Container>
+      <SliderContainer>
+        <Slider type="range" min="0" max="5" step=".25" onChange={(e) => updateSetting(e, 'swing')} defaultValue={swing} />
+      </SliderContainer>
+    </ButtonContainer>
+    <ButtonContainer>
       <Label>Volume</Label>
-      <Input type="text" onChange={(e) => updateSetting(e, 'overallVolume')} defaultValue={overallVolume} />
-    </Container>
+      <SliderContainer>
+        <Slider type="range" min="0" max="1" step=".05" onChange={(e) => updateSetting(e, 'overallVolume')} defaultValue={overallVolume} />
+      </SliderContainer>
+    </ButtonContainer>
     <AsphaultButton onClick={saveComposition}>Save</AsphaultButton>
     <AsphaultButton onClick={loadComposition}>Load</AsphaultButton>
     <AsphaultButton onClick={reset}>Reset</AsphaultButton>

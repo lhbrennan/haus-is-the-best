@@ -177,6 +177,13 @@ class App extends React.Component {
     this.setState({[setting]: event.target.value})
   }
 
+  changeVolume(e) {
+  var volume = e.target.value;
+  // use an x*x curve (x-squared) since linear (x) does not sound good
+  var fraction = parseInt(element.value) / parseInt(element.max);
+  this.gainNode.gain.value = fraction * fraction;
+};
+
   saveComposition() {
     console.log('saveComposition...')
     const { swing, bpm, pattern } = this.state;
