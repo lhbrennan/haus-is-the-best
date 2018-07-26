@@ -32,11 +32,13 @@ class App extends React.Component {
       swing: 2.5,
       bpm: 120,
       overallVolume: 1,
-      kickVolume: 1,
-      clapVolume: 1,
-      snareVolume: 1,
-      openHatVolume: .3,
-      closedHatVolume: .2,
+      volumes: {
+        kick: 1,
+        clap: .8,
+        snare: 1,
+        openHat: .5,
+        closedHat: .5,
+      },
     };
 
     this.audioContext = new AudioContext();
@@ -82,6 +84,7 @@ class App extends React.Component {
     this.stop = this.stop.bind(this);
     this.scheduleActiveNotes = this.scheduleActiveNotes.bind(this);
     this.togglePadResponse = this.togglePadResponse.bind(this);
+    this.changeVolume = this.changeVolume.bind(this);
   }
 
   /*---------------------------------------------------------------------------
@@ -150,9 +153,12 @@ class App extends React.Component {
     const buffer = this.buffers[instrument];
     const voice = this.audioContext.createBufferSource();
     voice.buffer = buffer;
+
     const instrumentGainNode = this.audioContext.createGain();
     instrumentGainNode.connect(this.gainNode);
-    instrumentGainNode.gain.value = this.state[`${instrument}Volume`];
+    const volume = this.state.volumes[instrument];
+    instrumentGainNode.gain.value = volume;
+
     voice.connect(instrumentGainNode);
     voice.start(noteTime);
   }
@@ -177,11 +183,14 @@ class App extends React.Component {
     this.setState({[setting]: event.target.value})
   }
 
-  changeVolume(e) {
-  var volume = e.target.value;
-  // use an x*x curve (x-squared) since linear (x) does not sound good
-  var fraction = parseInt(element.value) / parseInt(element.max);
-  this.gainNode.gain.value = fraction * fraction;
+  changeVolume(e, instrument) {
+  var volume = e.target.value * e.target.value; // use x-squared since linear does not sound good
+  console.log(`changing ${instrument} volume to ${volume}`);
+  this.setState(prevState => {
+    const newVolumes = Object.assign({}, prevState.volumes);
+    newVolumes[instrument] = volume;
+    return { volumes: newVolumes };
+  });
 };
 
   saveComposition() {
@@ -269,7 +278,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { resolution, bars, swing, bpm, overallVolume, padResponse, pattern, playing } = this.state;
+    const { resolution, bars, swing, bpm, overallVolume, volumes, padResponse, pattern, playing } = this.state;
     return (
       <Wrapper>
         <MasterControl play={this.play}
@@ -289,7 +298,9 @@ class App extends React.Component {
           instruments={this.instruments}
           updatePattern={this.updatePattern}
           padResponse={padResponse}
-          triggerSample={this.triggerSample} />
+          triggerSample={this.triggerSample}
+          volumes={volumes}
+          changeVolume={this.changeVolume} />
       </Wrapper>
     );
   }

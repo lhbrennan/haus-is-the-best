@@ -22,6 +22,10 @@ const GridContainer = props => (
       triggerSample={props.triggerSample}
       padResponse={props.padResponse}
       updatePattern={props.updatePattern} />
+    <RightPanel
+      volumes={props.volumes}
+      instruments={props.instruments}
+      changeVolume={props.changeVolume} />
   </Div>
 );
 
