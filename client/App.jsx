@@ -42,6 +42,7 @@ class App extends React.Component {
     this.audioContext = new AudioContext();
     this.timerId = null;
     this.scheduleAheadTime = .125; // seconds
+    this.offset = .05;
 
     this.pathsToSamples = {
       kick: '/samples/SampleMagic_tr909_kick_04.wav',
@@ -84,8 +85,9 @@ class App extends React.Component {
       };
     }, () => {
       if (this.state.playing) {
+        this.audioContext = new AudioContext();
         this.activeStep = 0;
-        this.nextStepTime = 0;
+        this.nextStepTime = this.offset;
         this.timer();
       } else {
         this.stop();
@@ -103,7 +105,7 @@ class App extends React.Component {
   }
 
   scheduler() {
-    const currentTime = this.audioContext.currentTime;
+    const currentTime = this.audioContext.currentTime + this.offset;
     console.log('running scheduler...');
     while (this.nextStepTime < currentTime + this.scheduleAheadTime ) {
         console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
