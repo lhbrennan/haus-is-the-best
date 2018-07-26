@@ -70,8 +70,7 @@ class App extends React.Component {
     this.scheduler = this.scheduler.bind(this);
     this.nextStep = this.nextStep.bind(this);
     this.playNote = this.playNote.bind(this);
-    this.updateSwing = this.updateSwing.bind(this);
-    this.updateBpm = this.updateBpm.bind(this);
+    this.updateSetting = this.updateSetting.bind(this);
     this.saveComposition = this.saveComposition.bind(this);
     this.loadComposition = this.loadComposition.bind(this);
     this.reset = this.reset.bind(this);
@@ -166,12 +165,8 @@ class App extends React.Component {
     });
   }
   
-  updateSwing(event, setting) {
+  updateSetting(event, setting) {
     this.setState({[setting]: event.target.value})
-  }
-
-  updateBpm(event) {
-    this.setState({bpm: event.target.value})
   }
 
   saveComposition() {
@@ -259,13 +254,14 @@ class App extends React.Component {
   }
 
   render() {
-    const { resolution, bars, swing,padResponse, pattern, playing } = this.state;
+    const { resolution, bars, swing, bpm, overallVolume, padResponse, pattern, playing } = this.state;
     return (
       <Wrapper>
         <MasterControl play={this.play}
           swing={swing}
-          updateSwing={this.updateSwing}
-          updateBpm={this.updateBpm}
+          bpm={bpm}
+          overallVolume={overallVolume}
+          updateSetting={this.updateSetting}
           saveComposition={this.saveComposition}
           loadComposition={this.loadComposition}
           reset={this.reset}

@@ -53,15 +53,15 @@ const MasterControl = props => (
     </AsphaultButton>
     <Container>
       <Label>BPM</Label>
-      <Input type="text" onChange={props.updateBpm} defaultValue="120"/>
+      <Input type="text" onChange={(e) => props.updateSetting(e, 'bpm')} defaultValue={props.bpm}/>
     </Container>
     <Container>
       <Label>Swing</Label>
-      <Input type="text" onChange={(event) => props.updateSwing(event, 'swing')} defaultValue={props.swing} />
+      <Input type="text" onChange={(e) => props.updateSetting(e, 'swing')} defaultValue={props.swing} />
     </Container>
     <Container>
       <Label>Volume</Label>
-      <Input type="text" onChange={props.updateSwing} defaultValue={props.swing} />
+      <Input type="text" onChange={(e) => props.updateSetting(e, 'overallVolume')} defaultValue={props.overallVolume} />
     </Container>
     <AsphaultButton onClick={props.saveComposition}>Save</AsphaultButton>
     <AsphaultButton onClick={props.loadComposition}>Load</AsphaultButton>
