@@ -1,17 +1,14 @@
-// figure out better way of handling defaultPattern
-// combine update bpm with update swing?
-
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import GridContainer from './components/GridContainer.jsx';
-import MasterControl from './components/MasterControl.jsx';
+import GridContainer from './components/GridContainer';
+import MasterControl from './components/MasterControl';
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
 `;
 
 class App extends React.Component {
@@ -34,10 +31,10 @@ class App extends React.Component {
       overallVolume: 1,
       volumes: {
         kick: 1,
-        clap: .8,
+        clap: 0.8,
         snare: 1,
-        openHat: .5,
-        closedHat: .5,
+        openHat: 0.5,
+        closedHat: 0.5,
       },
     };
 
@@ -50,8 +47,8 @@ class App extends React.Component {
     this.nextStepTime = 0; // seconds
     this.activeStep = 0; // 16 total steps
     this.timerId = null;
-    this.scheduleAheadTime = .125; // seconds
-    this.offset = .05; // seconds -- used to prevent screech on initial playback
+    this.scheduleAheadTime = 0.125; // seconds
+    this.offset = 0.05; // seconds -- used to prevent screech on initial playback
 
     this.pathsToSamples = {
       kick: '/samples/SampleMagic_tr909_kick_04.wav',
@@ -88,19 +85,38 @@ class App extends React.Component {
   }
 
   /*---------------------------------------------------------------------------
-    AUDIO TIMING SYSTEM
+  AUDIO TIMING SYSTEM
   ---------------------------------------------------------------------------*/
+  componentDidMount() {
+    this.instruments.forEach((instrument) => {
+      this.loadSound(instrument, this.pathsToSamples[instrument]);
+    });
+  }
+
+  loadSound(instrument, samplePath) {
+    const request = new XMLHttpRequest();
+    request.open('GET', samplePath, true);
+    request.responseType = 'arraybuffer';
+
+    request.onload = () => {
+      this.audioContext.decodeAudioData(request.response, (buffer) => {
+        this.buffers[instrument] = buffer;
+      }, (err) => {
+        console.log('error loading sample: ', err);
+        throw err;
+      });
+    };
+    request.send();
+  }
+
   play() {
-    this.setState((prevState) => {
-      return {
-        playing: !prevState.playing
-      };
-    }, () => {
-      if (this.state.playing) {
+    this.setState(prevState => ({ playing: !prevState.playing }), () => {
+      const { playing, overallVolume } = this.state;
+      if (playing) {
         this.audioContext = new AudioContext();
         this.gainNode = this.audioContext.createGain();
         this.gainNode.connect(this.audioContext.destination);
-        this.gainNode.gain.value = this.state.overallVolume;
+        this.gainNode.gain.value = overallVolume;
         this.activeStep = 0;
         this.nextStepTime = this.offset;
         this.timer();
@@ -122,19 +138,21 @@ class App extends React.Component {
   scheduler() {
     const currentTime = this.audioContext.currentTime + this.offset;
     console.log('running scheduler...');
-    while (this.nextStepTime < currentTime + this.scheduleAheadTime ) {
-        console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
-        this.scheduleActiveNotes()
-        this.nextStep();
+    while (this.nextStepTime < currentTime + this.scheduleAheadTime) {
+      console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
+      this.scheduleActiveNotes();
+      this.nextStep();
     }
   }
 
   scheduleActiveNotes() {
-    for (let instrument in this.state.pattern) {
-      if (this.state.pattern[instrument][this.activeStep]) {
+    const { pattern } = this.state;
+    const instruments = Object.keys(pattern);
+    instruments.forEach((instrument) => {
+      if (pattern[instrument][this.activeStep]) {
         this.playNote(instrument, this.nextStepTime);
       }
-    }
+    });
   }
 
   nextStep() {
@@ -145,18 +163,19 @@ class App extends React.Component {
     const newActiveStep = this.activeStep + 1;
     this.activeStep = (newActiveStep === 16 ? 0 : newActiveStep);
 
-    const swingFactor = (this.activeStep % 2 ? (1+(swing/10)) : (1-(swing/10)))
+    const swingFactor = (this.activeStep % 2 ? (1 + (swing / 10)) : (1 - (swing / 10)));
     this.nextStepTime += (secondsPer16thNote * swingFactor);
   }
 
   playNote(instrument, noteTime) {
+    const { volumes } = this.state;
     const buffer = this.buffers[instrument];
     const voice = this.audioContext.createBufferSource();
     voice.buffer = buffer;
 
     const instrumentGainNode = this.audioContext.createGain();
     instrumentGainNode.connect(this.gainNode);
-    const volume = this.state.volumes[instrument];
+    const volume = volumes[instrument];
     instrumentGainNode.gain.value = volume;
 
     voice.connect(instrumentGainNode);
@@ -175,61 +194,57 @@ class App extends React.Component {
     this.setState((prevState) => {
       const newPattern = Object.assign({}, prevState.pattern);
       newPattern[instrument][stepNum] = 1 - prevState.pattern[instrument][stepNum];
-      return { pattern: newPattern };
+      return { pattern: newPattern };
     });
   }
-  
+
   updateSetting(event, setting) {
-    this.setState({[setting]: event.target.value})
+    this.setState({ [setting]: event.target.value });
   }
 
   changeVolume(e, instrument) {
-  var volume = e.target.value * e.target.value; // use x-squared since linear does not sound good
-  console.log(`changing ${instrument} volume to ${volume}`);
-  this.setState(prevState => {
-    const newVolumes = Object.assign({}, prevState.volumes);
-    newVolumes[instrument] = volume;
-    return { volumes: newVolumes };
-  });
-};
+    const volume = e.target.value * e.target.value; // use x-squared since linear does not sound good
+    console.log(`changing ${instrument} volume to ${volume}`);
+    this.setState((prevState) => {
+      const newVolumes = Object.assign({}, prevState.volumes);
+      newVolumes[instrument] = volume;
+      return { volumes: newVolumes };
+    });
+  }
 
   saveComposition() {
-    console.log('saveComposition...')
+    console.log('saveComposition...');
     const { swing, bpm, pattern } = this.state;
     axios.post('/compositions', {
       username: this.username,
       compositionName: this.compositionName,
-      pattern: pattern,
-      swing: swing,
-      bpm: bpm,
-    })
+      pattern,
+      swing,
+      bpm,
+    });
   }
 
   loadComposition() {
-    console.log('loadComposition...')
+    console.log('loadComposition...');
     axios.get('/compositions', {
       params: {
         username: this.username,
         compositionName: this.compositionName,
-      }
+      },
     })
       .then((results) => {
         const composition = results.data;
-        this.setState(prevState => {
-          return {
-            pattern: composition.pattern
-          };
-        });
         this.setState({
+          pattern: composition.pattern,
           swing: composition.swing,
           bpm: composition.bpm,
-        })
+        });
         this.username = composition.username;
         this.compositionName = composition.compositionName;
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   }
 
   reset() {
@@ -240,48 +255,26 @@ class App extends React.Component {
         snare: new Array(16).fill(0),
         openHat: new Array(16).fill(0),
         closedHat: new Array(16).fill(0),
-      }
-    })
+      },
+    });
     this.stop();
   }
 
   togglePadResponse() {
-    this.setState((prevState) => {
-      return { padResponse: !prevState.padResponse };
-    });
+    this.setState(prevState => ({ padResponse: !prevState.padResponse }));
   }
   /*---------------------------------------------------------------------------
-    LOADING & RENDERING
+    RENDERING
   ---------------------------------------------------------------------------*/
 
-  componentDidMount() {
-    this.instruments.forEach(instrument => {
-      this.loadSound(instrument, this.pathsToSamples[instrument]);
-      
-    })
-  }
-
-  loadSound(instrument, samplePath) {
-    let request = new XMLHttpRequest();
-    request.open('GET', samplePath, true);
-    request.responseType = 'arraybuffer';
-
-    request.onload = () => {
-      this.audioContext.decodeAudioData(request.response, (buffer) => {
-        this.buffers[instrument] = buffer;
-      }, function(err) {
-        console.log('error loading sample: ', err);
-        throw err;
-      });
-    }
-    request.send();
-  }
-
   render() {
-    const { resolution, bars, swing, bpm, overallVolume, volumes, padResponse, pattern, playing } = this.state;
+    const {
+      resolution, bars, swing, bpm, overallVolume, volumes, padResponse, pattern, playing,
+    } = this.state;
     return (
       <Wrapper>
-        <MasterControl play={this.play}
+        <MasterControl
+          play={this.play}
           swing={swing}
           bpm={bpm}
           overallVolume={overallVolume}
@@ -290,17 +283,19 @@ class App extends React.Component {
           loadComposition={this.loadComposition}
           reset={this.reset}
           playing={playing}
-          togglePadResponse={this.togglePadResponse} />
+          togglePadResponse={this.togglePadResponse}
+        />
         <GridContainer
-          pattern={pattern} 
-          resolution={resolution} 
-          bars={bars} 
+          pattern={pattern}
+          resolution={resolution}
+          bars={bars}
           instruments={this.instruments}
           updatePattern={this.updatePattern}
           padResponse={padResponse}
           triggerSample={this.triggerSample}
           volumes={volumes}
-          changeVolume={this.changeVolume} />
+          changeVolume={this.changeVolume}
+        />
       </Wrapper>
     );
   }

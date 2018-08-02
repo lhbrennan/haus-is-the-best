@@ -1,19 +1,24 @@
+import path from 'path';
+
 module.exports = {
-  entry: __dirname + '/client/index.jsx',
+  entry: path.join(__dirname, '/client/index.jsx'),
   module: {
     rules: [
-      { 
+      {
+        resolve: {
+          extensions: ['.js', '.jsx'],
+        },
         test: [/\.jsx$/],
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
           presets: ['env', 'react'],
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
-   output: {
+  output: {
     filename: 'bundle.js',
-    path: __dirname + '/public'
-  }
+    path: path.join(__dirname, '/public'),
+  },
 };
