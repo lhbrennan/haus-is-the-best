@@ -11,6 +11,15 @@ flex-direction: column;
 justify-content: center;
 `;
 
+// kind of hacky defining this outside the App component...
+const defaultPattern = {
+  kick: new Array(16).fill(0),
+  clap: new Array(16).fill(0),
+  snare: new Array(16).fill(0),
+  openHat: new Array(16).fill(0),
+  closedHat: new Array(16).fill(0),
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,13 +27,7 @@ class App extends React.Component {
       playing: false,
       bars: 1,
       resolution: 16, // steps per bar
-      pattern: {
-        kick: new Array(16).fill(0),
-        clap: new Array(16).fill(0),
-        snare: new Array(16).fill(0),
-        openHat: new Array(16).fill(0),
-        closedHat: new Array(16).fill(0),
-      },
+      pattern: defaultPattern,
       padResponse: false,
       swing: 2.5,
       bpm: 120,
@@ -203,7 +206,8 @@ class App extends React.Component {
   }
 
   changeVolume(e, instrument) {
-    const volume = e.target.value * e.target.value; // use x-squared since linear does not sound good
+    // use x-squared since linear does not sound good
+    const volume = e.target.value * e.target.value;
     console.log(`changing ${instrument} volume to ${volume}`);
     this.setState((prevState) => {
       const newVolumes = Object.assign({}, prevState.volumes);
@@ -248,16 +252,10 @@ class App extends React.Component {
   }
 
   reset() {
-    this.setState({
-      pattern: {
-        kick: new Array(16).fill(0),
-        clap: new Array(16).fill(0),
-        snare: new Array(16).fill(0),
-        openHat: new Array(16).fill(0),
-        closedHat: new Array(16).fill(0),
-      },
-    });
     this.stop();
+    this.setState({
+      pattern: defaultPattern,
+    });
   }
 
   togglePadResponse() {
