@@ -16,18 +16,18 @@ const Button = styled.button`
 `;
 
 // TODO: Refactor to stateless component
-class Pad extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+const Pad = (props) => {
+  const {
+    instrument,
+    beat,
+    subBeat,
+    updatePattern,
+    triggerSample,
+    velocity,
+    padResponse,
+  } = props;
 
-    this.handler = this.handler.bind(this);
-  }
-
-  handler() {
-    const {
-      instrument, beat, subBeat, updatePattern, triggerSample, velocity, padResponse,
-    } = this.props;
+  function handler() {
     if (!velocity && padResponse) {
       triggerSample(instrument);
     }
@@ -35,12 +35,9 @@ class Pad extends React.Component {
     updatePattern(instrument, beat, subBeat);
   }
 
-  render() {
-    const { velocity } = this.props;
-    return (
-      <Button onClick={this.handler} velocity={velocity} />
-    );
-  }
-}
+  return (
+    <Button onClick={handler} velocity={velocity} />
+  );
+};
 
 export default Pad;
