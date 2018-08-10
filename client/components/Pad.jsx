@@ -15,7 +15,6 @@ const Button = styled.button`
   width: 50px;
 `;
 
-// TODO: Refactor to stateless component
 const Pad = (props) => {
   const {
     instrument,

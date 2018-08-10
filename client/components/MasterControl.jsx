@@ -72,7 +72,7 @@ const MasterControl = ({ play, playing, updateSetting, bpm, swing, overallVolume
     </AsphaultButton>
     <ButtonContainer>
       <Label>BPM</Label>
-      <Input type="text" onChange={(e) => updateSetting(e, 'bpm')} defaultValue={bpm}/>
+      <Input type="text" onBlur={(e) => updateSetting(e, 'bpm')} defaultValue={bpm}/>
     </ButtonContainer>
     <ButtonContainer>
       <Label>Swing</Label>
