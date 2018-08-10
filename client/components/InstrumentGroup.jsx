@@ -12,15 +12,17 @@ class InstrumentGroup extends React.Component {
     const { pattern, numPads, beat, instrument, updatePattern, triggerSample, padResponse } = this.props;
     const pads = [];
     for (let i = 0; i < numPads; i++) {
-      pads.push(<Pad 
-        active={!!pattern[instrument][((beat - 1) * 4) + (i + 1) - 1]}
+      const stepNum = ((beat - 1) * 4) + (i + 1) - 1;
+      pads.push(<Pad
+        velocity={pattern[instrument][stepNum]}
         beat={beat}
-        subBeat={i + 1} 
-        instrument={instrument} 
+        subBeat={i + 1}
+        instrument={instrument}
         key={i}
         triggerSample={triggerSample}
         padResponse={padResponse}
-        updatePattern={updatePattern} />);
+        updatePattern={updatePattern}
+      />);
     }
     return pads;
   }

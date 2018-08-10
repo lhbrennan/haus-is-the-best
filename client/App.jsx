@@ -152,8 +152,9 @@ class App extends React.Component {
     const { pattern } = this.state;
     const instruments = Object.keys(pattern);
     instruments.forEach((instrument) => {
-      if (pattern[instrument][this.activeStep]) {
-        this.playNote(instrument, this.nextStepTime);
+      const velocity = pattern[instrument][this.activeStep];
+      if (velocity) {
+        this.playNote(instrument, this.nextStepTime, velocity);
       }
     });
   }
@@ -170,7 +171,7 @@ class App extends React.Component {
     this.nextStepTime += (secondsPer16thNote * swingFactor);
   }
 
-  playNote(instrument, noteTime) {
+  playNote(instrument, noteTime, velocity) {
     const { volumes } = this.state;
     const buffer = this.buffers[instrument];
     const voice = this.audioContext.createBufferSource();
@@ -179,7 +180,7 @@ class App extends React.Component {
     const instrumentGainNode = this.audioContext.createGain();
     instrumentGainNode.connect(this.gainNode);
     const volume = volumes[instrument];
-    instrumentGainNode.gain.value = volume;
+    instrumentGainNode.gain.value = volume * (velocity / 5);
 
     voice.connect(instrumentGainNode);
     voice.start(noteTime);
@@ -195,9 +196,16 @@ class App extends React.Component {
   updatePattern(instrument, beat, subBeat) {
     const stepNum = ((beat - 1) * 4) + subBeat - 1;
     this.setState((prevState) => {
-      const newPattern = Object.assign({}, prevState.pattern);
-      newPattern[instrument][stepNum] = 1 - prevState.pattern[instrument][stepNum];
-      return { pattern: newPattern };
+      const updated = Object.assign({}, prevState.pattern);
+      if (updated[instrument][stepNum] === 0) {
+        updated[instrument][stepNum] = 5;
+      } else if (updated[instrument][stepNum] === 1) {
+        updated[instrument][stepNum] = 0;
+      } else {
+        updated[instrument][stepNum] = prevState.pattern[instrument][stepNum] - 2;
+      }
+      console.log('Velocity', updated[instrument][stepNum]);
+      return { pattern: updated };
     });
   }
 
