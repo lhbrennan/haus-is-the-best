@@ -1,13 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-import { Provider, connect } from 'react-redux';
 import styled from 'styled-components';
-import createStore from './store';
+import { connect } from 'react-redux';
 
 import GridContainer from './components/GridContainer';
 import MasterControl from './components/MasterControl';
-
-const store = createStore({ bpm: 120 });
+import updateBpm from './actions';
 
 const Wrapper = styled.div`
 display: flex;
@@ -252,8 +250,8 @@ class App extends React.Component {
         this.setState({
           pattern: composition.pattern,
           swing: composition.swing,
-          bpm: composition.bpm,
         });
+        updateBpm(composition.bpm);
         this.username = composition.username;
         this.compositionName = composition.compositionName;
       })
@@ -281,32 +279,30 @@ class App extends React.Component {
       resolution, bars, swing, overallVolume, volumes, padResponse, pattern, playing,
     } = this.state;
     return (
-      <Provider store={store}>
-        <Wrapper>
-          <MasterControl
-            play={this.play}
-            swing={swing}
-            overallVolume={overallVolume}
-            updateSetting={this.updateSetting}
-            saveComposition={this.saveComposition}
-            loadComposition={this.loadComposition}
-            reset={this.reset}
-            playing={playing}
-            togglePadResponse={this.togglePadResponse}
-          />
-          <GridContainer
-            pattern={pattern}
-            resolution={resolution}
-            bars={bars}
-            instruments={this.instruments}
-            updatePattern={this.updatePattern}
-            padResponse={padResponse}
-            triggerSample={this.triggerSample}
-            volumes={volumes}
-            changeVolume={this.changeVolume}
-          />
-        </Wrapper>
-      </Provider>
+      <Wrapper>
+        <MasterControl
+          play={this.play}
+          swing={swing}
+          overallVolume={overallVolume}
+          updateSetting={this.updateSetting}
+          saveComposition={this.saveComposition}
+          loadComposition={this.loadComposition}
+          reset={this.reset}
+          playing={playing}
+          togglePadResponse={this.togglePadResponse}
+        />
+        <GridContainer
+          pattern={pattern}
+          resolution={resolution}
+          bars={bars}
+          instruments={this.instruments}
+          updatePattern={this.updatePattern}
+          padResponse={padResponse}
+          triggerSample={this.triggerSample}
+          volumes={volumes}
+          changeVolume={this.changeVolume}
+        />
+      </Wrapper>
     );
   }
 }

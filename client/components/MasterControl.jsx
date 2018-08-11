@@ -67,7 +67,7 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-const MasterControl = ({ play, playing, updateSetting, updateBpm, bpm, swing, overallVolume, saveComposition, loadComposition, reset, togglePadResponse }) => (
+const MasterControl = ({ play, playing, updateSetting, bpm, swing, overallVolume, saveComposition, loadComposition, reset, togglePadResponse }) => (
   <Panel>
     <AsphaultButton onClick={play}>
       {playing ? 'Stop' : 'Play'}
@@ -97,10 +97,6 @@ const MasterControl = ({ play, playing, updateSetting, updateBpm, bpm, swing, ov
 
 const mapStateToProps = state => ({ bpm: state.bpm });
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//       fetchData: (url) => dispatch(itemsFetchData(url))
-//   };
-// };
+const mapDispatchToProps = dispatch => ({ updateBpm: bpm => dispatch(updateBpm(bpm)) });
 
-export default connect(mapStateToProps, null)(MasterControl);
+export default connect(mapStateToProps, mapDispatchToProps)(MasterControl);
