@@ -1,9 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
+import { Provider, connect } from 'react-redux';
+import styled from 'styled-components';
+import createStore from './store';
 
 import GridContainer from './components/GridContainer';
 import MasterControl from './components/MasterControl';
+
+const store = createStore({ bpm: 120 });
 
 const Wrapper = styled.div`
 display: flex;
@@ -30,7 +34,6 @@ class App extends React.Component {
       pattern: defaultPattern,
       padResponse: false,
       swing: 2.5,
-      bpm: 120,
       overallVolume: 1,
       volumes: {
         kick: 1,
@@ -160,8 +163,8 @@ class App extends React.Component {
   }
 
   nextStep() {
-    const { swing, bpm } = this.state;
-    const secondsPerBeat = 60.0 / bpm;
+    const { swing } = this.state;
+    const secondsPerBeat = 60.0 / this.props.bpm;
     const secondsPer16thNote = secondsPerBeat / 4;
 
     const newActiveStep = this.activeStep + 1;
@@ -226,13 +229,13 @@ class App extends React.Component {
 
   saveComposition() {
     console.log('saveComposition...');
-    const { swing, bpm, pattern } = this.state;
+    const { swing, pattern } = this.state;
     axios.post('/compositions', {
       username: this.username,
       compositionName: this.compositionName,
       pattern,
       swing,
-      bpm,
+      bpm: this.props.bpm,
     });
   }
 
@@ -275,36 +278,45 @@ class App extends React.Component {
 
   render() {
     const {
-      resolution, bars, swing, bpm, overallVolume, volumes, padResponse, pattern, playing,
+      resolution, bars, swing, overallVolume, volumes, padResponse, pattern, playing,
     } = this.state;
     return (
-      <Wrapper>
-        <MasterControl
-          play={this.play}
-          swing={swing}
-          bpm={bpm}
-          overallVolume={overallVolume}
-          updateSetting={this.updateSetting}
-          saveComposition={this.saveComposition}
-          loadComposition={this.loadComposition}
-          reset={this.reset}
-          playing={playing}
-          togglePadResponse={this.togglePadResponse}
-        />
-        <GridContainer
-          pattern={pattern}
-          resolution={resolution}
-          bars={bars}
-          instruments={this.instruments}
-          updatePattern={this.updatePattern}
-          padResponse={padResponse}
-          triggerSample={this.triggerSample}
-          volumes={volumes}
-          changeVolume={this.changeVolume}
-        />
-      </Wrapper>
+      <Provider store={store}>
+        <Wrapper>
+          <MasterControl
+            play={this.play}
+            swing={swing}
+            overallVolume={overallVolume}
+            updateSetting={this.updateSetting}
+            saveComposition={this.saveComposition}
+            loadComposition={this.loadComposition}
+            reset={this.reset}
+            playing={playing}
+            togglePadResponse={this.togglePadResponse}
+          />
+          <GridContainer
+            pattern={pattern}
+            resolution={resolution}
+            bars={bars}
+            instruments={this.instruments}
+            updatePattern={this.updatePattern}
+            padResponse={padResponse}
+            triggerSample={this.triggerSample}
+            volumes={volumes}
+            changeVolume={this.changeVolume}
+          />
+        </Wrapper>
+      </Provider>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({ bpm: state.bpm });
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//       fetchData: (url) => dispatch(itemsFetchData(url))
+//   };
+// };
+
+export default connect(mapStateToProps, null)(App);

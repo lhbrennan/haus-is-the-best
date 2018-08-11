@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { updateBpm } from '../actions';
 
 const Panel = styled.div`
   display: flex;
@@ -65,14 +67,14 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-const MasterControl = ({ play, playing, updateSetting, bpm, swing, overallVolume, saveComposition, loadComposition, reset, togglePadResponse }) => (
+const MasterControl = ({ play, playing, updateSetting, updateBpm, bpm, swing, overallVolume, saveComposition, loadComposition, reset, togglePadResponse }) => (
   <Panel>
     <AsphaultButton onClick={play}>
       {playing ? 'Stop' : 'Play'}
     </AsphaultButton>
     <ButtonContainer>
       <Label>BPM</Label>
-      <Input type="text" onBlur={(e) => updateSetting(e, 'bpm')} defaultValue={bpm}/>
+      <Input type="text" onBlur={e => updateBpm(e.target.value)} defaultValue={bpm}/>
     </ButtonContainer>
     <ButtonContainer>
       <Label>Swing</Label>
@@ -93,4 +95,12 @@ const MasterControl = ({ play, playing, updateSetting, bpm, swing, overallVolume
   </Panel>
 );
 
-export default MasterControl;
+const mapStateToProps = state => ({ bpm: state.bpm });
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//       fetchData: (url) => dispatch(itemsFetchData(url))
+//   };
+// };
+
+export default connect(mapStateToProps, null)(MasterControl);
