@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import updateBpm from '../actions.js';
+import updateBpm from '../actions';
 
 const Panel = styled.div`
   display: flex;
@@ -67,36 +67,83 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-const MasterControl = ({ play, playing, updateSetting, update, bpm, swing, overallVolume, saveComposition, loadComposition, reset, togglePadResponse }) => (
+const MasterControl = ({
+  play,
+  playing,
+  updateSetting,
+  updateBpm,
+  bpm,
+  swing,
+  overallVolume,
+  saveComposition,
+  loadComposition,
+  reset,
+  togglePadResponse,
+}) => (
   <Panel>
     <AsphaultButton onClick={play}>
       {playing ? 'Stop' : 'Play'}
     </AsphaultButton>
+
     <ButtonContainer>
-      <Label>BPM</Label>
-      <Input type="text" onBlur={e => update(e.target.value)} defaultValue={bpm}/>
+      <Label>
+        BPM
+      </Label>
+      <Input type="text" onBlur={e => updateBpm(e.target.value)} defaultValue={bpm} />
     </ButtonContainer>
+
     <ButtonContainer>
-      <Label>Swing</Label>
+      <Label>
+        Swing
+      </Label>
       <SliderContainer>
-        <Slider type="range" min="0" max="5" step=".25" onChange={(e) => updateSetting(e, 'swing')} defaultValue={swing} />
+        <Slider
+          type="range"
+          min="0"
+          max="5"
+          step=".25"
+          onChange={e => updateSetting(e, 'swing')}
+          defaultValue={swing}
+        />
       </SliderContainer>
     </ButtonContainer>
+
     <ButtonContainer>
-      <Label>Volume</Label>
+      <Label>
+        Volume
+      </Label>
       <SliderContainer>
-        <Slider type="range" min="0" max="1" step=".05" onChange={(e) => updateSetting(e, 'overallVolume')} defaultValue={overallVolume} />
+        <Slider
+          type="range"
+          min="0"
+          max="1"
+          step=".05"
+          onChange={e => updateSetting(e, 'overallVolume')}
+          defaultValue={overallVolume}
+        />
       </SliderContainer>
     </ButtonContainer>
-    <AsphaultButton onClick={saveComposition}>Save</AsphaultButton>
-    <AsphaultButton onClick={loadComposition}>Load</AsphaultButton>
-    <AsphaultButton onClick={reset}>Reset</AsphaultButton>
-    <AsphaultButton onClick={togglePadResponse}>Toggle</AsphaultButton>
+
+    <AsphaultButton onClick={saveComposition}>
+      Save
+    </AsphaultButton>
+
+    <AsphaultButton onClick={loadComposition}>
+      Load
+    </AsphaultButton>
+
+    <AsphaultButton onClick={reset}>
+      Reset
+    </AsphaultButton>
+
+    <AsphaultButton onClick={togglePadResponse}>
+      Toggle
+    </AsphaultButton>
   </Panel>
 );
 
 const mapStateToProps = state => ({ bpm: state.bpm });
 
-const mapDispatchToProps = dispatch => ({ update: bpm => dispatch(updateBpm(bpm)) });
+const mapDispatchToProps = dispatch => ({ updateBpm: bpm => dispatch(updateBpm(bpm)) });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MasterControl);
