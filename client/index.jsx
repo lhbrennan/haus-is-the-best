@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import createStore from './store';
-import App from './App.jsx';
+import App from './App';
 
 const store = createStore(
   {
@@ -10,7 +10,7 @@ const store = createStore(
     bars: 1,
     bpm: 120,
     resolution: 16, // steps per bar
-    pattern: defaultPattern,
+    // pattern: defaultPattern,
     padResponse: false,
     swing: 2.5,
     overallVolume: 1,

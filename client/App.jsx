@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import GridContainer from './components/GridContainer';
-import MasterControl from './components/MasterControl';
+import MasterControlContainer from './containers/MasterControlContainer';
 import updateBpm from './actions';
 
 const Wrapper = styled.div`
@@ -280,7 +280,7 @@ class App extends React.Component {
     } = this.state;
     return (
       <Wrapper>
-        <MasterControl
+        <MasterControlContainer
           play={this.play}
           swing={swing}
           overallVolume={overallVolume}

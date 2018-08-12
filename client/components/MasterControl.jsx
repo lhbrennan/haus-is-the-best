@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import updateBpm from '../actions';
 
 const Panel = styled.div`
   display: flex;
@@ -142,8 +140,4 @@ const MasterControl = ({
   </Panel>
 );
 
-const mapStateToProps = state => ({ bpm: state.bpm });
-
-const mapDispatchToProps = dispatch => ({ updateBpm: bpm => dispatch(updateBpm(bpm)) });
-
-export default connect(mapStateToProps, mapDispatchToProps)(MasterControl);
+export default MasterControl;
