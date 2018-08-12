@@ -1,4 +1,4 @@
-function updateBpm(bpm) {
+export function updateBpm(bpm) {
   console.log('updating bpm to', bpm);
   return {
     type: 'UPDATE_BPM',
@@ -6,4 +6,9 @@ function updateBpm(bpm) {
   };
 }
 
-export default updateBpm;
+export function updateOverallVolume(volume) {
+  return {
+    type: 'UPDATE_VOLUME',
+    volume,
+  };
+}
