@@ -68,9 +68,9 @@ const Input = styled.input`
 const MasterControl = ({
   play,
   playing,
-  updateSetting,
   updateBpm,
   updateSwing,
+  updateOverallVolume,
   bpm,
   swing,
   overallVolume,
@@ -117,7 +117,7 @@ const MasterControl = ({
           min="0"
           max="1"
           step=".05"
-          onChange={e => updateSetting(e, 'overallVolume')}
+          onChange={e => updateOverallVolume(e.target.value)}
           defaultValue={overallVolume}
         />
       </SliderContainer>

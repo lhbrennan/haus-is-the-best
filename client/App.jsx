@@ -31,7 +31,6 @@ class App extends React.Component {
       resolution: 16, // steps per bar
       pattern: defaultPattern,
       padResponse: false,
-      overallVolume: 1,
       volumes: {
         kick: 1,
         clap: 0.8,
@@ -76,7 +75,6 @@ class App extends React.Component {
     this.scheduler = this.scheduler.bind(this);
     this.nextStep = this.nextStep.bind(this);
     this.playNote = this.playNote.bind(this);
-    this.updateSetting = this.updateSetting.bind(this);
     this.saveComposition = this.saveComposition.bind(this);
     this.loadComposition = this.loadComposition.bind(this);
     this.reset = this.reset.bind(this);
@@ -112,8 +110,9 @@ class App extends React.Component {
   }
 
   play() {
+    const { overallVolume } = this.props;
     this.setState(prevState => ({ playing: !prevState.playing }), () => {
-      const { playing, overallVolume } = this.state;
+      const { playing } = this.state;
       if (playing) {
         this.audioContext = new AudioContext();
         this.gainNode = this.audioContext.createGain();
@@ -208,10 +207,6 @@ class App extends React.Component {
     });
   }
 
-  updateSetting(event, setting) {
-    this.setState({ [setting]: event.target.value });
-  }
-
   changeVolume(e, instrument) {
     // use x-squared since linear does not sound good
     const volume = e.target.value * e.target.value;
@@ -275,7 +270,7 @@ class App extends React.Component {
 
   render() {
     const {
-      resolution, bars, overallVolume, volumes, padResponse, pattern, playing,
+      resolution, bars, volumes, padResponse, pattern, playing,
     } = this.state;
 
     return (
@@ -283,7 +278,6 @@ class App extends React.Component {
         <MasterControlContainer
           play={this.play}
           swing={this.props.swing}
-          overallVolume={overallVolume}
           updateSetting={this.updateSetting}
           saveComposition={this.saveComposition}
           loadComposition={this.loadComposition}
@@ -312,6 +306,7 @@ const mapStateToProps = state => (
     bpm: state.bpm,
     instruments: state.instruments,
     swing: state.swing,
+    overallVolume: state.overallVolume,
   }
 );
 
