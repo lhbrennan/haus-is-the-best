@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import GridContainer from './components/GridContainer';
 import MasterControlContainer from './containers/MasterControlContainer';
-import { updateBpm } from './actions';
+import { updateBpm, updateSwing } from './actions';
 
 const Wrapper = styled.div`
 display: flex;
@@ -31,7 +31,6 @@ class App extends React.Component {
       resolution: 16, // steps per bar
       pattern: defaultPattern,
       padResponse: false,
-      swing: 2.5,
       overallVolume: 1,
       volumes: {
         kick: 1,
@@ -160,7 +159,7 @@ class App extends React.Component {
   }
 
   nextStep() {
-    const { swing } = this.state;
+    const { swing } = this.props;
     const secondsPerBeat = 60.0 / this.props.bpm;
     const secondsPer16thNote = secondsPerBeat / 4;
 
@@ -226,7 +225,8 @@ class App extends React.Component {
 
   saveComposition() {
     console.log('saveComposition...');
-    const { swing, pattern } = this.state;
+    const { pattern } = this.state;
+    const { swing } = this.props;
     axios.post('/compositions', {
       username: this.username,
       compositionName: this.compositionName,
@@ -248,8 +248,8 @@ class App extends React.Component {
         const composition = results.data;
         this.setState({
           pattern: composition.pattern,
-          swing: composition.swing,
         });
+        this.props.dispatch(updateSwing(composition.swing));
         this.props.dispatch(updateBpm(composition.bpm));
         this.username = composition.username;
         this.compositionName = composition.compositionName;
@@ -275,16 +275,14 @@ class App extends React.Component {
 
   render() {
     const {
-      resolution, bars, swing, overallVolume, volumes, padResponse, pattern, playing,
+      resolution, bars, overallVolume, volumes, padResponse, pattern, playing,
     } = this.state;
 
-    console.log('app state.bpm', this.props.bpm);
-    console.log('app state.instruments', this.props.instruments);
     return (
       <Wrapper>
         <MasterControlContainer
           play={this.play}
-          swing={swing}
+          swing={this.props.swing}
           overallVolume={overallVolume}
           updateSetting={this.updateSetting}
           saveComposition={this.saveComposition}
@@ -313,6 +311,7 @@ const mapStateToProps = state => (
   {
     bpm: state.bpm,
     instruments: state.instruments,
+    swing: state.swing,
   }
 );
 

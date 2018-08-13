@@ -70,6 +70,7 @@ const MasterControl = ({
   playing,
   updateSetting,
   updateBpm,
+  updateSwing,
   bpm,
   swing,
   overallVolume,
@@ -100,7 +101,7 @@ const MasterControl = ({
           min="0"
           max="5"
           step=".25"
-          onChange={e => updateSetting(e, 'swing')}
+          onChange={e => updateSwing(e.target.value)}
           defaultValue={swing}
         />
       </SliderContainer>

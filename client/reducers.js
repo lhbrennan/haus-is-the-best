@@ -18,7 +18,17 @@ function instruments(state = [], action) {
   }
 }
 
+function swing(state = 2.5, action) {
+  switch (action.type) {
+    case 'UPDATE_SWING':
+      return action.swing;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   bpm,
   instruments,
+  swing,
 });

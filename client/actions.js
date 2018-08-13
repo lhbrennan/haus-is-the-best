@@ -12,3 +12,10 @@ export function updateOverallVolume(volume) {
     volume,
   };
 }
+
+export function updateSwing(swing) {
+  return {
+    type: 'UPDATE_SWING',
+    swing,
+  };
+}

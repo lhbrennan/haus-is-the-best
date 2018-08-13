@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Grid from './Grid.jsx';
-import LeftPanel from './LeftPanel.jsx';
-import RightPanel from './RightPanel.jsx';
+import Grid from './Grid';
+import LeftPanel from './LeftPanel';
+import RightPanel from './RightPanel';
 
 const Div = styled.div`
   display: flex;
@@ -16,20 +16,21 @@ const GridContainer = ({
 }) => (
   <Div>
     <LeftPanel instruments={instruments} />
-    <Grid 
-      numBeats={bars * 4} 
+    <Grid
+      numBeats={bars * 4}
       pattern={pattern}
-      resolution={resolution} 
+      resolution={resolution}
       instruments={instruments}
       triggerSample={triggerSample}
       padResponse={padResponse}
-      updatePattern={updatePattern} />
+      updatePattern={updatePattern}
+    />
     <RightPanel
       volumes={volumes}
       instruments={instruments}
-      changeVolume={changeVolume} />
+      changeVolume={changeVolume}
+    />
   </Div>
 );
-
 
 export default GridContainer;
