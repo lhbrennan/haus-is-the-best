@@ -9,6 +9,16 @@ function bpm(state = 120, action) {
   }
 }
 
+function instruments(state = [], action) {
+  switch (action.type) {
+    case 'UPDATE_INSTRUMENTS':
+      return action.instruments;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   bpm,
+  instruments,
 });

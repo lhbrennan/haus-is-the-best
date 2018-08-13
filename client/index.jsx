@@ -9,6 +9,7 @@ const store = createStore(
     playing: false,
     bars: 1,
     bpm: 120,
+    instruments: ['kick', 'clap', 'snare', 'openHat', 'closedHat'],
     resolution: 16, // steps per bar
     // pattern: defaultPattern,
     padResponse: false,

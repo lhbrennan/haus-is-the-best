@@ -11,22 +11,25 @@ const Div = styled.div`
   justify-content: center;
 `;
 
-const GridContainer = props => (
+const GridContainer = ({
+  instruments, bars, pattern, resolution, triggerSample, padResponse, updatePattern, volumes, changeVolume,
+}) => (
   <Div>
-    <LeftPanel instruments={props.instruments} />
+    <LeftPanel instruments={instruments} />
     <Grid 
-      numBeats={props.bars * 4} 
-      pattern={props.pattern}
-      resolution={props.resolution} 
-      instruments={props.instruments}
-      triggerSample={props.triggerSample}
-      padResponse={props.padResponse}
-      updatePattern={props.updatePattern} />
+      numBeats={bars * 4} 
+      pattern={pattern}
+      resolution={resolution} 
+      instruments={instruments}
+      triggerSample={triggerSample}
+      padResponse={padResponse}
+      updatePattern={updatePattern} />
     <RightPanel
-      volumes={props.volumes}
-      instruments={props.instruments}
-      changeVolume={props.changeVolume} />
+      volumes={volumes}
+      instruments={instruments}
+      changeVolume={changeVolume} />
   </Div>
 );
+
 
 export default GridContainer;

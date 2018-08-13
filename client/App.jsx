@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import GridContainer from './components/GridContainer';
 import MasterControlContainer from './containers/MasterControlContainer';
-import updateBpm from './actions';
+import { updateBpm } from './actions';
 
 const Wrapper = styled.div`
 display: flex;
@@ -46,7 +46,6 @@ class App extends React.Component {
     this.gainNode = null;
     this.username = 'lhb'; // default username, will change with oauth
     this.compositionName = 'test1'; // default composition name
-    this.instruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
     this.timerInterval = 50; // milliseconds
     this.nextStepTime = 0; // seconds
     this.activeStep = 0; // 16 total steps
@@ -92,7 +91,7 @@ class App extends React.Component {
   AUDIO TIMING SYSTEM
   ---------------------------------------------------------------------------*/
   componentDidMount() {
-    this.instruments.forEach((instrument) => {
+    this.props.instruments.forEach((instrument) => {
       this.loadSound(instrument, this.pathsToSamples[instrument]);
     });
   }
@@ -251,12 +250,12 @@ class App extends React.Component {
           pattern: composition.pattern,
           swing: composition.swing,
         });
-        updateBpm(composition.bpm);
+        this.props.dispatch(updateBpm(composition.bpm));
         this.username = composition.username;
         this.compositionName = composition.compositionName;
       })
       .catch((err) => {
-        console.error(err);
+        console.error('COMPOSITION LOADING ERROR: ', err);
       });
   }
 
@@ -278,6 +277,9 @@ class App extends React.Component {
     const {
       resolution, bars, swing, overallVolume, volumes, padResponse, pattern, playing,
     } = this.state;
+
+    console.log('app state.bpm', this.props.bpm);
+    console.log('app state.instruments', this.props.instruments);
     return (
       <Wrapper>
         <MasterControlContainer
@@ -295,7 +297,7 @@ class App extends React.Component {
           pattern={pattern}
           resolution={resolution}
           bars={bars}
-          instruments={this.instruments}
+          instruments={this.props.instruments}
           updatePattern={this.updatePattern}
           padResponse={padResponse}
           triggerSample={this.triggerSample}
@@ -307,7 +309,12 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ bpm: state.bpm });
+const mapStateToProps = state => (
+  {
+    bpm: state.bpm,
+    instruments: state.instruments,
+  }
+);
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
