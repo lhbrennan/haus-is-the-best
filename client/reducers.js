@@ -27,8 +27,50 @@ function swing(state = 2.5, action) {
   }
 }
 
+function playing(state = false, action) {
+  switch (action.type) {
+    case 'TOGGLE_PLAYING':
+      return !state.playing;
+    default:
+      return state;
+  }
+}
+
+function overallVolume(state = 1, action) {
+  switch (action.type) {
+    case 'UPDATE_OVERALL_VOLUME':
+      return action.overallVolume;
+    default:
+      return state;
+  }
+}
+
+// TO-DO: fix this reducer
+function volumes(state = {}, action) {
+  switch (action.type) {
+    case 'UPDATE_INSTRUMENT_VOLUME':
+      return state;
+    default:
+      return state;
+  }
+}
+
+// TO-DO: fix this reducer
+function pattern(state = {}, action) {
+  switch (action.type) {
+    case 'UPDATE_PATTERN':
+      return state;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   bpm,
   instruments,
   swing,
+  playing,
+  overallVolume,
+  volumes,
+  pattern,
 });

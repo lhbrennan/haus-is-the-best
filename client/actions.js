@@ -19,3 +19,9 @@ export function updateSwing(swing) {
     swing,
   };
 }
+
+export function togglePlaying() {
+  return {
+    type: 'TOGGLE_PLAYING',
+  };
+}

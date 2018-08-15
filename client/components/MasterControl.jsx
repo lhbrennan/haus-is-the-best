@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import TransportContainer from '../containers/TransportContainer';
 
 const Panel = styled.div`
   display: flex;
@@ -27,101 +28,14 @@ const AsphaultButton = styled.button`
   box-shadow: inset 0 -2px #263849;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SliderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  display: inline-block;
-  width: 20px;
-  height: 150px;
-  padding: 0;
-`;
-
-const Slider = styled.input`
-  width: 110px;
-  height: 20px;
-  margin: 0;
-  transform-origin: 75px 75px;
-  transform: rotate(-90deg);
-`;
-
-const Label = styled.label`
-  font-size: 22px;
-  margin-right: 7px;  
-`;
-
-const Input = styled.input`
-  width: 30px;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 16px;
-`;
-
 const MasterControl = ({
-  play,
-  playing,
-  updateBpm,
-  updateSwing,
-  updateOverallVolume,
-  bpm,
-  swing,
-  overallVolume,
   saveComposition,
   loadComposition,
   reset,
   togglePadResponse,
 }) => (
   <Panel>
-    <AsphaultButton onClick={play}>
-      {playing ? 'Stop' : 'Play'}
-    </AsphaultButton>
-
-    <ButtonContainer>
-      <Label>
-        BPM
-      </Label>
-      <Input type="text" onBlur={e => updateBpm(e.target.value)} defaultValue={bpm} />
-    </ButtonContainer>
-
-    <ButtonContainer>
-      <Label>
-        Swing
-      </Label>
-      <SliderContainer>
-        <Slider
-          type="range"
-          min="0"
-          max="5"
-          step=".25"
-          onChange={e => updateSwing(e.target.value)}
-          defaultValue={swing}
-        />
-      </SliderContainer>
-    </ButtonContainer>
-
-    <ButtonContainer>
-      <Label>
-        Volume
-      </Label>
-      <SliderContainer>
-        <Slider
-          type="range"
-          min="0"
-          max="1"
-          step=".05"
-          onChange={e => updateOverallVolume(e.target.value)}
-          defaultValue={overallVolume}
-        />
-      </SliderContainer>
-    </ButtonContainer>
+    <TransportContainer />
 
     <AsphaultButton onClick={saveComposition}>
       Save

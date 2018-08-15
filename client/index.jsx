@@ -4,14 +4,23 @@ import { Provider } from 'react-redux';
 import createStore from './store';
 import App from './App';
 
+// kind of hacky defining this outside the App component...
+const defaultPattern = {
+  kick: [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],
+  clap: new Array(16).fill(0),
+  snare: new Array(16).fill(0),
+  openHat: new Array(16).fill(0),
+  closedHat: new Array(16).fill(0),
+};
+
 const store = createStore(
   {
     playing: false,
-    bars: 1,
+    // bars: 1,
     bpm: 120,
     instruments: ['kick', 'clap', 'snare', 'openHat', 'closedHat'],
-    resolution: 16, // steps per bar
-    // pattern: defaultPattern,
+    // resolution: 16, // steps per bar
+    pattern: defaultPattern,
     padResponse: false,
     swing: 2.5,
     overallVolume: 1,

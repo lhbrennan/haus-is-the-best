@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import GridContainer from './components/GridContainer';
 import MasterControlContainer from './containers/MasterControlContainer';
+import AudioPlayer from './containers/AudioPlayer';
+
 import { updateBpm, updateSwing } from './actions';
 
 const Wrapper = styled.div`
@@ -26,7 +28,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playing: false,
       bars: 1,
       resolution: 16, // steps per bar
       pattern: defaultPattern,
@@ -40,148 +41,16 @@ class App extends React.Component {
       },
     };
 
-    this.audioContext = new AudioContext();
-    this.gainNode = null;
     this.username = 'lhb'; // default username, will change with oauth
     this.compositionName = 'test1'; // default composition name
-    this.timerInterval = 50; // milliseconds
-    this.nextStepTime = 0; // seconds
-    this.activeStep = 0; // 16 total steps
-    this.timerId = null;
-    this.scheduleAheadTime = 0.125; // seconds
-    this.offset = 0.05; // seconds -- used to prevent screech on initial playback
 
-    this.pathsToSamples = {
-      kick: '/samples/SampleMagic_tr909_kick_04.wav',
-      clap: '/samples/SampleMagic_tr909_clap.wav',
-      snare: '/samples/SampleMagic_tr909_snare_04.wav',
-      closedHat: '/samples/SampleMagic_tr909_closedhat_01.wav',
-      openHat: '/samples/SampleMagic_tr909_openhat_02.wav',
-    };
-
-    this.buffers = {
-      kick: null,
-      clap: null,
-      snare: null,
-      closedHat: null,
-      openHat: null,
-    };
-
-    this.loadSound = this.loadSound.bind(this);
     this.updatePattern = this.updatePattern.bind(this);
     this.triggerSample = this.triggerSample.bind(this);
-    this.play = this.play.bind(this);
-    this.timer = this.timer.bind(this);
-    this.scheduler = this.scheduler.bind(this);
-    this.nextStep = this.nextStep.bind(this);
-    this.playNote = this.playNote.bind(this);
     this.saveComposition = this.saveComposition.bind(this);
     this.loadComposition = this.loadComposition.bind(this);
     this.reset = this.reset.bind(this);
-    this.stop = this.stop.bind(this);
-    this.scheduleActiveNotes = this.scheduleActiveNotes.bind(this);
     this.togglePadResponse = this.togglePadResponse.bind(this);
     this.changeVolume = this.changeVolume.bind(this);
-  }
-
-  /*---------------------------------------------------------------------------
-  AUDIO TIMING SYSTEM
-  ---------------------------------------------------------------------------*/
-  componentDidMount() {
-    this.props.instruments.forEach((instrument) => {
-      this.loadSound(instrument, this.pathsToSamples[instrument]);
-    });
-  }
-
-  loadSound(instrument, samplePath) {
-    const request = new XMLHttpRequest();
-    request.open('GET', samplePath, true);
-    request.responseType = 'arraybuffer';
-
-    request.onload = () => {
-      this.audioContext.decodeAudioData(request.response, (buffer) => {
-        this.buffers[instrument] = buffer;
-      }, (err) => {
-        console.log('error loading sample: ', err);
-        throw err;
-      });
-    };
-    request.send();
-  }
-
-  play() {
-    const { overallVolume } = this.props;
-    this.setState(prevState => ({ playing: !prevState.playing }), () => {
-      const { playing } = this.state;
-      if (playing) {
-        this.audioContext = new AudioContext();
-        this.gainNode = this.audioContext.createGain();
-        this.gainNode.connect(this.audioContext.destination);
-        this.gainNode.gain.value = overallVolume;
-        this.activeStep = 0;
-        this.nextStepTime = this.offset;
-        this.timer();
-      } else {
-        this.stop();
-      }
-    });
-  }
-
-  stop() {
-    clearInterval(this.timerId);
-    this.timerId = null;
-  }
-
-  timer() {
-    this.timerId = setInterval(this.scheduler, this.timerInterval);
-  }
-
-  scheduler() {
-    const currentTime = this.audioContext.currentTime + this.offset;
-    // console.log('running scheduler...');
-    while (this.nextStepTime < currentTime + this.scheduleAheadTime) {
-      // console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
-      this.scheduleActiveNotes();
-      this.nextStep();
-    }
-  }
-
-  scheduleActiveNotes() {
-    const { pattern } = this.state;
-    const instruments = Object.keys(pattern);
-    instruments.forEach((instrument) => {
-      const velocity = pattern[instrument][this.activeStep];
-      if (velocity) {
-        this.playNote(instrument, this.nextStepTime, velocity);
-      }
-    });
-  }
-
-  nextStep() {
-    const { swing } = this.props;
-    const secondsPerBeat = 60.0 / this.props.bpm;
-    const secondsPer16thNote = secondsPerBeat / 4;
-
-    const newActiveStep = this.activeStep + 1;
-    this.activeStep = (newActiveStep === 16 ? 0 : newActiveStep);
-
-    const swingFactor = (this.activeStep % 2 ? (1 + (swing / 10)) : (1 - (swing / 10)));
-    this.nextStepTime += (secondsPer16thNote * swingFactor);
-  }
-
-  playNote(instrument, noteTime, velocity) {
-    const { volumes } = this.state;
-    const buffer = this.buffers[instrument];
-    const voice = this.audioContext.createBufferSource();
-    voice.buffer = buffer;
-
-    const instrumentGainNode = this.audioContext.createGain();
-    instrumentGainNode.connect(this.gainNode);
-    const volume = volumes[instrument];
-    instrumentGainNode.gain.value = volume * (velocity / 5);
-
-    voice.connect(instrumentGainNode);
-    voice.start(noteTime);
   }
 
   /*---------------------------------------------------------------------------
@@ -270,19 +139,17 @@ class App extends React.Component {
 
   render() {
     const {
-      resolution, bars, volumes, padResponse, pattern, playing,
+      resolution, bars, volumes, padResponse, pattern,
     } = this.state;
 
     return (
       <Wrapper>
         <MasterControlContainer
           play={this.play}
-          swing={this.props.swing}
           updateSetting={this.updateSetting}
           saveComposition={this.saveComposition}
           loadComposition={this.loadComposition}
           reset={this.reset}
-          playing={playing}
           togglePadResponse={this.togglePadResponse}
         />
         <GridContainer
@@ -296,6 +163,7 @@ class App extends React.Component {
           volumes={volumes}
           changeVolume={this.changeVolume}
         />
+        <AudioPlayer />
       </Wrapper>
     );
   }
