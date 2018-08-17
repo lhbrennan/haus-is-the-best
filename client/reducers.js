@@ -9,7 +9,6 @@ const defaultPattern = {
 };
 
 function pattern(state = {}, action) {
-  console.log('initial pattern', state);
   const { type, instrument, stepNum, payload } = action;
   const newPattern = Object.assign({}, state);
 
@@ -22,8 +21,6 @@ function pattern(state = {}, action) {
       } else {
         newPattern[instrument][stepNum] -= 2;
       }
-      console.log('Velocity', newPattern[instrument][stepNum]);
-      console.log('newPattern', newPattern);
       return newPattern;
     case 'LOAD_COMPOSITION':
       return payload.pattern;

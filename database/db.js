@@ -31,7 +31,6 @@ const storeComposition = function (data) {
 };
 
 const fetchComposition = function(username, compositionName) {
-  console.log(`fetching composition with username ${username} and compositionName ${compositionName}`);
   return Composition.findOne({
     username,
     compositionName,

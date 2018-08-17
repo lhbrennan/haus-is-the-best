@@ -10,7 +10,6 @@ class InstrumentGroup extends React.Component {
 
   createPads() {
     const { pattern, numPads, beat, instrument, triggerSample, padResponse } = this.props;
-    console.log('instrumentGroups pattern', pattern);
     const pads = [];
     for (let i = 0; i < numPads; i++) {
       const stepNum = ((beat - 1) * 4) + (i + 1) - 1;

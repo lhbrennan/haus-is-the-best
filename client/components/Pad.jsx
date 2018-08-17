@@ -26,11 +26,9 @@ const Pad = (props) => {
   } = props;
 
   function handler() {
-    console.log('original velocity', velocity);
     if (!velocity && padResponse) {
       triggerSample(instrument);
     }
-    console.log(`${instrument}: ${beat}.${subBeat}`);
     updatePattern(instrument, beat, subBeat);
   }
 

@@ -27,11 +27,7 @@ class App extends React.Component {
       },
     };
 
-    this.username = 'lhb'; // default username, will change with oauth
-    this.compositionName = 'test1'; // default composition name
-
     this.triggerSample = this.triggerSample.bind(this);
-    this.reset = this.reset.bind(this);
     this.togglePadResponse = this.togglePadResponse.bind(this);
     this.changeVolume = this.changeVolume.bind(this);
   }
@@ -51,13 +47,6 @@ class App extends React.Component {
       const newVolumes = Object.assign({}, prevState.volumes);
       newVolumes[instrument] = volume;
       return { volumes: newVolumes };
-    });
-  }
-
-  reset() {
-    this.stop();
-    this.setState({
-      pattern: defaultPattern,
     });
   }
 
