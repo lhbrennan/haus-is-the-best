@@ -34,3 +34,10 @@ export function updatePattern(instrument, beat, subBeat) {
     instrument,
   };
 }
+
+export function loadComposition(composition) {
+  return {
+    type: 'LOAD_COMPOSITION',
+    payload: composition,
+  };
+}

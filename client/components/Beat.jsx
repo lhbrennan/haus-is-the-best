@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import InstrumentGroup from './InstrumentGroup.jsx';
+import InstrumentGroupContainer from '../containers/InstrumentGroupContainer';
 
 const Div = styled.div`
   padding: 5px;
@@ -16,12 +16,11 @@ class Beat extends React.Component {
   }
 
   render() {
-    const { pattern, instruments, resolution, beat, triggerSample, padResponse } = this.props;
+    const { instruments, resolution, beat, triggerSample, padResponse } = this.props;
     return (
       <Div beat={beat}>
         {instruments.map(instrument => (
-          <InstrumentGroup
-            pattern={pattern}
+          <InstrumentGroupContainer
             numPads={resolution / 4}
             instrument={instrument}
             beat={beat}

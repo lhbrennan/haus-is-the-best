@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
@@ -44,8 +43,6 @@ class App extends React.Component {
     this.compositionName = 'test1'; // default composition name
 
     this.triggerSample = this.triggerSample.bind(this);
-    this.saveComposition = this.saveComposition.bind(this);
-    this.loadComposition = this.loadComposition.bind(this);
     this.reset = this.reset.bind(this);
     this.togglePadResponse = this.togglePadResponse.bind(this);
     this.changeVolume = this.changeVolume.bind(this);
@@ -58,22 +55,6 @@ class App extends React.Component {
     this.playNote(instrument, 0);
   }
 
-  // updatePattern(instrument, beat, subBeat) {
-  //   const stepNum = ((beat - 1) * 4) + subBeat - 1;
-  //   this.setState((prevState) => {
-  //     const updated = Object.assign({}, prevState.pattern);
-  //     if (updated[instrument][stepNum] === 0) {
-  //       updated[instrument][stepNum] = 5;
-  //     } else if (updated[instrument][stepNum] === 1) {
-  //       updated[instrument][stepNum] = 0;
-  //     } else {
-  //       updated[instrument][stepNum] = prevState.pattern[instrument][stepNum] - 2;
-  //     }
-  //     console.log('Velocity', updated[instrument][stepNum]);
-  //     return { pattern: updated };
-  //   });
-  // }
-
   changeVolume(e, instrument) {
     // use x-squared since linear does not sound good
     const volume = e.target.value * e.target.value;
@@ -83,42 +64,6 @@ class App extends React.Component {
       newVolumes[instrument] = volume;
       return { volumes: newVolumes };
     });
-  }
-
-  saveComposition() {
-    console.log('saveComposition...');
-    const { pattern } = this.state;
-    const { swing } = this.props;
-    axios.post('/compositions', {
-      username: this.username,
-      compositionName: this.compositionName,
-      pattern,
-      swing,
-      bpm: this.props.bpm,
-    });
-  }
-
-  loadComposition() {
-    console.log('loadComposition...');
-    axios.get('/compositions', {
-      params: {
-        username: this.username,
-        compositionName: this.compositionName,
-      },
-    })
-      .then((results) => {
-        const composition = results.data;
-        this.setState({
-          pattern: composition.pattern,
-        });
-        this.props.dispatch(updateSwing(composition.swing));
-        this.props.dispatch(updateBpm(composition.bpm));
-        this.username = composition.username;
-        this.compositionName = composition.compositionName;
-      })
-      .catch((err) => {
-        console.error('COMPOSITION LOADING ERROR: ', err);
-      });
   }
 
   reset() {
@@ -137,7 +82,7 @@ class App extends React.Component {
 
   render() {
     const {
-      resolution, bars, volumes, padResponse, pattern,
+      resolution, bars, volumes, padResponse,
     } = this.state;
 
     return (
@@ -145,13 +90,10 @@ class App extends React.Component {
         <MasterControlContainer
           play={this.play}
           updateSetting={this.updateSetting}
-          saveComposition={this.saveComposition}
-          loadComposition={this.loadComposition}
           reset={this.reset}
           togglePadResponse={this.togglePadResponse}
         />
         <PerformerSection
-          pattern={pattern}
           resolution={resolution}
           bars={bars}
           instruments={this.props.instruments}

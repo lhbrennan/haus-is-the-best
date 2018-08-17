@@ -33,15 +33,20 @@ const MasterControl = ({
   loadComposition,
   reset,
   togglePadResponse,
+  pattern,
+  swing,
+  bpm,
+  username,
+  compositionName,
 }) => (
   <Panel>
     <TransportContainer />
 
-    <AsphaultButton onClick={saveComposition}>
+    <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName)}>
       Save
     </AsphaultButton>
 
-    <AsphaultButton onClick={loadComposition}>
+    <AsphaultButton onClick={() => loadComposition(username, compositionName)}>
       Load
     </AsphaultButton>
 

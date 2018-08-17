@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  background: ${(props) => {
-    const v = props.velocity;
-    if (v === 5) { return '#6A0000'; }
-    if (v === 3) { return '#B33A3A'; }
-    if (v === 1) { return '#FFB6B6'; }
+  background: ${({ velocity }) => {
+    if (velocity === 5) { return '#6A0000'; }
+    if (velocity === 3) { return '#B33A3A'; }
+    if (velocity === 1) { return '#FFB6B6'; }
     return 'cadetblue';
   }};
   margin: 5px; 
@@ -27,6 +26,7 @@ const Pad = (props) => {
   } = props;
 
   function handler() {
+    console.log('original velocity', velocity);
     if (!velocity && padResponse) {
       triggerSample(instrument);
     }

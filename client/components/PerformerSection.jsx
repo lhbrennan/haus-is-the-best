@@ -12,13 +12,12 @@ const Div = styled.div`
 `;
 
 const PerformerSection = ({
-  instruments, bars, pattern, resolution, triggerSample, padResponse, volumes, changeVolume,
+  instruments, bars, resolution, triggerSample, padResponse, volumes, changeVolume,
 }) => (
   <Div>
     <LeftPanel instruments={instruments} />
     <Grid
       numBeats={bars * 4}
-      pattern={pattern}
       resolution={resolution}
       instruments={instruments}
       triggerSample={triggerSample}
