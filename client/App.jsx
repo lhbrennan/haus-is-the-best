@@ -5,22 +5,11 @@ import { connect } from 'react-redux';
 import PerformerSection from './components/PerformerSection';
 import MasterControlContainer from './containers/MasterControlContainer';
 
-import { updateBpm, updateSwing } from './actions';
-
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
 `;
-
-// kind of hacky defining this outside the App component...
-const defaultPattern = {
-  kick: new Array(16).fill(0),
-  clap: new Array(16).fill(0),
-  snare: new Array(16).fill(0),
-  openHat: new Array(16).fill(0),
-  closedHat: new Array(16).fill(0),
-};
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +17,6 @@ class App extends React.Component {
     this.state = {
       bars: 1,
       resolution: 16, // steps per bar
-      pattern: defaultPattern,
       padResponse: false,
       volumes: {
         kick: 1,

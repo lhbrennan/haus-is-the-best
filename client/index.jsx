@@ -5,7 +5,6 @@ import createStore from './store';
 import App from './App';
 import AudioPlayer from './containers/AudioPlayer';
 
-
 // kind of hacky defining this outside the App component...
 const defaultPattern = {
   kick: new Array(16).fill(0),

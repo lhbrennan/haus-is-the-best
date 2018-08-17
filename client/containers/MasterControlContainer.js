@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { loadComposition } from '../actions.js'
+import { loadComposition, resetPattern } from '../actions.js';
 
 // TO-DO: Why can't I remove the '.jsx' extension w/o breaking stuff?
 // Maybe because I'm not importing React?
@@ -15,7 +15,7 @@ const saveComposition = (pattern, swing, bpm, username, compositionName) => {
     swing,
     bpm,
   });
-}
+};
 
 const loadCompositionHandler = (username, compositionName, dispatch) => {
   console.log('loadComposition...');
@@ -31,7 +31,7 @@ const loadCompositionHandler = (username, compositionName, dispatch) => {
     .catch((err) => {
       console.error('COMPOSITION LOADING ERROR: ', err);
     });
-}
+};
 
 const mapStateToProps = state => ({
   saveComposition,
@@ -40,11 +40,12 @@ const mapStateToProps = state => ({
   bpm: state.bpm,
   compositionName: state.compositionName,
   username: state.username,
-})
+});
 
 const mapDispatchToProps = dispatch => ({
   loadComposition: (username, compositionName) => loadCompositionHandler(username, compositionName, dispatch),
-})
+  resetPattern: () => dispatch(resetPattern()),
+});
 
 const MasterControlContainer = connect(
   mapStateToProps,

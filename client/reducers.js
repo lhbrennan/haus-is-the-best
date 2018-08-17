@@ -1,5 +1,39 @@
 import { combineReducers } from 'redux';
 
+const defaultPattern = {
+  kick: new Array(16).fill(0),
+  clap: new Array(16).fill(0),
+  snare: new Array(16).fill(0),
+  openHat: new Array(16).fill(0),
+  closedHat: new Array(16).fill(0),
+};
+
+function pattern(state = {}, action) {
+  console.log('initial pattern', state);
+  const { type, instrument, stepNum, payload } = action;
+  const newPattern = Object.assign({}, state);
+
+  switch (type) {
+    case 'UPDATE_PATTERN':
+      if (newPattern[instrument][stepNum] === 0) {
+        newPattern[instrument][stepNum] = 5;
+      } else if (newPattern[instrument][stepNum] === 1) {
+        newPattern[instrument][stepNum] = 0;
+      } else {
+        newPattern[instrument][stepNum] -= 2;
+      }
+      console.log('Velocity', newPattern[instrument][stepNum]);
+      console.log('newPattern', newPattern);
+      return newPattern;
+    case 'LOAD_COMPOSITION':
+      return payload.pattern;
+    case 'RESET_PATTERN':
+      return defaultPattern;
+    default:
+      return state;
+  }
+}
+
 function bpm(state = 120, action) {
   switch (action.type) {
     case 'UPDATE_BPM':
@@ -41,8 +75,8 @@ function instruments(state = [], action) {
 function swing(state = 2.5, action) {
   switch (action.type) {
     case 'UPDATE_SWING':
-    return action.swing;
-      case 'LOAD_COMPOSITION':
+      return action.swing;
+    case 'LOAD_COMPOSITION':
       return action.payload.swing;
     default:
       return state;
@@ -67,29 +101,6 @@ function overallVolume(state = 1, action) {
   }
 }
 
-function pattern(state = {}, action) {
-  console.log('initial pattern', state)
-  const { type, instrument, stepNum, payload } = action;
-  const newPattern = Object.assign({}, state);
-
-  switch (type) {
-    case 'UPDATE_PATTERN':
-      if (newPattern[instrument][stepNum] === 0) {
-        newPattern[instrument][stepNum] = 5;
-      } else if (newPattern[instrument][stepNum] === 1) {
-        newPattern[instrument][stepNum] = 0;
-      } else {
-        newPattern[instrument][stepNum] -= 2;
-      }
-      console.log('Velocity', newPattern[instrument][stepNum]);
-      console.log('newPattern', newPattern);
-      return newPattern;
-    case 'LOAD_COMPOSITION':
-      return payload.pattern;
-    default:
-      return state;
-  }
-}
 
 // TO-DO: fix this reducer
 function volumes(state = {}, action) {

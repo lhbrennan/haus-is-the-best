@@ -31,7 +31,7 @@ const AsphaultButton = styled.button`
 const MasterControl = ({
   saveComposition,
   loadComposition,
-  reset,
+  resetPattern,
   togglePadResponse,
   pattern,
   swing,
@@ -50,7 +50,7 @@ const MasterControl = ({
       Load
     </AsphaultButton>
 
-    <AsphaultButton onClick={reset}>
+    <AsphaultButton onClick={resetPattern}>
       Reset
     </AsphaultButton>
 

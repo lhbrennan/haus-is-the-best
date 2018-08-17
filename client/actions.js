@@ -41,3 +41,9 @@ export function loadComposition(composition) {
     payload: composition,
   };
 }
+
+export function resetPattern() {
+  return {
+    type: 'RESET_PATTERN',
+  };
+}
