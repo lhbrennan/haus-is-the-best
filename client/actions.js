@@ -46,3 +46,13 @@ export function resetPattern() {
     type: 'RESET_PATTERN',
   };
 }
+
+export function updateInstrumentVolume(newVolume, instrument) {
+  const volume = newVolume * newVolume; // use x-squared since linear does not sound good
+  console.log(`changing ${instrument} volume to ${volume}`);
+  return {
+    type: 'UPDATE_INSTRUMENT_VOLUME',
+    volume,
+    instrument,
+  };
+}

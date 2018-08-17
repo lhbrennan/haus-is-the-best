@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import RightPanelContainer from '../containers/RightPanelContainer';
 import Grid from './Grid';
 import LeftPanel from './LeftPanel';
-import RightPanel from './RightPanel';
 
 const Div = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Div = styled.div`
 `;
 
 const PerformerSection = ({
-  instruments, bars, resolution, triggerSample, padResponse, volumes, changeVolume,
+  instruments, bars, resolution, triggerSample, padResponse,
 }) => (
   <Div>
     <LeftPanel instruments={instruments} />
@@ -23,11 +23,7 @@ const PerformerSection = ({
       triggerSample={triggerSample}
       padResponse={padResponse}
     />
-    <RightPanel
-      volumes={volumes}
-      instruments={instruments}
-      changeVolume={changeVolume}
-    />
+    <RightPanelContainer />
   </Div>
 );
 

@@ -90,7 +90,7 @@ function playing(state = false, action) {
 }
 
 function overallVolume(state = 1, action) {
-  switch (action.type) {
+  switch (action.type) {  
     case 'UPDATE_OVERALL_VOLUME':
       return action.overallVolume;
     default:
@@ -98,12 +98,13 @@ function overallVolume(state = 1, action) {
   }
 }
 
-
-// TO-DO: fix this reducer
 function volumes(state = {}, action) {
-  switch (action.type) {
+  const { volume, instrument, type } = action;
+  switch (type) {
     case 'UPDATE_INSTRUMENT_VOLUME':
-      return state;
+      return Object.assign({}, state, {
+        [instrument]: volume,
+      });
     default:
       return state;
   }

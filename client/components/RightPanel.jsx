@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import InstrumentVolume from './InstumentVolume.jsx';
+import InstrumentVolumeContainer from '../containers/InstrumentVolumeContainer';
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,10 +9,10 @@ const Wrapper = styled.div`
   justify-content: space-around;
 `;
 
-const RightPanel = ({ instruments, volumes, changeVolume }) => (
+const RightPanel = ({ instruments }) => (
   <Wrapper>
-    {instruments.map((instrument) => (
-      <InstrumentVolume instrument={instrument} changeVolume={changeVolume} volume={volumes[instrument]} key={instrument} />
+    {instruments.map(instrument => (
+      <InstrumentVolumeContainer instrument={instrument} key={instrument} />
     ))}
   </Wrapper>
 );
