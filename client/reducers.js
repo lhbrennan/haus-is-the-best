@@ -30,7 +30,7 @@ function swing(state = 2.5, action) {
 function playing(state = false, action) {
   switch (action.type) {
     case 'TOGGLE_PLAYING':
-      return !state.playing;
+      return !state;
     default:
       return state;
   }

@@ -35,7 +35,6 @@ class AudioPlayer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('props', this.props);
     const { instruments } = this.props;
     instruments.forEach((instrument) => {
       this.loadSound(instrument, this.pathsToSamples[instrument]);
@@ -74,7 +73,6 @@ class AudioPlayer extends React.Component {
 
   initializeAudio() {
     const { overallVolume } = this.props;
-    console.log('props', this.props);
 
     this.audioContext = new AudioContext();
     this.gainNode = this.audioContext.createGain();

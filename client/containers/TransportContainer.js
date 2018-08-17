@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { updateBpm, updateSwing, updateOverallVolume, togglePlaying } from '../actions';
 import Transport from '../components/Transport.jsx';
 
-const mapStateToProps = state => ({ 
+const mapStateToProps = state => ({
   bpm: state.bpm,
   playing: state.playing,
   swing: state.swing,

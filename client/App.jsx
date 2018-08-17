@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import GridContainer from './components/GridContainer';
 import MasterControlContainer from './containers/MasterControlContainer';
-import AudioPlayer from './containers/AudioPlayer';
 
 import { updateBpm, updateSwing } from './actions';
 
@@ -163,7 +162,6 @@ class App extends React.Component {
           volumes={volumes}
           changeVolume={this.changeVolume}
         />
-        <AudioPlayer />
       </Wrapper>
     );
   }

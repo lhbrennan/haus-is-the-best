@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import createStore from './store';
 import App from './App';
+import AudioPlayer from './containers/AudioPlayer';
+
 
 // kind of hacky defining this outside the App component...
 const defaultPattern = {
@@ -36,7 +38,10 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <div>
+      <App />
+      <AudioPlayer />
+    </div>
   </Provider>,
   document.getElementById('app'),
 );
