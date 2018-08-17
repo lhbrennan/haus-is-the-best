@@ -8,7 +8,7 @@ import AudioPlayer from './containers/AudioPlayer';
 
 // kind of hacky defining this outside the App component...
 const defaultPattern = {
-  kick: [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],
+  kick: new Array(16).fill(0),
   clap: new Array(16).fill(0),
   snare: new Array(16).fill(0),
   openHat: new Array(16).fill(0),

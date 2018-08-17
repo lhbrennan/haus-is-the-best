@@ -25,3 +25,12 @@ export function togglePlaying() {
     type: 'TOGGLE_PLAYING',
   };
 }
+
+export function updatePattern(instrument, beat, subBeat) {
+  const stepNum = ((beat - 1) * 4) + subBeat - 1;
+  return {
+    type: 'UPDATE_PATTERN',
+    stepNum,
+    instrument,
+  };
+}

@@ -11,8 +11,8 @@ const Div = styled.div`
   justify-content: center;
 `;
 
-const GridContainer = ({
-  instruments, bars, pattern, resolution, triggerSample, padResponse, updatePattern, volumes, changeVolume,
+const PerformerSection = ({
+  instruments, bars, pattern, resolution, triggerSample, padResponse, volumes, changeVolume,
 }) => (
   <Div>
     <LeftPanel instruments={instruments} />
@@ -23,7 +23,6 @@ const GridContainer = ({
       instruments={instruments}
       triggerSample={triggerSample}
       padResponse={padResponse}
-      updatePattern={updatePattern}
     />
     <RightPanel
       volumes={volumes}
@@ -33,4 +32,4 @@ const GridContainer = ({
   </Div>
 );
 
-export default GridContainer;
+export default PerformerSection;

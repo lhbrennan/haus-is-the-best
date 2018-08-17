@@ -3,7 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import GridContainer from './components/GridContainer';
+import PerformerSection from './components/PerformerSection';
 import MasterControlContainer from './containers/MasterControlContainer';
 
 import { updateBpm, updateSwing } from './actions';
@@ -43,7 +43,6 @@ class App extends React.Component {
     this.username = 'lhb'; // default username, will change with oauth
     this.compositionName = 'test1'; // default composition name
 
-    this.updatePattern = this.updatePattern.bind(this);
     this.triggerSample = this.triggerSample.bind(this);
     this.saveComposition = this.saveComposition.bind(this);
     this.loadComposition = this.loadComposition.bind(this);
@@ -59,21 +58,21 @@ class App extends React.Component {
     this.playNote(instrument, 0);
   }
 
-  updatePattern(instrument, beat, subBeat) {
-    const stepNum = ((beat - 1) * 4) + subBeat - 1;
-    this.setState((prevState) => {
-      const updated = Object.assign({}, prevState.pattern);
-      if (updated[instrument][stepNum] === 0) {
-        updated[instrument][stepNum] = 5;
-      } else if (updated[instrument][stepNum] === 1) {
-        updated[instrument][stepNum] = 0;
-      } else {
-        updated[instrument][stepNum] = prevState.pattern[instrument][stepNum] - 2;
-      }
-      console.log('Velocity', updated[instrument][stepNum]);
-      return { pattern: updated };
-    });
-  }
+  // updatePattern(instrument, beat, subBeat) {
+  //   const stepNum = ((beat - 1) * 4) + subBeat - 1;
+  //   this.setState((prevState) => {
+  //     const updated = Object.assign({}, prevState.pattern);
+  //     if (updated[instrument][stepNum] === 0) {
+  //       updated[instrument][stepNum] = 5;
+  //     } else if (updated[instrument][stepNum] === 1) {
+  //       updated[instrument][stepNum] = 0;
+  //     } else {
+  //       updated[instrument][stepNum] = prevState.pattern[instrument][stepNum] - 2;
+  //     }
+  //     console.log('Velocity', updated[instrument][stepNum]);
+  //     return { pattern: updated };
+  //   });
+  // }
 
   changeVolume(e, instrument) {
     // use x-squared since linear does not sound good
@@ -151,12 +150,11 @@ class App extends React.Component {
           reset={this.reset}
           togglePadResponse={this.togglePadResponse}
         />
-        <GridContainer
+        <PerformerSection
           pattern={pattern}
           resolution={resolution}
           bars={bars}
           instruments={this.props.instruments}
-          updatePattern={this.updatePattern}
           padResponse={padResponse}
           triggerSample={this.triggerSample}
           volumes={volumes}

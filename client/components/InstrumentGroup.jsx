@@ -1,5 +1,5 @@
 import React from 'react';
-import Pad from './Pad.jsx';
+import PadContainer from '../containers/PadContainer';
 
 class InstrumentGroup extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class InstrumentGroup extends React.Component {
     const pads = [];
     for (let i = 0; i < numPads; i++) {
       const stepNum = ((beat - 1) * 4) + (i + 1) - 1;
-      pads.push(<Pad
+      pads.push(<PadContainer
         velocity={pattern[instrument][stepNum]}
         beat={beat}
         subBeat={i + 1}

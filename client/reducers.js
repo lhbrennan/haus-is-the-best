@@ -45,20 +45,30 @@ function overallVolume(state = 1, action) {
   }
 }
 
-// TO-DO: fix this reducer
-function volumes(state = {}, action) {
-  switch (action.type) {
-    case 'UPDATE_INSTRUMENT_VOLUME':
-      return state;
+function pattern(state = {}, action) {
+  const { type, instrument, stepNum } = action;
+  const newPattern = Object.assign({}, state);
+
+  switch (type) {
+    case 'UPDATE_PATTERN':
+      if (newPattern[instrument][stepNum] === 0) {
+        newPattern[instrument][stepNum] = 5;
+      } else if (newPattern[instrument][stepNum] === 1) {
+        newPattern[instrument][stepNum] = 0;
+      } else {
+        newPattern[instrument][stepNum] = newPattern.pattern[instrument][stepNum] - 2;
+      }
+      console.log('Velocity', newPattern[instrument][stepNum]);
+      return newPattern;
     default:
       return state;
   }
 }
 
 // TO-DO: fix this reducer
-function pattern(state = {}, action) {
+function volumes(state = {}, action) {
   switch (action.type) {
-    case 'UPDATE_PATTERN':
+    case 'UPDATE_INSTRUMENT_VOLUME':
       return state;
     default:
       return state;

@@ -41,8 +41,13 @@ class AudioPlayer extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    this.handlePlaying();
+  componentDidUpdate(prevProps) {
+    const { playing } = this.props;
+    console.log('AudioPlayer received new props');
+    if (prevProps.playing !== playing) {
+      console.log('Invoking handlePlaying()');
+      this.handlePlaying();
+    }
   }
 
   loadSound(instrument, samplePath) {
@@ -72,6 +77,7 @@ class AudioPlayer extends React.Component {
   }
 
   initializeAudio() {
+    console.log('Initializing Audio');
     const { overallVolume } = this.props;
 
     this.audioContext = new AudioContext();
@@ -93,9 +99,9 @@ class AudioPlayer extends React.Component {
 
   scheduler() {
     const currentTime = this.audioContext.currentTime + this.offset;
-    // console.log('running scheduler...');
+    console.log('running scheduler...');
     while (this.nextStepTime < currentTime + this.scheduleAheadTime) {
-      // console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
+      console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
       this.scheduleActiveNotes();
       this.nextStep();
     }
@@ -140,9 +146,7 @@ class AudioPlayer extends React.Component {
   }
 
   render() {
-    return (
-      <div />
-    );
+    return null;
   }
 }
 
