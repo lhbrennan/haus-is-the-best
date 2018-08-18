@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import PerformerSection from './components/PerformerSection';
+import PerformerSectionContainer from './containers/PerformerSectionContainer';
 import MasterControlContainer from './containers/MasterControlContainer';
 
 const Wrapper = styled.div`
@@ -20,17 +20,12 @@ class App extends React.Component {
       padResponse: false,
     };
 
-    this.triggerSample = this.triggerSample.bind(this);
     this.togglePadResponse = this.togglePadResponse.bind(this);
   }
 
   /*---------------------------------------------------------------------------
     EVENT HANDLERS
   ---------------------------------------------------------------------------*/
-  triggerSample(instrument) {
-    this.playNote(instrument, 0);
-  }
-
   togglePadResponse() {
     this.setState(prevState => ({ padResponse: !prevState.padResponse }));
   }
@@ -39,41 +34,13 @@ class App extends React.Component {
   ---------------------------------------------------------------------------*/
 
   render() {
-    const {
-      resolution, bars, padResponse,
-    } = this.state;
-
     return (
       <Wrapper>
-        <MasterControlContainer
-          updateSetting={this.updateSetting}
-          togglePadResponse={this.togglePadResponse}
-        />
-        <PerformerSection
-          resolution={resolution}
-          bars={bars}
-          instruments={this.props.instruments}
-          padResponse={padResponse}
-          triggerSample={this.triggerSample}
-        />
+        <MasterControlContainer />
+        <PerformerSectionContainer />
       </Wrapper>
     );
   }
 }
 
-const mapStateToProps = state => (
-  {
-    bpm: state.bpm,
-    instruments: state.instruments,
-    swing: state.swing,
-    overallVolume: state.overallVolume,
-  }
-);
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//       fetchData: (url) => dispatch(itemsFetchData(url))
-//   };
-// };
-
-export default connect(mapStateToProps, null)(App);
+export default connect()(App);

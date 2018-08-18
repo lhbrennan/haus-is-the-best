@@ -32,6 +32,7 @@ class AudioPlayer extends React.Component {
 
     this.scheduler = this.scheduler.bind(this);
     this.scheduleActiveNotes = this.scheduleActiveNotes.bind(this);
+    this.playNote = this.playNote.bind(this);
   }
 
   componentDidMount() {
@@ -42,10 +43,14 @@ class AudioPlayer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { playing } = this.props;
+    console.log('recieved new props', this.props);
+    const { playing, overallVolume } = this.props;
     if (prevProps.playing !== playing) {
       this.handlePlaying();
     }
+    if (playing) {
+      this.gainNode.gain.value = overallVolume;
+    };
   }
 
   loadSound(instrument, samplePath) {
@@ -127,7 +132,7 @@ class AudioPlayer extends React.Component {
     this.nextStepTime += (secondsPer16thNote * swingFactor);
   }
 
-  playNote(instrument, noteTime, velocity) {
+  playNote(instrument, noteTime = 0, velocity = 5) {
     const { volumes } = this.props;
     const buffer = this.buffers[instrument];
     const voice = this.audioContext.createBufferSource();

@@ -17,12 +17,12 @@ const defaultPattern = {
 const store = createStore(
   {
     playing: false,
-    // bars: 1,
+    bars: 1,
     bpm: 120,
     username: 'lhb',
     compositionName: 'composition1',
     instruments: ['kick', 'clap', 'snare', 'openHat', 'closedHat'],
-    // resolution: 16, // steps per bar
+    resolution: 16, // steps per bar
     pattern: defaultPattern,
     padResponse: false,
     swing: 2.5,
@@ -34,7 +34,8 @@ const store = createStore(
       openHat: 0.5,
       closedHat: 0.5,
     },
-  },
+    eventQueue: [],
+  }
 );
 
 ReactDOM.render(

@@ -7,7 +7,7 @@ export function updateBpm(bpm) {
 
 export function updateOverallVolume(volume) {
   return {
-    type: 'UPDATE_VOLUME',
+    type: 'UPDATE_OVERALL_VOLUME',
     volume,
   };
 }

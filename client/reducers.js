@@ -90,9 +90,10 @@ function playing(state = false, action) {
 }
 
 function overallVolume(state = 1, action) {
-  switch (action.type) {  
+  switch (action.type) { 
     case 'UPDATE_OVERALL_VOLUME':
-      return action.overallVolume;
+      console.log('new overallVolume', action.volume);
+      return action.volume;
     default:
       return state;
   }
@@ -110,6 +111,20 @@ function volumes(state = {}, action) {
   }
 }
 
+function bars(state = 1, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
+
+function resolution(state = 16, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   bpm,
   username,
@@ -120,4 +135,6 @@ export default combineReducers({
   overallVolume,
   volumes,
   pattern,
+  bars,
+  resolution,
 });

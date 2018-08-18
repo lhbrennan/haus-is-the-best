@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import RightPanelContainer from '../containers/RightPanelContainer';
-import Grid from './Grid';
+import GridContainer from '../containers/GridContainer';
 import LeftPanel from './LeftPanel';
 
 const Div = styled.div`
@@ -11,18 +11,10 @@ const Div = styled.div`
   justify-content: center;
 `;
 
-const PerformerSection = ({
-  instruments, bars, resolution, triggerSample, padResponse,
-}) => (
+const PerformerSection = ({ instruments }) => (
   <Div>
     <LeftPanel instruments={instruments} />
-    <Grid
-      numBeats={bars * 4}
-      resolution={resolution}
-      instruments={instruments}
-      triggerSample={triggerSample}
-      padResponse={padResponse}
-    />
+    <GridContainer />
     <RightPanelContainer />
   </Div>
 );

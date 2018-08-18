@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 30px 175px;
+`;
+
 // optimization: this styled component is duplicate of same in MasterControl
 const AsphaultButton = styled.button`
   position: relative;
@@ -69,7 +76,8 @@ const Transport = ({
   overallVolume,
   updateOverallVolume,
 }) => (
-  <div>
+  <Wrapper>
+
     <AsphaultButton onClick={togglePlaying}>
       {playing ? 'Stop' : 'Play'}
     </AsphaultButton>
@@ -112,7 +120,8 @@ const Transport = ({
         />
       </SliderContainer>
     </ButtonContainer>
-  </div>
+
+  </Wrapper>
 );
 
 export default Transport;
