@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { dequeueEvent } from '../actions.js';
+import { dequeueEvent } from '../actions';
 
 class AudioPlayer extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class AudioPlayer extends React.Component {
       openHat: null,
     };
 
-    this.audioContext = new AudioContext();
+    this.audioContext = null;
     this.gainNode = null;
     this.timerInterval = 50; // milliseconds
     this.nextStepTime = 0; // seconds
@@ -41,6 +41,8 @@ class AudioPlayer extends React.Component {
     instruments.forEach((instrument) => {
       this.loadSound(instrument, this.pathsToSamples[instrument]);
     });
+
+    this.initializeAudio();
   }
 
   componentDidUpdate(prevProps) {

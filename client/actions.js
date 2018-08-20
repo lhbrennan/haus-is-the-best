@@ -75,3 +75,17 @@ export function togglePadResponse() {
     type: 'TOGGLE_PAD_RESPONSE',
   };
 }
+
+export function updateBars(bars) {
+  return {
+    type: 'UPDATE_BARS',
+    bars,
+  };
+}
+
+export function selectBar(bar) {
+  return {
+    type: 'SELECT_BAR',
+    bar,
+  };
+}

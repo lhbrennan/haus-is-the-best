@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import TransportContainer from '../containers/TransportContainer';
+import NumBarsContainer from '../containers/NumBarsContainer';
+import BarsSelectorContainer from '../containers/BarsSelectorContainer';
 
 const Panel = styled.div`
   display: flex;
@@ -41,6 +43,7 @@ const MasterControl = ({
 }) => (
   <Panel>
     <TransportContainer />
+    <NumBarsContainer />
 
     <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName)}>
       Save
@@ -57,6 +60,8 @@ const MasterControl = ({
     <AsphaultButton onClick={togglePadResponse}>
       Toggle
     </AsphaultButton>
+
+    <BarsSelectorContainer />
   </Panel>
 );
 

@@ -17,7 +17,7 @@ const defaultPattern = {
 const store = createStore(
   {
     playing: false,
-    bars: 1,
+    bars: 2,
     bpm: 120,
     username: 'lhb',
     compositionName: 'composition1',
@@ -35,6 +35,7 @@ const store = createStore(
       closedHat: 0.5,
     },
     eventQueue: [],
+    visibleBar: 1,
   },
 );
 

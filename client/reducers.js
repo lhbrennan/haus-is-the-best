@@ -111,6 +111,9 @@ function volumes(state = {}, action) {
 
 function bars(state = 1, action) {
   switch (action.type) {
+    case 'UPDATE_BARS':
+      console.log('new bars', action.bars);
+      return action.bars;
     default:
       return state;
   }
@@ -143,6 +146,15 @@ function padResponse(state = true, action) {
   }
 }
 
+function visibleBar(state = 1, action) {
+  switch (action.type) {
+    case 'SELECT_BAR':
+      return action.bar;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   bpm,
   username,
@@ -157,4 +169,5 @@ export default combineReducers({
   resolution,
   eventQueue,
   padResponse,
+  visibleBar,
 });
