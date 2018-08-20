@@ -7,7 +7,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBars: bars => dispatch(updateBars(bars)),
+  updateBars: (bars) => {
+    let newBars = Number(bars);
+    newBars = newBars > 4 ? 4 : newBars;
+    dispatch(updateBars(newBars));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NumBars);

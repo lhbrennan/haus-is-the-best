@@ -25,7 +25,7 @@ const NumBars = ({ updateBars, bars }) => (
     <Label>
       Bars
     </Label>
-    <Input type="text" onChange={e => updateBars(e.target.value)} defaultValue={bars} />
+    <Input type="text" onChange={e => updateBars(e.target.value)} value={bars} />
   </ButtonContainer>
 
 );

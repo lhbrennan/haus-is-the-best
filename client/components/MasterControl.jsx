@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TransportContainer from '../containers/TransportContainer';
 import NumBarsContainer from '../containers/NumBarsContainer';
-import BarsSelectorContainer from '../containers/BarsSelectorContainer';
+import BarSelectorContainer from '../containers/BarSelectorContainer';
 
 const Panel = styled.div`
   display: flex;
@@ -61,7 +61,7 @@ const MasterControl = ({
       Toggle
     </AsphaultButton>
 
-    <BarsSelectorContainer />
+    <BarSelectorContainer />
   </Panel>
 );
 
