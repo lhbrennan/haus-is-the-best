@@ -16,12 +16,12 @@ class Grid extends React.Component {
   }
 
   createBeats() {
-    const { pattern, numBeats, resolution, instruments, triggerSample, padResponse } = this.props;
+    const { pattern, resolution, instruments, triggerSample, padResponse, visibleBar } = this.props;
     const beats = [];
-    for (let i = 0; i < numBeats; i++) {
+    for (let i = (visibleBar - 1) * 4; i < visibleBar * 4; i++) {
       beats.push(<Beat
-        pattern={pattern} 
-        resolution={resolution} 
+        pattern={pattern}
+        resolution={resolution}
         instruments={instruments}
         beat={i + 1}
         key={i}
