@@ -56,3 +56,22 @@ export function updateInstrumentVolume(newVolume, instrument) {
     instrument,
   };
 }
+
+export function queueEvent(instrument) {
+  return {
+    type: 'QUEUE_EVENT',
+    instrument,
+  };
+}
+
+export function dequeueEvent() {
+  return {
+    type: 'DEQUEUE_EVENT',
+  };
+}
+
+export function togglePadResponse() {
+  return {
+    type: 'TOGGLE_PAD_RESPONSE',
+  }
+}

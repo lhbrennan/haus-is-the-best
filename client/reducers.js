@@ -125,6 +125,26 @@ function resolution(state = 16, action) {
   }
 }
 
+function eventQueue(state = [], action) {
+  switch (action.type) {
+    case 'QUEUE_EVENT':
+      return [...state, action.instrument];
+    case 'DEQUEUE_EVENT':
+      return [...state].slice(1);
+    default:
+      return state;
+  }
+}
+
+function padResponse(state = true, action) {
+  switch (action.type) {
+    case 'TOGGLE_PAD_RESPONSE':
+      return !state;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   bpm,
   username,
@@ -137,4 +157,6 @@ export default combineReducers({
   pattern,
   bars,
   resolution,
+  eventQueue,
+  padResponse,
 });

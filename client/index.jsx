@@ -24,7 +24,7 @@ const store = createStore(
     instruments: ['kick', 'clap', 'snare', 'openHat', 'closedHat'],
     resolution: 16, // steps per bar
     pattern: defaultPattern,
-    padResponse: false,
+    padResponse: true,
     swing: 2.5,
     overallVolume: 1,
     volumes: {
@@ -35,7 +35,7 @@ const store = createStore(
       closedHat: 0.5,
     },
     eventQueue: [],
-  }
+  },
 );
 
 ReactDOM.render(

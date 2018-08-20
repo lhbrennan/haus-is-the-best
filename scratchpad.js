@@ -1,3 +1,9 @@
+// ----------------------------------------------------------------------------
+// ISSUES
+// ----------------------------------------------------------------------------
+// why is file extension required if react is not imported?
+// why do you need reducer defualts if you initialize the store with default values?
+
 playOsc(time, activeStep) {
   const noteLength = .05;
   let osc = this.audioContext.createOscillator();

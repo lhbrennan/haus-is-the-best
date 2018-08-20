@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { dequeueEvent } from '../actions.js';
 
 class AudioPlayer extends React.Component {
   constructor(props) {
@@ -44,7 +45,11 @@ class AudioPlayer extends React.Component {
 
   componentDidUpdate(prevProps) {
     console.log('recieved new props', this.props);
-    const { playing, overallVolume } = this.props;
+    const { playing, overallVolume, eventQueue, dequeueEvent } = this.props;
+    if (eventQueue.length > 0) {
+      this.playNote(eventQueue[0]);
+      dequeueEvent();
+    }
     if (prevProps.playing !== playing) {
       this.handlePlaying();
     }
@@ -161,10 +166,12 @@ const mapStateToProps = state => (
     swing: state.swing,
     bpm: state.bpm,
     instruments: state.instruments,
+    eventQueue: state.eventQueue,
   }
 );
 
-export default connect(
-  mapStateToProps,
-  null,
-)(AudioPlayer);
+const mapDispatchToProps = dispatch => ({
+  dequeueEvent: () => dispatch(dequeueEvent()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AudioPlayer);

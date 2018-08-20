@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updatePattern } from '../actions';
+import { updatePattern, queueEvent } from '../actions';
 import Pad from '../components/Pad.jsx';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // triggerSample: bpm => dispatch(updateBpm(bpm)),
+  triggerSample: instrument => dispatch(queueEvent(instrument)),
   updatePattern: (instrument, beat, subBeat) => dispatch(updatePattern(instrument, beat, subBeat)),
 });
 
