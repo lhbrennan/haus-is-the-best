@@ -5,15 +5,11 @@ module.exports = {
   module: {
     rules: [
       {
-        resolve: {
-          extensions: ['.js', '.jsx'],
-        },
+        resolve: { extensions: ['.js', '.jsx'] },
         test: /\.(js|jsx)$/, // test: [/\.jsx$/],
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: {
-          presets: ['env', 'react'],
-        },
+        query: { presets: ['env', 'react'] },
       },
     ],
   },

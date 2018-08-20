@@ -7,11 +7,11 @@ import AudioPlayer from './containers/AudioPlayer';
 
 // kind of hacky defining this outside the App component...
 const defaultPattern = {
-  kick: new Array(16).fill(0),
-  clap: new Array(16).fill(0),
-  snare: new Array(16).fill(0),
-  openHat: new Array(16).fill(0),
-  closedHat: new Array(16).fill(0),
+  kick: new Array(64).fill(0),
+  clap: new Array(64).fill(0),
+  snare: new Array(64).fill(0),
+  openHat: new Array(64).fill(0),
+  closedHat: new Array(64).fill(0),
 };
 
 const store = createStore(

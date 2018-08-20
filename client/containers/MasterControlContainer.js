@@ -2,9 +2,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { loadComposition, resetPattern, togglePadResponse } from '../actions';
 
-// TO-DO: Why can't I remove the '.jsx' extension w/o breaking stuff?
-// Maybe because I'm not importing React?
-import MasterControl from '../components/MasterControl.jsx';
+import MasterControl from '../components/MasterControl';
 
 const saveComposition = (pattern, swing, bpm, username, compositionName) => {
   console.log('saveComposition...');

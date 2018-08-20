@@ -103,9 +103,7 @@ function volumes(state = {}, action) {
   const { volume, instrument, type } = action;
   switch (type) {
     case 'UPDATE_INSTRUMENT_VOLUME':
-      return Object.assign({}, state, {
-        [instrument]: volume,
-      });
+      return Object.assign({}, state, { [instrument]: volume });
     default:
       return state;
   }
