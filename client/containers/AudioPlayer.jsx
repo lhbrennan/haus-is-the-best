@@ -55,7 +55,7 @@ class AudioPlayer extends React.Component {
     }
     if (playing) {
       this.gainNode.gain.value = overallVolume;
-    };
+    }
   }
 
   loadSound(instrument, samplePath) {

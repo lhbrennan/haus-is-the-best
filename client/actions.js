@@ -73,5 +73,5 @@ export function dequeueEvent() {
 export function togglePadResponse() {
   return {
     type: 'TOGGLE_PAD_RESPONSE',
-  }
+  };
 }
