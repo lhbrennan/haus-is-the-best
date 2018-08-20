@@ -8,7 +8,7 @@ module.exports = {
         resolve: {
           extensions: ['.js', '.jsx'],
         },
-        test: [/\.jsx$/],
+        test: /\.(js|jsx)$/, // test: [/\.jsx$/],
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {

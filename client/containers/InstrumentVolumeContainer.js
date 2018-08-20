@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { updateInstrumentVolume } from '../actions.js';
-import InstrumentVolume from '../components/InstrumentVolume.jsx';
+import { updateInstrumentVolume } from '../actions';
+import InstrumentVolume from '../components/InstrumentVolume';
 
 const mapStateToProps = (state, ownProps) => ({
   volumes: state.volumes,

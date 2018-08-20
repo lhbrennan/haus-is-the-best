@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 const defaultPattern = {
-  kick: new Array(16).fill(0),
-  clap: new Array(16).fill(0),
-  snare: new Array(16).fill(0),
-  openHat: new Array(16).fill(0),
-  closedHat: new Array(16).fill(0),
+  kick: new Array(64).fill(0),
+  clap: new Array(64).fill(0),
+  snare: new Array(64).fill(0),
+  openHat: new Array(64).fill(0),
+  closedHat: new Array(64).fill(0),
 };
 
 function pattern(state = {}, action) {
@@ -90,7 +90,7 @@ function playing(state = false, action) {
 }
 
 function overallVolume(state = 1, action) {
-  switch (action.type) { 
+  switch (action.type) {
     case 'UPDATE_OVERALL_VOLUME':
       console.log('new overallVolume', action.volume);
       return action.volume;

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import InstrumentGroup from '../components/InstrumentGroup.jsx';
+import InstrumentGroup from '../components/InstrumentGroup';
 
 const mapStateToProps = (state, ownProps) => ({
   pattern: state.pattern,
