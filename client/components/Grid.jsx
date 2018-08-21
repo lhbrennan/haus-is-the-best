@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Beat from './Beat.jsx';
+import QtrNoteGroupBlock from './QtrNoteGroupBlock';
 
 const Div = styled.div`
   display: flex;
@@ -12,14 +12,14 @@ class Grid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.createBeats = this.createBeats.bind(this);
+    this.createQuarterNoteBlocks = this.createQuarterNoteBlocks.bind(this);
   }
 
-  createBeats() {
+  createQuarterNoteBlocks() {
     const { pattern, resolution, instruments, triggerSample, padResponse, visibleBar } = this.props;
     const beats = [];
     for (let i = (visibleBar - 1) * 4; i < visibleBar * 4; i++) {
-      beats.push(<Beat
+      beats.push(<QtrNoteGroupBlock
         pattern={pattern}
         resolution={resolution}
         instruments={instruments}
@@ -35,7 +35,7 @@ class Grid extends React.Component {
   render() {
     return (
       <Div>
-        { this.createBeats() }
+        { this.createQuarterNoteBlocks() }
       </Div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import InstrumentGroupContainer from '../containers/InstrumentGroupContainer';
+import QtrNoteInstrumentBlockContainer from '../containers/QtrNoteInstrumentBlockContainer';
 
 const Div = styled.div`
   padding: 5px;
@@ -9,7 +9,7 @@ const Div = styled.div`
   background: ${props => props.beat % 2 === 0 ? 'gainsboro' : 'azure'};
 `;
 
-class Beat extends React.Component {
+class QtrNoteGroupBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,7 +20,7 @@ class Beat extends React.Component {
     return (
       <Div beat={beat}>
         {instruments.map(instrument => (
-          <InstrumentGroupContainer
+          <QtrNoteInstrumentBlockContainer
             numPads={resolution / 4}
             instrument={instrument}
             beat={beat}
@@ -34,4 +34,4 @@ class Beat extends React.Component {
   }
 }
 
-export default Beat;
+export default QtrNoteGroupBlock;

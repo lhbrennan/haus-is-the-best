@@ -1,7 +1,7 @@
 import React from 'react';
 import PadContainer from '../containers/PadContainer';
 
-class InstrumentGroup extends React.Component {
+class QtrNoteInstrumentBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -35,4 +35,4 @@ class InstrumentGroup extends React.Component {
   }
 }
 
-export default InstrumentGroup;
+export default QtrNoteInstrumentBlock;

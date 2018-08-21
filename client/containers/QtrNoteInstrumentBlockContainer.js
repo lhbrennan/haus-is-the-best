@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import InstrumentGroup from '../components/InstrumentGroup';
+import QtrNoteInstrumentBlock from '../components/QtrNoteInstrumentBlock';
 
 const mapStateToProps = (state, ownProps) => ({
   pattern: state.pattern,
@@ -16,9 +16,9 @@ const mapStateToProps = (state, ownProps) => ({
 //   updatePattern: (instrument, beat, subBeat) => dispatch(updatePattern(instrument, beat, subBeat)),
 // });
 
-const InstrumentGroupContainer = connect(
+const QtrNoteInstrumentBlockContainer = connect(
   mapStateToProps,
   null,
-)(InstrumentGroup);
+)(QtrNoteInstrumentBlock);
 
-export default InstrumentGroupContainer;
+export default QtrNoteInstrumentBlockContainer;
