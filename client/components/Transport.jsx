@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding: 30px 175px;
+  padding: 30px 125px;
 `;
 
 // optimization: this styled component is duplicate of same in MasterControl
@@ -100,7 +100,7 @@ const Transport = ({
           max="5"
           step=".25"
           onChange={e => updateSwing(e.target.value)}
-          defaultValue={swing}
+          value={swing}
         />
       </SliderContainer>
     </ButtonContainer>
@@ -116,7 +116,7 @@ const Transport = ({
           max="1"
           step=".05"
           onChange={e => updateOverallVolume(e.target.value)}
-          defaultValue={overallVolume}
+          overallVolume={overallVolume}
         />
       </SliderContainer>
     </ButtonContainer>

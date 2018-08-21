@@ -37,6 +37,8 @@ function bpm(state = 120, action) {
 
 function username(state = 'lhb2', action) {
   switch (action.type) {
+    case 'UPDATE_USERNAME':
+      return action.username;
     case 'LOAD_COMPOSITION':
       return action.payload.username;
     default:
@@ -46,6 +48,8 @@ function username(state = 'lhb2', action) {
 
 function compositionName(state = 'composition1', action) {
   switch (action.type) {
+    case 'UPDATE_COMPOSITION_NAME':
+      return action.compositionName;
     case 'LOAD_COMPOSITION':
       return action.payload.compositionName;
     default:
@@ -97,6 +101,8 @@ function volumes(state = {}, action) {
   switch (type) {
     case 'UPDATE_INSTRUMENT_VOLUME':
       return Object.assign({}, state, { [instrument]: volume });
+    case 'LOAD_COMPOSITION':
+      return action.payload.volumes || state;
     default:
       return state;
   }

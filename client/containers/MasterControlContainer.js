@@ -4,7 +4,7 @@ import { loadComposition, resetPattern, togglePadResponse } from '../actions';
 
 import MasterControl from '../components/MasterControl';
 
-const saveComposition = (pattern, swing, bpm, username, compositionName) => {
+const saveComposition = (pattern, swing, bpm, username, compositionName, volumes) => {
   console.log('saveComposition...');
   axios.post('/compositions', {
     username,
@@ -12,6 +12,7 @@ const saveComposition = (pattern, swing, bpm, username, compositionName) => {
     pattern,
     swing,
     bpm,
+    volumes,
   });
 };
 
@@ -38,6 +39,7 @@ const mapStateToProps = state => ({
   bpm: state.bpm,
   compositionName: state.compositionName,
   username: state.username,
+  volumes: state.volumes,
 });
 
 const mapDispatchToProps = dispatch => ({

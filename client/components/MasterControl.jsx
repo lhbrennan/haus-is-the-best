@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import TransportContainer from '../containers/TransportContainer';
 import NumBarsContainer from '../containers/NumBarsContainer';
 import BarSelectorContainer from '../containers/BarSelectorContainer';
+import CredentialsContainer from '../containers/CredentialsContainer';
 
 const Panel = styled.div`
   display: flex;
@@ -30,6 +31,11 @@ const AsphaultButton = styled.button`
   box-shadow: inset 0 -2px #263849;
 `;
 
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const MasterControl = ({
   saveComposition,
   loadComposition,
@@ -40,28 +46,33 @@ const MasterControl = ({
   bpm,
   username,
   compositionName,
+  volumes,
 }) => (
   <Panel>
     <TransportContainer />
     <NumBarsContainer />
 
-    <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName)}>
-      Save
-    </AsphaultButton>
+    <Div>
+      <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName, volumes)}>
+        Save
+      </AsphaultButton>
 
-    <AsphaultButton onClick={() => loadComposition(username, compositionName)}>
-      Load
-    </AsphaultButton>
+      <AsphaultButton onClick={() => loadComposition(username, compositionName)}>
+        Load
+      </AsphaultButton>
 
-    <AsphaultButton onClick={resetPattern}>
-      Reset
-    </AsphaultButton>
+      <AsphaultButton onClick={resetPattern}>
+        Reset
+      </AsphaultButton>
 
-    <AsphaultButton onClick={togglePadResponse}>
-      Toggle
-    </AsphaultButton>
+      <AsphaultButton onClick={togglePadResponse}>
+        Toggle
+      </AsphaultButton>
+    </Div>
 
     <BarSelectorContainer />
+
+    <CredentialsContainer />
   </Panel>
 );
 

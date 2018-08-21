@@ -16,11 +16,19 @@ const compositionSchema = mongoose.Schema({
   },
   swing: Number,
   bpm: Number,
+  volumes: {
+    kick: Number,
+    clap: Number,
+    snare: Number,
+    openHat: Number,
+    closedHat: Number,
+  },
 });
 
 const Composition = mongoose.model('Composition', compositionSchema);
 
 const storeComposition = function (data) {
+  console.log('data to save', data);
   const composition = new Composition(data);
   composition.save((err, updatedComposition) => {
     if (err) { return console.error(err); }

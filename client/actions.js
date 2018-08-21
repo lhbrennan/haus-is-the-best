@@ -90,3 +90,17 @@ export function selectBar(bar) {
     bar,
   };
 }
+
+export function updateUsername(username) {
+  return {
+    type: 'UPDATE_USERNAME',
+    username,
+  };
+}
+
+export function updateCompositionName(compositionName) {
+  return {
+    type: 'UPDATE_COMPOSITION_NAME',
+    compositionName,
+  };
+}
