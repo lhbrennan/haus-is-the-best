@@ -14,10 +14,7 @@ const Button = styled.button`
 
 const BarsSelector = ({ bars, visibleBar, selectBar }) => {
   // create range from 1 to bars
-  console.log('NumBars', typeof bars);
-  console.log('visibleBar', visibleBar);
   const range = Array.from(new Array(bars), (_, index) => index + 1);
-  console.log('range', range);
 
   return (
     <div>

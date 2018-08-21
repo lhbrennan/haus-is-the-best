@@ -46,7 +46,6 @@ class AudioPlayer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('recieved new props', this.props);
     const { playing, overallVolume, eventQueue, dequeueEvent } = this.props;
     if (eventQueue.length > 0) {
       this.playNote(eventQueue[0]);
@@ -128,12 +127,12 @@ class AudioPlayer extends React.Component {
   }
 
   nextStep() {
-    const { swing, bpm } = this.props;
+    const { swing, bpm, bars } = this.props;
     const secondsPerBeat = 60.0 / bpm;
     const secondsPer16thNote = secondsPerBeat / 4;
 
     const newActiveStep = this.activeStep + 1;
-    this.activeStep = (newActiveStep === 16 ? 0 : newActiveStep);
+    this.activeStep = (newActiveStep === (bars * 16) ? 0 : newActiveStep);
 
     const swingFactor = (this.activeStep % 2 ? (1 + (swing / 10)) : (1 - (swing / 10)));
     this.nextStepTime += (secondsPer16thNote * swingFactor);
@@ -169,6 +168,7 @@ const mapStateToProps = state => (
     bpm: state.bpm,
     instruments: state.instruments,
     eventQueue: state.eventQueue,
+    bars: state.bars,
   }
 );
 

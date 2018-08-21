@@ -1,12 +1,5 @@
 import { combineReducers } from 'redux';
-
-const defaultPattern = {
-  kick: new Array(64).fill(0),
-  clap: new Array(64).fill(0),
-  snare: new Array(64).fill(0),
-  openHat: new Array(64).fill(0),
-  closedHat: new Array(64).fill(0),
-};
+import { DefaultPattern } from './constants';
 
 function pattern(state = {}, action) {
   const { type, instrument, stepNum, payload } = action;
@@ -25,7 +18,7 @@ function pattern(state = {}, action) {
     case 'LOAD_COMPOSITION':
       return payload.pattern;
     case 'RESET_PATTERN':
-      return defaultPattern;
+      return new DefaultPattern();
     default:
       return state;
   }

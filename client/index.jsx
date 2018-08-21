@@ -4,15 +4,7 @@ import { Provider } from 'react-redux';
 import createStore from './store';
 import App from './App';
 import AudioPlayer from './containers/AudioPlayer';
-
-// kind of hacky defining this outside the App component...
-const defaultPattern = {
-  kick: new Array(64).fill(0),
-  clap: new Array(64).fill(0),
-  snare: new Array(64).fill(0),
-  openHat: new Array(64).fill(0),
-  closedHat: new Array(64).fill(0),
-};
+import { DefaultPattern } from './constants';
 
 const store = createStore(
   {
@@ -23,7 +15,7 @@ const store = createStore(
     compositionName: 'composition1',
     instruments: ['kick', 'clap', 'snare', 'openHat', 'closedHat'],
     resolution: 16, // steps per bar
-    pattern: defaultPattern,
+    pattern: new DefaultPattern(),
     padResponse: true,
     swing: 2.5,
     overallVolume: 1,
