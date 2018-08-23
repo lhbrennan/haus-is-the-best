@@ -146,7 +146,10 @@ class AudioPlayer extends React.Component {
 
     const instrumentGainNode = this.audioContext.createGain();
     instrumentGainNode.connect(this.gainNode);
-    const volume = volumes[instrument];
+    let volume = volumes[instrument];
+    console.log('volume in reducer before transform: ', volume);
+    volume = (Math.exp(volume) - 1) / (Math.E - 1);
+    console.log('volume in reducer after transform: ', volume);
     instrumentGainNode.gain.value = volume * (velocity / 5);
 
     voice.connect(instrumentGainNode);
