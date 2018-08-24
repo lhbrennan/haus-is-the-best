@@ -3,3 +3,5 @@ samples/
 .DS_Store
 bundle.js
 .env
+.vscode/
+scratchpad.js
