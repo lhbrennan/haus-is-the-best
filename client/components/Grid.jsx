@@ -5,7 +5,7 @@ import QtrNoteGroupBlock from './QtrNoteGroupBlock';
 
 const Div = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-flow: row;
 `;
 
 class Grid extends React.Component {

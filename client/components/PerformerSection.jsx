@@ -7,7 +7,7 @@ import LeftPanel from './LeftPanel';
 
 const Div = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-flow: row;
   justify-content: center;
 `;
 

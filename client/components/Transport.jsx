@@ -3,18 +3,18 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 30px 125px;
+  flex-flow: row;
+  justify-content: space-between;
+  // padding: 30px;
 `;
 
 // optimization: this styled component is duplicate of same in MasterControl
-const AsphaultButton = styled.button`
-  position: relative;
-  vertical-align: top;
+const PlayButton = styled.button`
+  // position: relative;
+  // vertical-align: top;
   Width: 80px;
-  height: 45px;
-  padding: 0;
+  height: 80px;
+  // padding: 40px;
   font-size: 22px;
   color: white;
   text-align: center;
@@ -28,21 +28,16 @@ const AsphaultButton = styled.button`
   box-shadow: inset 0 -2px #263849;
 `;
 
-const ButtonContainer = styled.div`
+const InnerWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-flow: column;
 `;
 
-const SliderContainer = styled.div`
+const SettingsContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-
-  display: inline-block;
-  width: 20px;
-  height: 150px;
-  padding: 0;
+  padding: 5px;
 `;
 
 const Slider = styled.input`
@@ -50,7 +45,7 @@ const Slider = styled.input`
   height: 20px;
   margin: 0;
   transform-origin: 75px 75px;
-  transform: rotate(-90deg);
+  // transform: rotate(-90deg);
 `;
 
 const Label = styled.label`
@@ -78,22 +73,22 @@ const Transport = ({
 }) => (
   <Wrapper>
 
-    <AsphaultButton onClick={togglePlaying}>
+    <PlayButton onClick={togglePlaying}>
       {playing ? 'Stop' : 'Play'}
-    </AsphaultButton>
+    </PlayButton>
 
-    <ButtonContainer>
-      <Label>
-        BPM
-      </Label>
-      <Input type="text" onBlur={e => updateBpm(e.target.value)} defaultValue={bpm} />
-    </ButtonContainer>
+    <InnerWrapper>
+      <SettingsContainer>
+        <Label>
+          BPM
+        </Label>
+        <Input type="text" onBlur={e => updateBpm(e.target.value)} defaultValue={bpm} />
+      </SettingsContainer>
 
-    <ButtonContainer>
-      <Label>
-        Swing
-      </Label>
-      <SliderContainer>
+      <SettingsContainer>
+        <Label>
+          Swing
+        </Label>
         <Slider
           type="range"
           min="0"
@@ -102,14 +97,12 @@ const Transport = ({
           onChange={e => updateSwing(e.target.value)}
           value={swing}
         />
-      </SliderContainer>
-    </ButtonContainer>
+      </SettingsContainer>
 
-    <ButtonContainer>
-      <Label>
-        Volume
-      </Label>
-      <SliderContainer>
+      <SettingsContainer>
+        <Label>
+          Volume
+        </Label>
         <Slider
           type="range"
           min="0"
@@ -118,8 +111,8 @@ const Transport = ({
           onChange={e => updateOverallVolume(e.target.value)}
           overallVolume={overallVolume}
         />
-      </SliderContainer>
-    </ButtonContainer>
+      </SettingsContainer>
+    </InnerWrapper>
 
   </Wrapper>
 );
