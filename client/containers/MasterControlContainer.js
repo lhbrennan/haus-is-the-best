@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
   compositionName: state.compositionName,
   username: state.username,
   volumes: state.volumes,
+  padResponse: state.padResponse,
 });
 
 const mapDispatchToProps = dispatch => ({

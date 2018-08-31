@@ -5,10 +5,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  // padding: 30px;
 `;
 
-// optimization: this styled component is duplicate of same in MasterControl
 const PlayButton = styled.button`
   // position: relative;
   // vertical-align: top;

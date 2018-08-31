@@ -19,6 +19,10 @@ const BarsWrapper = styled.div`
 `;
 
 const AsphaultButton = styled.button`
+  background: ${({ padResponse }) => {
+    if (padResponse) { return 'orange'; }
+    return '#34495e';
+  }};
   margin: 0px 0px 5px 0px;
   Width: 80px;
   height: 60px;
@@ -26,7 +30,6 @@ const AsphaultButton = styled.button`
   color: white;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  background: #34495e;
   border: 0;
   border-bottom: 2px solid #263849;
   border-radius: 5px;
@@ -43,6 +46,7 @@ const Div = styled.div`
 const MasterControl = ({
   resetPattern,
   togglePadResponse,
+  padResponse,
 }) => (
   <Wrapper>
     <TransportContainer />
@@ -56,7 +60,7 @@ const MasterControl = ({
         Reset Pattern
       </AsphaultButton>
 
-      <AsphaultButton onClick={togglePadResponse}>
+      <AsphaultButton padResponse={padResponse} onClick={togglePadResponse}>
         Pad Sound
       </AsphaultButton>
     </Div>
