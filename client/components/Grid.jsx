@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 import QtrNoteGroupBlock from './QtrNoteGroupBlock';
 
-const Div = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
+  margin: 10px 20px;
 `;
 
 class Grid extends React.Component {
@@ -34,9 +35,9 @@ class Grid extends React.Component {
 
   render() {
     return (
-      <Div>
+      <Wrapper>
         { this.createQuarterNoteBlocks() }
-      </Div>
+      </Wrapper>
     );
   }
 }

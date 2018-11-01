@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: space-around;
+  width: 100px;
 `;
 
 const RightPanel = ({ instruments }) => (
