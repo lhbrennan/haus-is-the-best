@@ -1,5 +1,5 @@
 {
-  "name": "haus-is-the-best",
+  "name": "house-is-a-feeling",
   "version": "1.0.0",
   "description": "read the title",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lhbrennan/haus-is-the-best.git"
+    "url": "git+https://github.com/lhbrennan/house-is-a-feeling.git"
   },
   "author": "Luke <lhbrennan@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lhbrennan/haus-is-the-best/issues"
+    "url": "https://github.com/lhbrennan/house-is-a-feeling/issues"
   },
-  "homepage": "https://github.com/lhbrennan/haus-is-the-best#readme",
+  "homepage": "https://github.com/lhbrennan/house-is-a-feeling#readme",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
