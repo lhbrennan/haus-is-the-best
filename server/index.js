@@ -1,16 +1,16 @@
 const express = require('express');
 const parser = require('body-parser');
 
-const db = require('../database/db.js');
+// const db = require('../database/db.js');
 
 const app = express();
-// maybe reference your port from an environment variable
-const port = 3000;
+
+const port = process.env.PORT || 3000;
 // static assets should be referenced with absolute paths
 app.use('/', express.static('public'));
 app.use('/samples', express.static('samples'));
 app.use('/compositions', parser.json());
-
+/*
 app.get('/compositions', (req, res) => {
   const { username, compositionName } = req.query;
   // you should send feedback to your client if there's an error
@@ -25,7 +25,7 @@ app.post('/compositions', (req, res) => {
   db.storeComposition(req.body);
   res.status(201).end();
 });
-
+*/
 app.listen(port, () => {
   console.log('listening on port', port);
-})
+});
