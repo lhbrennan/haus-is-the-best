@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   background: ${({ visible }) => {
-    if (visible) { return '#6A0000'; }
-    return 'cadetblue';
+    if (visible) { return 'orange'; }
+    return 'grey';
   }};
   margin: 5px; 
   border-radius: 10px;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
 `;
 
 const BarsSelector = ({ bars, visibleBar, selectBar }) => {

@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Div = styled.div`
+const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
   justify-content: space-around;
   padding-right: 3px;
+  width: 100px;
 `;
 
 const Label = styled.div`
@@ -16,11 +17,11 @@ const Label = styled.div`
 `;
 
 const LeftPanel = props => (
-  <Div>
+  <Wrapper>
     {props.instruments.map(instrument => {
       return <Label key={instrument}>{instrument}</Label>
     })}
-  </Div>
+  </Wrapper>
 );
 
 export default LeftPanel;

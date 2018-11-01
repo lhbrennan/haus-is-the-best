@@ -5,18 +5,18 @@ import RightPanelContainer from '../containers/RightPanelContainer';
 import GridContainer from '../containers/GridContainer';
 import LeftPanel from './LeftPanel';
 
-const Div = styled.div`
+const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-flow: row;
   justify-content: center;
 `;
 
 const PerformerSection = ({ instruments }) => (
-  <Div>
+  <Wrapper>
     <LeftPanel instruments={instruments} />
     <GridContainer />
     <RightPanelContainer />
-  </Div>
+  </Wrapper>
 );
 
 export default PerformerSection;

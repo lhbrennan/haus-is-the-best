@@ -5,24 +5,31 @@ import NumBarsContainer from '../containers/NumBarsContainer';
 import BarSelectorContainer from '../containers/BarSelectorContainer';
 import CredentialsContainer from '../containers/CredentialsContainer';
 
-const Panel = styled.div`
+const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 30px 175px;
+  flex-flow: row;
+  justify-content: space-between;
+  width: 1000px;
+  margin: 0px 0px 25px 0px;
+`;
+
+const BarsWrapper = styled.div`
+  display: flex;
+  flex-flow: column;
 `;
 
 const AsphaultButton = styled.button`
-  position: relative;
-  vertical-align: top;
+  background: ${({ padResponse }) => {
+    if (padResponse) { return 'orange'; }
+    return '#34495e';
+  }};
+  margin: 0px 0px 5px 0px;
   Width: 80px;
-  height: 45px;
-  padding: 0;
+  height: 60px;
   font-size: 22px;
   color: white;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  background: #34495e;
   border: 0;
   border-bottom: 2px solid #263849;
   border-radius: 5px;
@@ -33,47 +40,33 @@ const AsphaultButton = styled.button`
 
 const Div = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
 `;
 
 const MasterControl = ({
-  saveComposition,
-  loadComposition,
   resetPattern,
   togglePadResponse,
-  pattern,
-  swing,
-  bpm,
-  username,
-  compositionName,
-  volumes,
+  padResponse,
 }) => (
-  <Panel>
+  <Wrapper>
     <TransportContainer />
-    <NumBarsContainer />
+    <BarsWrapper>
+      <NumBarsContainer />
+      <BarSelectorContainer />
+    </BarsWrapper>
 
     <Div>
-      <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName, volumes)}>
-        Save
-      </AsphaultButton>
-
-      <AsphaultButton onClick={() => loadComposition(username, compositionName)}>
-        Load
-      </AsphaultButton>
-
       <AsphaultButton onClick={resetPattern}>
-        Reset
+        Reset Pattern
       </AsphaultButton>
 
-      <AsphaultButton onClick={togglePadResponse}>
-        Toggle
+      <AsphaultButton padResponse={padResponse} onClick={togglePadResponse}>
+        Pad Sound
       </AsphaultButton>
     </Div>
 
-    <BarSelectorContainer />
-
     <CredentialsContainer />
-  </Panel>
+  </Wrapper>
 );
 
 export default MasterControl;
