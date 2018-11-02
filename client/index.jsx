@@ -9,7 +9,7 @@ import { DefaultPattern } from './constants';
 const store = createStore(
   {
     playing: false,
-    bars: 2,
+    bars: 1,
     bpm: 120,
     username: 'lhb',
     compositionName: 'composition1',
