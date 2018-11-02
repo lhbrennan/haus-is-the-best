@@ -21,7 +21,7 @@ app.use('/compositions', parser.json());
 
 app.get('/samples/:id', (req, res) => {
   const bucketParams = {
-    Bucket: process.env.AWS_BUCKET_NAME,
+    Bucket: process.env.S3_BUCKET_NAME,
     Key: req.params.id,
   };
   s3.getObject(bucketParams, (err, data) => {
