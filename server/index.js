@@ -24,6 +24,8 @@ app.get('/samples/:id', (req, res) => {
     Bucket: process.env.S3_BUCKET_NAME,
     Key: req.params.id,
   };
+  console.log('access key', process.env.AWS_ACCESS_KEY_ID);
+  console.log(bucketParams);
   s3.getObject(bucketParams, (err, data) => {
     if (err) {
       console.log(err, err.stack);
