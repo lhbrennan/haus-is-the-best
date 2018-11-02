@@ -1,13 +1,13 @@
 const express = require('express');
 const parser = require('body-parser');
-var AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-var s3 = new AWS.S3();
+const s3 = new AWS.S3();
 
 // const db = require('../database/db.js');
 
@@ -21,18 +21,16 @@ app.use('/compositions', parser.json());
 
 app.get('/samples/:id', (req, res) => {
   const bucketParams = {
-    Bucket: process.env.S3_BUCKET_NAME,
+    Bucket: `${process.env.S3_BUCKET_NAME}/samples`,
     Key: req.params.id,
   };
-  console.log('access key', process.env.AWS_ACCESS_KEY_ID);
-  console.log(bucketParams);
   s3.getObject(bucketParams, (err, data) => {
     if (err) {
       console.log(err, err.stack);
-    } else {
-      console.log(data);
-      res.status(200).send(data);
     }
+    console.log(data);
+    res.set('Content-Length', data.ContentLength).set('Content-Type', data.ContentType);
+    res.status(200).send(data.Body);
   });
 });
 /*
