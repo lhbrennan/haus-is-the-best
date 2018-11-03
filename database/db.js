@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
-// how will you handle credentials in deployment (this environment variables)
-mongoose.connect('mongodb://localhost/drum-machine');
+
+const uri = process.env.MONGODB_URI || 'mongodb://localhost/drum-machine';
+console.log('uri', uri)
+mongoose.connect(uri);
 
 const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
 
 const compositionSchema = mongoose.Schema({
   username: String,
@@ -38,7 +42,7 @@ const storeComposition = function (data) {
   });
 };
 
-const fetchComposition = function(username, compositionName) {
+const fetchComposition = function (username, compositionName) {
   return Composition.findOne({
     username,
     compositionName,
@@ -48,4 +52,4 @@ const fetchComposition = function(username, compositionName) {
 module.exports = {
   storeComposition,
   fetchComposition,
-}
+};

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "webpack -d --watch",
     "start": "node server/index.js",
-    "start-dev": "AWS_ACCESS_KEY_ID='AKIAIFL3O5XTI4KE63WA' AWS_SECRET_ACCESS_KEY='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' S3_BUCKET_NAME='lhbrennan-house-is-a-feeling-assets' nodemon server/index.js"
+    "start-dev": "AWS_ACCESS_KEY_ID='AKIAIFL3O5XTI4KE63WA' AWS_SECRET_ACCESS_KEY='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' S3_BUCKET_NAME='lhbrennan-house-is-a-feeling-assets' MONGODB_URI='mongodb://heroku_mn10v20g:bnu4odmd6280ugujhm4cbdg8bu@ds151293.mlab.com:51293/heroku_mn10v20g' nodemon server/index.js"
   },
   "repository": {
     "type": "git",

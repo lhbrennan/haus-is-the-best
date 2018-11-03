@@ -1,19 +1,17 @@
 const express = require('express');
 const parser = require('body-parser');
 const AWS = require('aws-sdk');
+const db = require('../database/db.js');
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
-
 const s3 = new AWS.S3();
 
-// const db = require('../database/db.js');
-
 const app = express();
-
 const port = process.env.PORT || 3000;
+
 // static assets should be referenced with absolute paths
 app.use('/', express.static('public'));
 // app.use('/samples', express.static('samples'));
@@ -33,7 +31,7 @@ app.get('/samples/:id', (req, res) => {
     res.status(200).send(data.Body);
   });
 });
-/*
+
 app.get('/compositions', (req, res) => {
   const { username, compositionName } = req.query;
   // you should send feedback to your client if there's an error
@@ -43,12 +41,12 @@ app.get('/compositions', (req, res) => {
     });
 });
 
-app.post('/compositions', (req, res) => { 
+app.post('/compositions', (req, res) => {
   // you should send feedback to your client if there's an error
   db.storeComposition(req.body);
   res.status(201).end();
 });
-*/
+
 app.listen(port, () => {
   console.log('listening on port', port);
 });
