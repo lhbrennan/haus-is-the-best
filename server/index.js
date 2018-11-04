@@ -2,6 +2,7 @@ const express = require('express');
 const parser = require('body-parser');
 const AWS = require('aws-sdk');
 const db = require('../database/db.js');
+require('dotenv').config({ silent: process.env.NODE_ENV !== 'development' });
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
