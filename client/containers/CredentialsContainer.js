@@ -17,7 +17,7 @@ const saveComposition = (pattern, swing, bpm, username, compositionName, volumes
 };
 
 const loadCompositionHandler = (username, compositionName, dispatch) => {
-  console.log('loadComposition...');
+  console.log(`Loading ${compositionName} by ${username}`);
   axios.get('/compositions', {
     params: {
       username,

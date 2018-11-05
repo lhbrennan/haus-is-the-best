@@ -53,46 +53,51 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-const Credentials = ({
-  username,
-  compositionName,
-  updateUsername,
-  updateCompositionName,
-  saveComposition,
-  loadComposition,
-  pattern,
-  swing,
-  bpm,
-  volumes,
-}) => (
-  <Wrapper>
+class Credentials extends React.Component {
+  componentDidMount() {
+    const { loadComposition, username, compositionName } = this.props;
+    loadComposition(username, compositionName);
+  }
 
-    <ButtonContainer>
-      <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName, volumes)}>
-        Save
-      </AsphaultButton>
+  render() {
+    const {
+      username,
+      compositionName,
+      updateUsername,
+      updateCompositionName,
+      saveComposition,
+      loadComposition,
+      pattern,
+      swing,
+      bpm,
+      volumes,
+    } = this.props;
 
-      <AsphaultButton onClick={() => loadComposition(username, compositionName)}>
-        Load
-      </AsphaultButton>
-    </ButtonContainer>
-
-    <SliderContainer>
-      <Label>
-        Username
-      </Label>
-      <Input type="text" onBlur={e => updateUsername(e.target.value)} defaultValue={username} />
-    </SliderContainer>
-
-    <SliderContainer>
-      <Label>
-        Composition
-      </Label>
-      <Input type="text" onBlur={e => updateCompositionName(e.target.value)} defaultValue={compositionName} />
-    </SliderContainer>
-
-  </Wrapper>
-)
+    return (
+      <Wrapper>
+        <ButtonContainer>
+          <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName, volumes)}>
+            Save
+          </AsphaultButton>
+          <AsphaultButton onClick={() => loadComposition(username, compositionName)}>
+            Load
+          </AsphaultButton>
+        </ButtonContainer>
+        <SliderContainer>
+          <Label>
+            Username
+          </Label>
+          <Input type="text" onBlur={e => updateUsername(e.target.value)} defaultValue={username} />
+        </SliderContainer>
+        <SliderContainer>
+          <Label>
+            Composition
+          </Label>
+          <Input type="text" onBlur={e => updateCompositionName(e.target.value)} defaultValue={compositionName} />
+        </SliderContainer>
+      </Wrapper>
+    );
+  }
+}
 
 export default Credentials;
-
