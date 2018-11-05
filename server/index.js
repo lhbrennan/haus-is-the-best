@@ -27,7 +27,6 @@ app.get('/samples/:id', (req, res) => {
     if (err) {
       console.log(err, err.stack);
     }
-    console.log(data);
     res.set('Content-Length', data.ContentLength).set('Content-Type', data.ContentType);
     res.status(200).send(data.Body);
   });

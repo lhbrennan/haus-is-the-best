@@ -32,14 +32,23 @@ const compositionSchema = mongoose.Schema({
 const Composition = mongoose.model('Composition', compositionSchema);
 
 const storeComposition = function (data) {
-  console.log('data to save', data);
-  const composition = new Composition(data);
-  composition.save((err, updatedComposition) => {
-    if (err) { return console.error(err); }
-    console.log('sucessfully saved ',
-      updatedComposition.username,
-      updatedComposition.compositionName);
-  });
+  console.log('updating this...');
+  console.log(data);
+  // const composition = new Composition(data);
+  const { username, compositionName } = data;
+  Composition.findOneAndUpdate(
+    { username, compositionName },
+    data,
+    { upsert: true, new: true },
+    (err, doc) => {
+      if (err) {
+        console.error('Problem with upsert');
+        console.log(err);
+      } else {
+        console.log('successful upsert\n', doc);
+      }
+    },
+  );
 };
 
 const fetchComposition = function (username, compositionName) {
