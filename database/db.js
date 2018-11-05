@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost/drum-machine';
-console.log('uri', uri)
 mongoose.connect(uri);
-
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -27,6 +25,7 @@ const compositionSchema = mongoose.Schema({
     openHat: Number,
     closedHat: Number,
   },
+  bars: Number,
 });
 
 const Composition = mongoose.model('Composition', compositionSchema);
