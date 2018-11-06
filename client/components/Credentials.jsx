@@ -71,12 +71,13 @@ class Credentials extends React.Component {
       swing,
       bpm,
       volumes,
+      bars,
     } = this.props;
 
     return (
       <Wrapper>
         <ButtonContainer>
-          <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName, volumes)}>
+          <AsphaultButton onClick={() => saveComposition(pattern, swing, bpm, username, compositionName, volumes, bars)}>
             Save
           </AsphaultButton>
           <AsphaultButton onClick={() => loadComposition(username, compositionName)}>

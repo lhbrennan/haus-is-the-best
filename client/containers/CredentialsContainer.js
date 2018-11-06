@@ -4,8 +4,8 @@ import axios from 'axios';
 import Credentials from '../components/Credentials';
 import { loadComposition, updateUsername, updateCompositionName } from '../actions';
 
-const saveComposition = (pattern, swing, bpm, username, compositionName, volumes) => {
-  console.log('saveComposition...');
+const saveComposition = (pattern, swing, bpm, username, compositionName, volumes, bars) => {
+  console.log(`Saving Composition... swing: ${swing}, bpm: ${bpm}, bars: ${bars}`);
   axios.post('/compositions', {
     username,
     compositionName,
@@ -13,6 +13,7 @@ const saveComposition = (pattern, swing, bpm, username, compositionName, volumes
     swing,
     bpm,
     volumes,
+    bars,
   });
 };
 
@@ -25,6 +26,8 @@ const loadCompositionHandler = (username, compositionName, dispatch) => {
     },
   })
     .then(({ data }) => {
+      console.log('data from mongo...', data);
+      // console.log(data);
       dispatch(loadComposition(data));
     })
     .catch((err) => {
@@ -40,6 +43,7 @@ const mapStateToProps = state => ({
   swing: state.swing,
   bpm: state.bpm,
   volumes: state.volumes,
+  bars: state.bars,
 });
 
 const mapDispatchToProps = dispatch => ({

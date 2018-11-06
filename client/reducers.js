@@ -113,6 +113,9 @@ function bars(state = 1, action) {
     case 'UPDATE_BARS':
       console.log('new bars', action.bars);
       return action.bars;
+    case 'LOAD_COMPOSITION':
+      console.log('new bars from loaded composition', action.payload.bars);
+      return action.payload.bars || 1;
     default:
       return state;
   }
