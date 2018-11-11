@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // static assets should be referenced with absolute paths
-app.use('/', express.static('public'));
+app.use('/', express.static('client/public'));
 // app.use('/samples', express.static('samples'));
 app.use('/compositions', parser.json());
 
