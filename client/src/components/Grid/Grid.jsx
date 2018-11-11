@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  margin: 0px 20px;
 `;
 
 class Grid extends React.Component {
