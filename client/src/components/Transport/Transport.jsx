@@ -8,25 +8,6 @@ const Wrapper = styled.div`
   color: #82b1ff;
 `;
 
-const PlayButton = styled.button`
-  // position: relative;
-  // vertical-align: top;
-  Width: 80px;
-  height: 80px;
-  // padding: 40px;
-  font-size: 22px;
-  color: white;
-  text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  background: #34495e;
-  border: 0;
-  border-bottom: 2px solid #263849;
-  border-radius: 5px;
-  cursor: pointer;
-  -webkit-box-shadow: inset 0 -2px #263849;
-  box-shadow: inset 0 -2px #263849;
-`;
-
 const InnerWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -61,21 +42,12 @@ const Input = styled.input`
 `;
 
 const Transport = ({
-  togglePlaying,
-  playing,
   bpm,
   updateBpm,
   swing,
   updateSwing,
-  overallVolume,
-  updateOverallVolume,
 }) => (
   <Wrapper>
-
-    <PlayButton onClick={togglePlaying}>
-      {playing ? 'Stop' : 'Play'}
-    </PlayButton>
-
     <InnerWrapper>
       <SettingsContainer>
         <Label>
@@ -97,22 +69,7 @@ const Transport = ({
           value={swing}
         />
       </SettingsContainer>
-
-      <SettingsContainer>
-        <Label>
-          Volume
-        </Label>
-        <Slider
-          type="range"
-          min="0"
-          max="1"
-          step=".05"
-          onChange={e => updateOverallVolume(e.target.value)}
-          overallVolume={overallVolume}
-        />
-      </SettingsContainer>
     </InnerWrapper>
-
   </Wrapper>
 );
 
