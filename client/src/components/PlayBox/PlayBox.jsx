@@ -27,13 +27,6 @@ const PlayButton = styled.button`
   box-shadow: inset 0 -2px #263849;
 `;
 
-const SettingsContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 5px;
-`;
-
 const Slider = styled.input`
   width: 110px;
   height: 20px;
@@ -47,14 +40,6 @@ const Label = styled.label`
   margin-right: 7px;  
 `;
 
-const Input = styled.input`
-  width: 30px;
-  text-align: center;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 16px;
-`;
-
 const PlayBox = ({
   togglePlaying,
   playing,
@@ -65,19 +50,14 @@ const PlayBox = ({
     <PlayButton onClick={togglePlaying}>
       {playing ? 'Stop' : 'Play'}
     </PlayButton>
-    <SettingsContainer>
-      <Label>
-        Volume
-      </Label>
-      <Slider
-        type="range"
-        min="0"
-        max="1"
-        step=".05"
-        onChange={e => updateOverallVolume(e.target.value)}
-        overallVolume={overallVolume}
-      />
-    </SettingsContainer>
+    <Slider
+      type="range"
+      min="0"
+      max="1"
+      step=".05"
+      onChange={e => updateOverallVolume(e.target.value)}
+      overallVolume={overallVolume}
+    />
   </Wrapper>
 );
 

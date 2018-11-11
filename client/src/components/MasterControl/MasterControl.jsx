@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  width: 1000px;
   margin: 0px 0px 25px 0px;
 `;
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import InstrumentVolumeContainer from '../InstrumentVolume/InstrumentVolumeContainer';
+
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -11,22 +13,12 @@ const Wrapper = styled.div`
   margin-top: 163.681px;
 `;
 
-const Label = styled.div`
-  text-align: left;
-  font-size: 18px;
-  padding: 8px;
-  text-transform: capitalize;
-  color: #FFEB95;
-`;
-
-const LeftPanel = ({ instruments }) => (
+const InstrumentList = ({ instruments }) => (
   <Wrapper>
     {instruments.map(instrument => (
-      <Label key={instrument}>
-        {instrument.toUpperCase()}
-      </Label>
+      <InstrumentVolumeContainer instrument={instrument} />
     ))}
   </Wrapper>
 );
 
-export default LeftPanel;
+export default InstrumentList;

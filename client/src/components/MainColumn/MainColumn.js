@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PerformerSectionContainer from '../PerformerSection/PerformerSectionContainer';
+import GridContainer from '../Grid/GridContainer';
 import MasterControlContainer from '../MasterControl/MasterControlContainer';
 
 const Wrapper = styled.div`
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 const MainColumn = () => (
   <Wrapper>
     <MasterControlContainer />
-    <PerformerSectionContainer />
+    <GridContainer />
   </Wrapper>
 );
 

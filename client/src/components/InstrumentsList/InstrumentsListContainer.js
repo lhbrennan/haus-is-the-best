@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import LeftPanel from './InstrumentsList';
+import InstrumentList from './InstrumentsList';
 
 const mapStateToProps = state => (
   { instruments: state.instruments }
 );
 
-export default connect(mapStateToProps, null)(LeftPanel);
+export default connect(mapStateToProps, null)(InstrumentList);

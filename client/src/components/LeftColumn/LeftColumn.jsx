@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LeftPanelContainer from '../InstrumentsList/InstrumentsListContainer';
+import InstrumentsList from '../InstrumentsList/InstrumentsListContainer';
 import PlayBoxContainer from '../PlayBox/PlayBoxContainer';
 
 const Wrapper = styled.div`
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 
 const LeftColumn = () => (
   <Wrapper>
-    <LeftPanelContainer />
+    <InstrumentsList />
     <PlayBoxContainer />
   </Wrapper>
 );
