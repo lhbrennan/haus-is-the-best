@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { updateBpm, updateSwing, updateOverallVolume, togglePlaying } from '../actions';
-import Transport from '../components/Transport';
+import { updateBpm, updateSwing, updateOverallVolume, togglePlaying } from '../../actions';
+import Transport from './Transport';
 
 const mapStateToProps = state => ({
   bpm: state.bpm,

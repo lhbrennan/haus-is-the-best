@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import RightPanel from '../components/RightPanel';
+import RightPanel from './RightPanel';
 
 const mapStateToProps = state => (
   { instruments: state.instruments }

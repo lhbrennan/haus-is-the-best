@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Grid from '../components/Grid';
+import Grid from './Grid';
 
 const mapStateToProps = state => ({
   resolution: state.resolution,

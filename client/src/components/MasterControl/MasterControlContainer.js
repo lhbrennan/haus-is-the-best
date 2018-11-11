@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { resetPattern, togglePadResponse } from '../../actions';
 
-import MasterControl from '../components/MasterControl';
+import MasterControl from './MasterControl';
 
 const mapStateToProps = state => ({
   pattern: state.pattern,
