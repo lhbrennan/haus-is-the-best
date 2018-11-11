@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import Credentials from '../components/Credentials';
-import { loadComposition, updateUsername, updateCompositionName } from '../actions';
+import Credentials from './Credentials';
+import { loadComposition, updateUsername, updateCompositionName } from '../../actions';
 
 const saveComposition = (pattern, swing, bpm, username, compositionName, volumes, bars) => {
   console.log(`Saving Composition... swing: ${swing}, bpm: ${bpm}, bars: ${bars}`);

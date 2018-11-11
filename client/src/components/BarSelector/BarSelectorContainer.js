@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import BarSelector from '../components/BarSelector';
-import { selectBar } from '../actions';
+import BarSelector from './BarSelector';
+import { selectBar } from '../../actions';
 
 const mapStateToProps = state => ({
   bars: state.bars,

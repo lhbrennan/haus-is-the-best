@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import TransportContainer from '../containers/TransportContainer';
 import NumBarsContainer from '../containers/NumBarsContainer';
-import BarSelectorContainer from '../containers/BarSelectorContainer';
-import CredentialsContainer from '../containers/CredentialsContainer';
+import BarSelectorContainer from './BarSelector/BarSelectorContainer';
+import CredentialsContainer from './Credentials/CredentialsContainer';
 
 const Wrapper = styled.div`
   display: flex;
