@@ -41,7 +41,7 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-const Transport = ({
+const PlayBackSettings = ({
   bpm,
   updateBpm,
   swing,
@@ -73,4 +73,4 @@ const Transport = ({
   </Wrapper>
 );
 
-export default Transport;
+export default PlayBackSettings;

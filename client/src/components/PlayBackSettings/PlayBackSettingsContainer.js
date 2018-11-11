@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { updateBpm, updateSwing, updateOverallVolume, togglePlaying } from '../../actions';
-import Transport from './Transport';
+import PlayBackSettings from './PlayBackSettings';
 
 const mapStateToProps = state => ({
   bpm: state.bpm,
@@ -16,9 +16,9 @@ const mapDispatchToProps = dispatch => ({
   togglePlaying: () => dispatch(togglePlaying()),
 });
 
-const TransportContainer = connect(
+const PlayBackSettingsContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Transport);
+)(PlayBackSettings);
 
-export default TransportContainer;
+export default PlayBackSettingsContainer;

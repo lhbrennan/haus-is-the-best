@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import TransportContainer from '../Transport/TransportContainer';
+import PlayBackSettingsContainer from '../PlayBackSettings/PlayBackSettingsContainer';
 import NumBarsContainer from '../NumBars/NumBarsContainer';
 import BarSelectorContainer from '../BarSelector/BarSelectorContainer';
 import CredentialsContainer from '../Credentials/CredentialsContainer';
@@ -49,7 +49,7 @@ const MasterControl = ({
   padResponse,
 }) => (
   <Wrapper>
-    <TransportContainer />
+    <PlayBackSettingsContainer />
     <BarsWrapper>
       <NumBarsContainer />
       <BarSelectorContainer />
