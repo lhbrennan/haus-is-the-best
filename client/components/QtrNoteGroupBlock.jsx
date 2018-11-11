@@ -6,7 +6,7 @@ import QtrNoteInstrumentBlockContainer from '../containers/QtrNoteInstrumentBloc
 const Div = styled.div`
   padding: 5px;
   border-radius: 8px;
-  background: ${props => props.beat % 2 === 0 ? 'gainsboro' : 'azure'};
+  background: ${({ beat }) => (beat % 2 === 0 ? 'gainsboro' : 'azure')};
 `;
 
 class QtrNoteGroupBlock extends React.Component {
@@ -16,7 +16,10 @@ class QtrNoteGroupBlock extends React.Component {
   }
 
   render() {
-    const { instruments, resolution, beat, triggerSample, padResponse } = this.props;
+    const {
+      instruments, resolution, beat, triggerSample, padResponse,
+    } = this.props;
+
     return (
       <Div beat={beat}>
         {instruments.map(instrument => (

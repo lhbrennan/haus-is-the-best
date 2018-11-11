@@ -16,11 +16,13 @@ const Label = styled.div`
   text-transform: capitalize;
 `;
 
-const LeftPanel = props => (
+const LeftPanel = ({ instruments }) => (
   <Wrapper>
-    {props.instruments.map(instrument => {
-      return <Label key={instrument}>{instrument}</Label>
-    })}
+    {instruments.map(instrument => (
+      <Label key={instrument}>
+        {instrument}
+      </Label>
+    ))}
   </Wrapper>
 );
 

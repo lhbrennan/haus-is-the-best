@@ -17,8 +17,11 @@ class Grid extends React.Component {
   }
 
   createQuarterNoteBlocks() {
-    const { pattern, resolution, instruments, triggerSample, padResponse, visibleBar } = this.props;
+    const {
+      pattern, resolution, instruments, triggerSample, padResponse, visibleBar,
+    } = this.props;
     const beats = [];
+
     for (let i = (visibleBar - 1) * 4; i < visibleBar * 4; i++) {
       beats.push(<QtrNoteGroupBlock
         pattern={pattern}

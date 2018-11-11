@@ -1,4 +1,4 @@
-export function DefaultPattern () {
+export function DefaultPattern() {
   this.kick = new Array(64).fill(0);
   this.clap = new Array(64).fill(0);
   this.snare = new Array(64).fill(0);

@@ -25,7 +25,7 @@ const Pad = (props) => {
     padResponse,
   } = props;
 
-  function handler() {
+  const handler = () => {
     if (!velocity && padResponse) {
       triggerSample(instrument);
     }

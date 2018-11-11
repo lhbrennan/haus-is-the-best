@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import createStore from './store';
+
 import App from './App';
 import AudioPlayer from './containers/AudioPlayer';
+import createStore from './store';
 import { DefaultPattern } from './constants';
 
 const store = createStore(
