@@ -4,33 +4,41 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
+  flex-basis: 330px;
+  justify-content: flex-start;
+  align-items: flex-end;
   color: #82b1ff;
 `;
 
-const InnerWrapper = styled.div`
+const Labels = styled.div`
   display: flex;
   flex-flow: column;
+  margin-right: 16px;
 `;
 
-const SettingsContainer = styled.div`
+const Label = styled.label`
   display: flex;
+  flex-flow: column;
   justify-content: flex-end;
-  align-items: center;
-  padding: 5px;
+  margin-top: 10px;
+  font-size: 22px;
+`;
+
+const Settings = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+`;
+
+const Setting = styled.div`
 `;
 
 const Slider = styled.input`
   width: 110px;
   height: 20px;
-  margin: 0;
+  margin-top: 10px;
   transform-origin: 75px 75px;
-  // transform: rotate(-90deg);
-`;
-
-const Label = styled.label`
-  font-size: 22px;
-  margin-right: 7px;  
 `;
 
 const Input = styled.input`
@@ -48,18 +56,15 @@ const PlayBackSettings = ({
   updateSwing,
 }) => (
   <Wrapper>
-    <InnerWrapper>
-      <SettingsContainer>
-        <Label>
-          BPM
-        </Label>
+    <Labels>
+      <Label>BPM</Label>
+      <Label>SWING</Label>
+    </Labels>
+    <Settings>
+      <Setting>
         <Input type="text" onBlur={e => updateBpm(e.target.value)} defaultValue={bpm} />
-      </SettingsContainer>
-
-      <SettingsContainer>
-        <Label>
-          Swing
-        </Label>
+      </Setting>
+      <Setting>
         <Slider
           type="range"
           min="0"
@@ -68,8 +73,8 @@ const PlayBackSettings = ({
           onChange={e => updateSwing(e.target.value)}
           value={swing}
         />
-      </SettingsContainer>
-    </InnerWrapper>
+      </Setting>
+    </Settings>
   </Wrapper>
 );
 
