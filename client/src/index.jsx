@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import styled from 'styled-components';
 
 import App from './components/App';
 import AudioPlayer from './components/AudioPlayer';
 import createStore from './store';
 import { DefaultPattern } from './constants';
+
+const Wrapper = styled.div`
+  background-color: #011627;
+  height: 100vh;
+  width: 100%
+`;
 
 const store = createStore(
   {
@@ -34,10 +41,10 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
+    <Wrapper>
       <App />
       <AudioPlayer />
-    </div>
+    </Wrapper>
   </Provider>,
   document.getElementById('app'),
 );

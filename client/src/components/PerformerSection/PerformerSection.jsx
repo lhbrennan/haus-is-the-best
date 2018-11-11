@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import RightPanelContainer from '../RightPanel/RightPanelContainer';
 import GridContainer from '../Grid/GridContainer';
-import LeftPanel from '../LeftPanel/LeftPanel';
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,9 +10,8 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const PerformerSection = ({ instruments }) => (
+const PerformerSection = () => (
   <Wrapper>
-    <LeftPanel instruments={instruments} />
     <GridContainer />
     <RightPanelContainer />
   </Wrapper>

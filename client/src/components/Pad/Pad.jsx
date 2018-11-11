@@ -9,9 +9,9 @@ const Button = styled.button`
     return 'cadetblue';
   }};
   margin: 5px; 
-  border-radius: 10px;
-  height: 50px;
-  width: 50px;
+  border-radius: 5px;
+  height: 70px;
+  width: 70px;
 `;
 
 const Pad = (props) => {

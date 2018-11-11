@@ -6,21 +6,23 @@ const Wrapper = styled.div`
   flex-flow: column;
   justify-content: space-around;
   padding-right: 3px;
-  width: 100px;
+  width: 120px;
+  margin-top: 163.681px;
 `;
 
 const Label = styled.div`
-  text-align: right;
-  font-size: 20px;
+  text-align: left;
+  font-size: 18px;
   padding: 8px;
   text-transform: capitalize;
+  color: #FFEB95;
 `;
 
 const LeftPanel = ({ instruments }) => (
   <Wrapper>
     {instruments.map(instrument => (
       <Label key={instrument}>
-        {instrument}
+        {instrument.toUpperCase()}
       </Label>
     ))}
   </Wrapper>

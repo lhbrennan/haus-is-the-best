@@ -6,7 +6,8 @@ import QtrNoteGroupBlock from '../QtrNoteGroupBlock/QtrNoteGroupBlock';
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
-  margin: 10px 20px;
+  justify-content: space-between;
+  margin: 0px 20px;
 `;
 
 class Grid extends React.Component {

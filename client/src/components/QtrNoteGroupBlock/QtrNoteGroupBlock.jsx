@@ -6,7 +6,7 @@ import QtrNoteInstrumentBlockContainer from '../QtrNoteInstrumentBlock/QtrNoteIn
 const Div = styled.div`
   padding: 5px;
   border-radius: 8px;
-  background: ${({ beat }) => (beat % 2 === 0 ? 'gainsboro' : 'azure')};
+  /* background: ${({ beat }) => (beat % 2 === 0 ? 'gainsboro' : 'azure')}; */
 `;
 
 class QtrNoteGroupBlock extends React.Component {

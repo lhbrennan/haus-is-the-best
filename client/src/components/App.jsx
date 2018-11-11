@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PerformerSectionContainer from './PerformerSection/PerformerSectionContainer';
-import MasterControlContainer from './MasterControl/MasterControlContainer';
+import LeftColumn from './LeftColumn/LeftColumn';
+import MainColumn from './MainColumn/MainColumn';
 
 const Wrapper = styled.div`
 font-family: 'Ubuntu', sans-serif;
 display: flex;
-flex-flow: column;
+flex-flow: row;
 justify-content: center;
-align-items: center;
+align-items: stretch;
 `;
 
 const App = () => (
   <Wrapper>
-    <MasterControlContainer />
-    <PerformerSectionContainer />
+    <LeftColumn />
+    <MainColumn />
   </Wrapper>
 );
 

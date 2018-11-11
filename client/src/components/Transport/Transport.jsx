@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  color: #82b1ff;
 `;
 
 const PlayButton = styled.button`
