@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import InstrumentVolumeContainer from './InstrumentVolume/InstrumentVolumeContainer';
+import InstrumentVolumeContainer from '../InstrumentVolume/InstrumentVolumeContainer';
 
 const Wrapper = styled.div`
   display: flex;

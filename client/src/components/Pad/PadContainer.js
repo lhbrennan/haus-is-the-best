@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { updatePattern, queueEvent } from '../actions';
-import Pad from '../components/Pad';
+import { updatePattern, queueEvent } from '../../actions';
+import Pad from './Pad';
 
 const mapStateToProps = (state, ownProps) => ({
   instrument: ownProps.instrument,

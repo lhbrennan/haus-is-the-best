@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import PerformerSection from '../components/PerformerSection';
+import PerformerSection from './PerformerSection';
 
 const mapStateToProps = state => (
   { instruments: state.instruments }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import QtrNoteInstrumentBlock from '../components/QtrNoteInstrumentBlock';
+import QtrNoteInstrumentBlock from './QtrNoteInstrumentBlock';
 
 const mapStateToProps = (state, ownProps) => ({
   pattern: state.pattern,

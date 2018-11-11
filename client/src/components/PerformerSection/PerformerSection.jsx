@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import RightPanelContainer from '../containers/RightPanelContainer';
 import GridContainer from '../containers/GridContainer';
-import LeftPanel from './LeftPanel';
+import LeftPanel from '../LeftPanel/LeftPanel';
 
 const Wrapper = styled.div`
   display: flex;

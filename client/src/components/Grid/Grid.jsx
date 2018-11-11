@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import QtrNoteGroupBlock from './QtrNoteGroupBlock';
+import QtrNoteGroupBlock from '../QtrNoteGroupBlock/QtrNoteGroupBlock';
 
 const Wrapper = styled.div`
   display: flex;

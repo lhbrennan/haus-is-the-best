@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import App from './App';
-import AudioPlayer from './containers/AudioPlayer';
+import App from './components/App';
+import AudioPlayer from './components/AudioPlayer';
 import createStore from './store';
 import { DefaultPattern } from './constants';
 

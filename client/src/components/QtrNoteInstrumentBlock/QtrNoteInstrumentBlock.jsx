@@ -1,5 +1,5 @@
 import React from 'react';
-import PadContainer from '../containers/PadContainer';
+import PadContainer from '../Pad/PadContainer';
 
 class QtrNoteInstrumentBlock extends React.Component {
   constructor(props) {

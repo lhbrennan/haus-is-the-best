@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import QtrNoteInstrumentBlockContainer from '../containers/QtrNoteInstrumentBlockContainer';
+import QtrNoteInstrumentBlockContainer from '../QtrNoteInstrumentBlock/QtrNoteInstrumentBlockContainer';
 
 const Div = styled.div`
   padding: 5px;

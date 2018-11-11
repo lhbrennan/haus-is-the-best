@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { resetPattern, togglePadResponse } from '../actions';
+import { resetPattern, togglePadResponse } from '../../actions';
 
 import MasterControl from '../components/MasterControl';
 
