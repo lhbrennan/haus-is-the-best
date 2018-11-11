@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import TransportContainer from '../containers/TransportContainer';
-import NumBarsContainer from '../containers/NumBarsContainer';
-import BarSelectorContainer from './BarSelector/BarSelectorContainer';
-import CredentialsContainer from './Credentials/CredentialsContainer';
+import TransportContainer from '../Transport/TransportContainer';
+import NumBarsContainer from '../NumBars/NumBarsContainer';
+import BarSelectorContainer from '../BarSelector/BarSelectorContainer';
+import CredentialsContainer from '../Credentials/CredentialsContainer';
 
 const Wrapper = styled.div`
   display: flex;
