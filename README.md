@@ -2,7 +2,7 @@
 
 https://house-is-a-feeling.herokuapp.com/
 
-This application is a drum sequencer with precise audio event timing. It uses the primary Javascript thread to run an event scheduling system. The scheduling system 'wakes up' periodically, looking ahead to to find audio events that need to be scheduled. It schedules these events using a secondary thread via the Web Audio API. This strategy avoids the imprecision common to web audio applications by ensuring that the audio events are not interrupted by rerendering, garbage collection, etc
+This application is a drum sequencer with precise audio event timing. It uses the primary Javascript thread to run an event scheduling system. The scheduling system 'wakes up' periodically, looking ahead to find audio events that need to be scheduled. It schedules these events using a secondary thread via the Web Audio API. This strategy avoids the imprecision common to web audio applications by ensuring that the audio events are not interrupted by rerendering, garbage collection, etc
 
 ## Getting Started
 
@@ -14,13 +14,16 @@ This application is a drum sequencer with precise audio event timing. It uses th
 
 * React
 * Redux
-* Node/Express
+* Styled Components
+* Node
+* Express
 * MongoDB
+* Mongoose
 
 ## Author
 
 **Luke Brennan**
 
-# Design Assistance
+## Design Assistance
 
 **Luke O'Connor**
