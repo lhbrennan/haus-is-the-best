@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import PlayBackSettingsContainer from '../PlayBackSettings/PlayBackSettingsContainer';
-import NumBarsContainer from '../NumBars/NumBarsContainer';
-import BarSelectorContainer from '../BarSelector/BarSelectorContainer';
+import Bars from '../Bars/Bars';
 import CredentialsContainer from '../Credentials/CredentialsContainer';
 
 const Wrapper = styled.div`
@@ -11,11 +10,6 @@ const Wrapper = styled.div`
   flex-flow: row;
   justify-content: space-between;
   margin: 0px 0px 25px 0px;
-`;
-
-const BarsWrapper = styled.div`
-  display: flex;
-  flex-flow: column;
 `;
 
 const AsphaultButton = styled.button`
@@ -50,10 +44,7 @@ const MasterControl = ({
 }) => (
   <Wrapper>
     <PlayBackSettingsContainer />
-    <BarsWrapper>
-      <NumBarsContainer />
-      <BarSelectorContainer />
-    </BarsWrapper>
+    <Bars />
 
     <Div>
       <AsphaultButton onClick={resetPattern}>

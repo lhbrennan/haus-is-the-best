@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateBars } from '../../actions';
+import { updateBars } from '../../../actions';
 import NumBars from './NumBars';
 
 const mapStateToProps = state => ({

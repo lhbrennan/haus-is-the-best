@@ -17,14 +17,11 @@ const Input = styled.input`
 
 const Label = styled.label`
   font-size: 22px;
-  margin-right: 7px;  
 `;
 
 const NumBars = ({ updateBars, bars }) => (
   <ButtonContainer>
-    <Label>
-      Bars
-    </Label>
+    <Label>BARS</Label>
     <Input type="text" onChange={e => updateBars(e.target.value)} value={bars} />
   </ButtonContainer>
 );
