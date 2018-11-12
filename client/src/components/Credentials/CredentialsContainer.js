@@ -30,8 +30,6 @@ const loadCompositionHandler = (username, compositionName, dispatch) => {
     },
   })
     .then(({ data }) => {
-      console.log('data from mongo...', data);
-      // console.log(data);
       dispatch(loadComposition(data));
     })
     .catch((err) => {

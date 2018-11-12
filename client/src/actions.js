@@ -84,7 +84,6 @@ export function updateBars(bars) {
 }
 
 export function selectBar(bar) {
-  console.log('new visible bar', bar);
   return {
     type: 'SELECT_BAR',
     bar,

@@ -111,10 +111,8 @@ function volumes(state = {}, action) {
 function bars(state = 1, action) {
   switch (action.type) {
     case 'UPDATE_BARS':
-      console.log('new bars', action.bars);
       return action.bars;
     case 'LOAD_COMPOSITION':
-      console.log('new bars from loaded composition', action.payload.bars);
       return action.payload.bars || 1;
     default:
       return state;

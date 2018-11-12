@@ -31,9 +31,6 @@ const compositionSchema = mongoose.Schema({
 const Composition = mongoose.model('Composition', compositionSchema);
 
 const storeComposition = function (data) {
-  console.log('updating this...');
-  console.log(data);
-  // const composition = new Composition(data);
   const { username, compositionName } = data;
   Composition.findOneAndUpdate(
     { username, compositionName },

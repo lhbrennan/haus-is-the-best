@@ -107,9 +107,7 @@ class AudioPlayer extends React.Component {
 
   scheduler() {
     const currentTime = this.audioContext.currentTime + this.offset;
-    // console.log('running scheduler...');
     while (this.nextStepTime < currentTime + this.scheduleAheadTime) {
-      // console.log(`Current time: ${currentTime}, activeStep: ${this.activeStep}`);
       this.scheduleActiveNotes();
       this.nextStep();
     }
@@ -147,9 +145,7 @@ class AudioPlayer extends React.Component {
     const instrumentGainNode = this.audioContext.createGain();
     instrumentGainNode.connect(this.gainNode);
     let volume = volumes[instrument];
-    console.log('volume in reducer before transform: ', volume);
     volume = (Math.exp(volume) - 1) / (Math.E - 1);
-    console.log('volume in reducer after transform: ', volume);
     instrumentGainNode.gain.value = volume * (velocity / 5);
 
     voice.connect(instrumentGainNode);
