@@ -1,6 +1,8 @@
 # House is a Feeling
 
-I was motivated to start this project by the relative lack of interesting web-based audio applications. Audio applications have historically been constrained by the technical limitations of working with audio in javascript, but with the advent of the Web Audio API, I feel like this should be changing. I've spent a lot of my personal time over the last 10 years working in electronic music production, so I wanted to create a tool that I would benefit from while getting a deeper understanding of the Web Audio capabilities. There are a number of web-based drum sequencers out there, but most of them suffer from imprecise event timing due to the single-threaded nature of Javascript. This application avoids that limitation by using the core Javascript thread to run the scheduling system, while using the Web Audio thread for scheduling the actual audio events.
+https://house-is-a-feeling.herokuapp.com/
+
+This application is a drum sequencer with precise audio event timing. It uses the primary Javascript thread to run an event scheduling system. The scheduling system 'wakes up' periodically, looking ahead to to find audio events that need to be scheduled. It schedules these events using a secondary thread via the Web Audio API. This strategy avoids the imprecision common to web audio applications by ensuring that the audio events are not interrupted by rerendering, garbage collection, etc
 
 ## Getting Started
 
@@ -18,3 +20,7 @@ I was motivated to start this project by the relative lack of interesting web-ba
 ## Author
 
 **Luke Brennan**
+
+# Design Assistance
+
+**Luke O'Connor**
