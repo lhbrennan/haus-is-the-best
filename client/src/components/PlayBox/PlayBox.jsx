@@ -16,6 +16,7 @@ const PlayButton = styled.button`
   box-sizing: border-box;
   border-color: transparent transparent transparent #FFEB95;
   padding: 0;
+  cursor: pointer;
   background-color: #011627;
   border-width: ${({ playing }) => (playing ? '0px 0px 0px 50px' : '25px 0px 25px 50px')};
   border-style: ${({ playing }) => (playing ? 'double' : 'solid')};

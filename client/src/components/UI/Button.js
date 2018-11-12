@@ -1,27 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: row;
-`;
-
-// const Button = styled.button`
-//   background: ${({ visible }) => {
-//     if (visible) { return 'orange'; }
-//     return 'grey';
-//   }};
-//   margin: 5px; 
-//   border-radius: 10px;
-//   height: 40px;
-//   width: 40px;
-// `;
 const Button = styled.button`
   display: flex;
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  flex: 0 0 40px;
+  flex: 0 0 auto;
   height: 40px;
   margin: 0px 4px;
 
@@ -35,7 +19,7 @@ const Button = styled.button`
 
   background: ${({ visible }) => {
     if (visible) { return '#FFEB95'; }
-    return '#5f7e97';
+    return '#80a4c2';
   }};
   border: 0 none;
   border-radius: 4px;
@@ -68,20 +52,4 @@ const Button = styled.button`
   }
 `;
 
-const BarsSelector = ({ bars, visibleBar, selectBar }) => {
-  // create range from 1 to bars
-  const range = Array.from(new Array(bars), (_, index) => index + 1);
-
-  return (
-    <Wrapper>
-      {range.length > 1
-      && range.map(elem => (
-        <Button key={elem} visible={elem === visibleBar} onClick={() => selectBar(elem)}>
-          {elem}
-        </Button>))
-      }
-    </Wrapper>
-  );
-};
-
-export default BarsSelector;
+export default Button;

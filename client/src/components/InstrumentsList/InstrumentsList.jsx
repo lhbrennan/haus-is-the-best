@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   justify-content: space-around;
   padding-right: 3px;
   width: 120px;
-  margin-top: 163.681px;
+  margin-top: 100px;
 `;
 
 const InstrumentList = ({ instruments }) => (

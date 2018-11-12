@@ -3,16 +3,19 @@ import styled from 'styled-components';
 
 import PlayBackSettingsContainer from '../PlayBackSettings/PlayBackSettingsContainer';
 import Bars from '../Bars/Bars';
-import CredentialsContainer from '../Credentials/CredentialsContainer';
+import ButtonTemplate from '../UI/Button';
 
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 0px 0px 25px 0px;
 `;
 
-const AsphaultButton = styled.button`
+const Button = styled(ButtonTemplate)`
+`;
+
+const Button2 = styled.button`
   background: ${({ padResponse }) => {
     if (padResponse) { return 'orange'; }
     return '#34495e';
@@ -34,7 +37,12 @@ const AsphaultButton = styled.button`
 
 const Div = styled.div`
   display: flex;
-  flex-flow: column;
+  flex-flow: row;
+  flex: 0 0 330px;
+  padding: 0px 10px;
+  justify-content: center;
+  align-items: flex-end;
+  color: #82b1ff;
 `;
 
 const MasterControl = ({
@@ -47,16 +55,14 @@ const MasterControl = ({
     <Bars />
 
     <Div>
-      <AsphaultButton onClick={resetPattern}>
+      <Button onClick={resetPattern}>
         Reset Pattern
-      </AsphaultButton>
+      </Button>
 
-      <AsphaultButton padResponse={padResponse} onClick={togglePadResponse}>
+      {/* <Button padResponse={padResponse} onClick={togglePadResponse}>
         Pad Sound
-      </AsphaultButton>
+      </Button> */}
     </Div>
-
-    <CredentialsContainer />
   </Wrapper>
 );
 

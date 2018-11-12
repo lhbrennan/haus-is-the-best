@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
-  flex-basis: 330px;
+  flex: 0 0 330px;
+  padding: 0px 10px;
   justify-content: flex-start;
   align-items: flex-end;
   color: #82b1ff;
@@ -42,10 +43,10 @@ const Slider = styled.input`
 `;
 
 const Input = styled.input`
-  width: 30px;
+  width: 40px;
   text-align: center;
-  border-radius: 5px;
-  padding: 5px;
+  border-radius: 3px;
+  padding: 3px 5px;
   font-size: 16px;
 `;
 

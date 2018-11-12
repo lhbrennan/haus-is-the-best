@@ -6,9 +6,11 @@ import BarSelectorContainer from './BarSelector/BarSelectorContainer';
 
 const Wrapper = styled.div`
   display: flex;
-  flex-flow: column;
-  justify-content: flex-end;
-  align-items: flex-start;
+  flex-flow: row;
+  flex: 0 0 330px;
+  padding: 0px 10px;
+  justify-content: flex-start;
+  align-items: flex-end;
   color: #82b1ff;
 `;
 
