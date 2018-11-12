@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import PlayBackSettingsContainer from '../PlayBackSettings/PlayBackSettingsContainer';
 import Bars from '../Bars/Bars';
+import SaveLoadContainer from '../SaveLoad/SaveLoadContainer';
+
 import Button from '../UI/Button';
 
 const Wrapper = styled.div`
@@ -40,6 +42,7 @@ const MasterControl = ({
         Pad Sound
       </Button> */}
     </Div>
+    <SaveLoadContainer />
   </Wrapper>
 );
 

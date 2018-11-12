@@ -1,19 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from '../UI/Button';
-
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: space-around;
   align-items: center;
   flex: 0 0 1440px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
 `;
 
 const SliderContainer = styled.div`
@@ -49,13 +42,6 @@ class Credentials extends React.Component {
       compositionName,
       updateUsername,
       updateCompositionName,
-      saveComposition,
-      loadComposition,
-      pattern,
-      swing,
-      bpm,
-      volumes,
-      bars,
     } = this.props;
 
     return (
@@ -72,14 +58,6 @@ class Credentials extends React.Component {
           </Label>
           <Input type="text" onBlur={e => updateCompositionName(e.target.value)} defaultValue={compositionName} />
         </SliderContainer>
-        <ButtonContainer>
-          <Button onClick={() => saveComposition(pattern, swing, bpm, username, compositionName, volumes, bars)}>
-            Save
-          </Button>
-          <Button onClick={() => loadComposition(username, compositionName)}>
-            Load
-          </Button>
-        </ButtonContainer>
       </Wrapper>
     );
   }
