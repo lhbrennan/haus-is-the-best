@@ -5,6 +5,10 @@ import Credentials from './Credentials';
 import { loadComposition, updateUsername, updateCompositionName } from '../../actions';
 
 const saveComposition = (pattern, swing, bpm, username, compositionName, volumes, bars) => {
+  if (username === 'demo') {
+    console.log('Cannot overwrite demo compositions');
+    return;
+  }
   console.log(`Saving Composition... swing: ${swing}, bpm: ${bpm}, bars: ${bars}`);
   axios.post('/compositions', {
     username,

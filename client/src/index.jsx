@@ -18,9 +18,9 @@ const store = createStore(
   {
     playing: false,
     bars: 1,
-    bpm: 120,
+    bpm: 122,
     username: 'demo',
-    compositionName: 'techno-1',
+    compositionName: 'house-1',
     instruments: ['kick', 'clap', 'snare', 'openHat', 'closedHat'],
     resolution: 16, // steps per bar
     pattern: new DefaultPattern(),
