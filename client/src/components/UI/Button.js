@@ -8,6 +8,7 @@ const Button = styled.button`
   flex: 0 0 auto;
   height: 40px;
   margin: 0px 4px;
+  color: #82b1ff;
 
   cursor: pointer;
   user-select: none;
@@ -19,9 +20,9 @@ const Button = styled.button`
 
   background: ${({ visible }) => {
     if (visible) { return '#FFEB95'; }
-    return '#80a4c2';
+    return '#122d42';
   }};
-  border: 0 none;
+  border: 2px solid #FFEB95
   border-radius: 4px;
 
   font-size: 22px;

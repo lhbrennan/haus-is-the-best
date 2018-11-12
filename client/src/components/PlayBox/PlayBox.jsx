@@ -24,25 +24,6 @@ const PlayButton = styled.button`
   will-change: border-width;
 `;
 
-// const PlayButton = styled.button`
-//   // position: relative;
-//   // vertical-align: top;
-//   Width: 80px;
-//   height: 80px;
-//   // padding: 40px;
-//   font-size: 22px;
-//   color: white;
-//   text-align: center;
-//   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-//   background: #34495e;
-//   border: 0;
-//   border-bottom: 2px solid #263849;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   -webkit-box-shadow: inset 0 -2px #263849;
-//   box-shadow: inset 0 -2px #263849;
-// `;
-
 const Slider = styled.input`
   width: 110px;
   height: 20px;
