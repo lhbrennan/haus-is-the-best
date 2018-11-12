@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 const InstrumentList = ({ instruments }) => (
   <Wrapper>
     {instruments.map(instrument => (
-      <InstrumentVolumeContainer instrument={instrument} />
+      <InstrumentVolumeContainer instrument={instrument} key={instrument} />
     ))}
   </Wrapper>
 );
