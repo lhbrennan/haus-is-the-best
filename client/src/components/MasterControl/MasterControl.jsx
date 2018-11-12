@@ -35,7 +35,7 @@ const MasterControl = ({
 
     <Div>
       <Button onClick={resetPattern}>
-        Reset Pattern
+        RESET PATTERN
       </Button>
 
       {/* <Button padResponse={padResponse} onClick={togglePadResponse}>
