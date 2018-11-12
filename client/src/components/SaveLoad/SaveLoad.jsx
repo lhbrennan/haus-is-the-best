@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   align-items: flex-end;
 `;
 
-class Credentials extends React.Component {
+class SaveLoad extends React.Component {
   componentDidMount() {
     const { loadComposition, username, compositionName } = this.props;
     loadComposition(username, compositionName);
@@ -44,4 +44,4 @@ class Credentials extends React.Component {
   }
 }
 
-export default Credentials;
+export default SaveLoad;

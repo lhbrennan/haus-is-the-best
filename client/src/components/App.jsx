@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import CompositionDetails from './CompositionDetails/CompositionDetails';
+import CompositionDetailsContainer from './CompositionDetails/CompositionDetailsContainer';
 import LeftColumn from './LeftColumn/LeftColumn';
 import MainColumn from './MainColumn/MainColumn';
 
@@ -20,7 +20,7 @@ align-items: stretch;
 
 const App = () => (
   <Wrapper>
-    <CompositionDetails />
+    <CompositionDetailsContainer />
     <RowWrapper>
       <LeftColumn />
       <MainColumn />
