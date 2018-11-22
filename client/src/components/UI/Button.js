@@ -22,7 +22,7 @@ const Button = styled.button`
     if (visible) { return '#FFEB95'; }
     return '#122d42';
   }};
-  border: 2px solid #FFEB95
+  border: 2px solid #FFEB95;
   border-radius: 4px;
 
   font-size: 18px;
@@ -32,8 +32,8 @@ const Button = styled.button`
   -webkit-appearance: none;
   -moz-appearance:    none;
   appearance:         none;
- 
-  
+
+
   box-shadow: 2px 5px 10px var(--color-smoke);
 
   &:hover {
@@ -41,12 +41,12 @@ const Button = styled.button`
 
     opacity: .85;
   }
-  
+
   &:active {
     transition: all 150ms linear;
     opacity: .75;
   }
-  
+
   &:focus {
     outline: 1px dotted #959595;
     outline-offset: -4px;
