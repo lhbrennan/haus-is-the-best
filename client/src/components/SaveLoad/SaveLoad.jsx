@@ -24,16 +24,11 @@ class SaveLoad extends React.Component {
       compositionName,
       saveComposition,
       loadComposition,
-      pattern,
-      swing,
-      bpm,
-      volumes,
-      bars,
     } = this.props;
 
     return (
       <Wrapper>
-        <Button onClick={() => saveComposition(pattern, swing, bpm, username, compositionName, volumes, bars)}>
+        <Button onClick={saveComposition}>
           SAVE
         </Button>
         <Button onClick={() => loadComposition(username, compositionName)}>
