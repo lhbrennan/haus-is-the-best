@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { DefaultPattern, defaultVolumes } from './constants';
+import { DefaultPattern, defaultVolumes, defaultInstruments } from './constants';
 import * as types from './actionTypes';
 
-function pattern(state = {}, action) {
+function pattern(state = new DefaultPattern(), action) {
   const { type, instrument, stepNum, payload } = action;
   const newPattern = Object.assign({}, state);
   switch (type) {
@@ -66,7 +66,7 @@ function compositionName(state = '', action) {
   }
 }
 
-function instruments(state = [], action) {
+function instruments(state = defaultInstruments, action) {
   switch (action.type) {
     case types.UPDATE_INSTRUMENTS:
       return action.instruments;
@@ -169,20 +169,29 @@ function visibleBar(state = 1, action) {
 }
 
 const rootReducer = combineReducers({
-  bpm,
+  // * Credentials
   username,
   compositionName,
-  instruments,
-  swing,
+  // * Playback Settings
   playing,
+  bpm,
+  swing,
   overallVolume,
-  volumes,
-  pattern,
-  bars,
-  resolution,
-  eventQueue,
+  // * UI Settings
   padResponse,
   visibleBar,
+  resolution,
+  // * Track/Pattern Settings
+  // patternAttributes: combineReducers({
+  //   pattern,
+  //   bars,
+  // }),
+  pattern,
+  bars,
+  instruments,
+  volumes,
+  // * Audio System
+  eventQueue,
 });
 
 export default rootReducer;

@@ -14,7 +14,10 @@ const defaultVolumes = {
   closedHat: 0.5,
 };
 
+const defaultInstruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
+
 module.exports = {
   DefaultPattern,
   defaultVolumes,
+  defaultInstruments,
 };
