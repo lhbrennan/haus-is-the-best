@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux';
-import { DefaultPattern } from './constants';
+import { DefaultPattern, defaultVolumes } from './constants';
 
 function pattern(state = {}, action) {
   const { type, instrument, stepNum, payload } = action;
   const newPattern = Object.assign({}, state);
-
   switch (type) {
     case 'UPDATE_PATTERN':
       if (newPattern[instrument][stepNum] === 0) {
@@ -15,6 +14,17 @@ function pattern(state = {}, action) {
         newPattern[instrument][stepNum] -= 2;
       }
       return newPattern;
+    case 'DUPLICATE_PATTERN': {
+      console.log('old pattern', state)
+      const duplicatedPattern = {};
+      const activeInstruments = Object.keys(state);
+      activeInstruments.forEach((activeInstrument) => {
+        const instrumentPattern = state[activeInstrument];
+        duplicatedPattern[activeInstrument] = [...instrumentPattern, ...instrumentPattern];
+      });
+      console.log('new pattern', duplicatedPattern);
+      return duplicatedPattern;
+    }
     case 'LOAD_COMPOSITION':
       return payload.pattern;
     case 'RESET_PATTERN':
@@ -35,7 +45,7 @@ function bpm(state = 120, action) {
   }
 }
 
-function username(state = 'lhb2', action) {
+function username(state = '', action) {
   switch (action.type) {
     case 'UPDATE_USERNAME':
       return action.username;
@@ -46,7 +56,7 @@ function username(state = 'lhb2', action) {
   }
 }
 
-function compositionName(state = 'composition1', action) {
+function compositionName(state = '', action) {
   switch (action.type) {
     case 'UPDATE_COMPOSITION_NAME':
       return action.compositionName;
@@ -96,7 +106,7 @@ function overallVolume(state = 1, action) {
   }
 }
 
-function volumes(state = {}, action) {
+function volumes(state = defaultVolumes, action) {
   const { volume, instrument, type } = action;
   switch (type) {
     case 'UPDATE_INSTRUMENT_VOLUME':
@@ -114,6 +124,10 @@ function bars(state = 1, action) {
       return action.bars;
     case 'LOAD_COMPOSITION':
       return action.payload.bars || 1;
+    case 'RESET_PATTERN':
+      return 1;
+    case 'DUPLICATE_PATTERN':
+      return state * 2;
     default:
       return state;
   }
@@ -155,7 +169,7 @@ function visibleBar(state = 1, action) {
   }
 }
 
-export default combineReducers({
+const rootReducer = combineReducers({
   bpm,
   username,
   compositionName,
@@ -171,3 +185,5 @@ export default combineReducers({
   padResponse,
   visibleBar,
 });
+
+export default rootReducer;

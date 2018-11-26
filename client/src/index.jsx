@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import App from './components/App';
 import AudioPlayer from './components/AudioPlayer';
-import createStore from './store';
+import configureStore from './store';
 import { DefaultPattern } from './constants';
 
 const Wrapper = styled.div`
@@ -14,26 +14,26 @@ const Wrapper = styled.div`
   width: 100%
 `;
 
-const store = createStore(
+const store = configureStore(
   {
-    playing: false,
-    bars: 1,
-    bpm: 122,
+    /* playing: false, */
+    /* bars: 1, */
+    /* bpm: 122, */
     username: 'demo',
     compositionName: 'house-1',
     instruments: ['kick', 'clap', 'snare', 'openHat', 'closedHat'],
-    resolution: 16, // steps per bar
+    /* resolution: 16, // steps per bar */
     pattern: new DefaultPattern(),
     padResponse: true,
     swing: 2.5,
     overallVolume: 1,
-    volumes: {
+    /* volumes: {
       kick: 1,
       clap: 0.8,
       snare: 1,
       openHat: 0.5,
       closedHat: 0.5,
-    },
+    }, */
     eventQueue: [],
     visibleBar: 1,
   },

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import NumBarsContainer from './NumBars/NumBarsContainer';
 import BarSelectorContainer from './BarSelector/BarSelectorContainer';
+import DuplicatePattern from './DuplicatePattern';
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,6 +19,7 @@ const Bars = () => (
   <Wrapper>
     <NumBarsContainer />
     <BarSelectorContainer />
+    <DuplicatePattern />
   </Wrapper>
 );
 

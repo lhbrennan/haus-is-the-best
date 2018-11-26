@@ -6,9 +6,9 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   flex: 0 0 auto;
-  height: 40px;
+  height: 25px;
   margin: 0px 4px;
-  color: #FFFFFF;
+  color: #717171;
 
   cursor: pointer;
   user-select: none;
@@ -18,14 +18,11 @@ const Button = styled.button`
   text-decoration: none;
   text-transform: none;
 
-  background: ${({ visible }) => {
-    if (visible) { return '#FFEB95'; }
-    return '#122d42';
-  }};
-  border: 2px solid #FFEB95;
-  border-radius: 4px;
+  background: #FFFFFF;
+  border: 2px solid #E1E1E1;
+  border-radius: 3px;
 
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.3;
 

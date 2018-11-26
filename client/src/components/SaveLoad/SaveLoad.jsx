@@ -29,10 +29,10 @@ class SaveLoad extends React.Component {
     return (
       <Wrapper>
         <Button onClick={saveComposition}>
-          SAVE
+          Save
         </Button>
         <Button onClick={() => loadComposition(username, compositionName)}>
-          LOAD
+          Load
         </Button>
       </Wrapper>
     );

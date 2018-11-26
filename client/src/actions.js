@@ -103,3 +103,9 @@ export function updateCompositionName(compositionName) {
     compositionName,
   };
 }
+
+export function duplicatePattern() {
+  return {
+    type: 'DUPLICATE_PATTERN',
+  };
+}
