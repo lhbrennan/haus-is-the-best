@@ -8,10 +8,10 @@ const Button = styled.button`
     if (velocity === 1) { return '#FFB6B6'; }
     return 'cadetblue';
   }};
-  margin: 5px; 
-  border-radius: 5px;
-  height: 70px;
-  width: 70px;
+  margin: 5px;
+  border-radius: 3px;
+  height: 60px;
+  width: 60px;
 `;
 
 const Pad = (props) => {

@@ -6,11 +6,9 @@ import InstrumentVolumeContainer from '../InstrumentVolume/InstrumentVolumeConta
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
-  flex-basis: 410px;
+  flex: 0 0 120px;
   justify-content: space-around;
   padding-right: 3px;
-  width: 120px;
-  margin-top: 100px;
 `;
 
 const InstrumentList = ({ instruments }) => (

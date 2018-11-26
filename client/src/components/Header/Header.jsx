@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const OuterWrapper = styled.div`
+const Header = styled.header`
   display: flex;
   flex-flow: row;
   justify-content: center;
@@ -42,7 +42,7 @@ const DetailWrapper = styled.div`
 const Label = styled.label`
   font-size: 22px;
   margin-right: 7px;
-  color: #82b1ff; 
+  color: #82b1ff;
 `;
 
 const Input = styled.input`
@@ -59,7 +59,7 @@ const CompositionDetails = ({
   updateUsername,
   updateCompositionName,
 }) => (
-  <OuterWrapper>
+  <Header>
     <InnerWrapper>
       <Title>HOUSE IS A FEELING</Title>
       <Details>
@@ -77,7 +77,7 @@ const CompositionDetails = ({
         </DetailWrapper>
       </Details>
     </InnerWrapper>
-  </OuterWrapper>
+  </Header>
 );
 
 export default CompositionDetails;

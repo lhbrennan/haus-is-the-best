@@ -22,6 +22,7 @@ const PlayButton = styled.button`
   border-style: ${({ playing }) => (playing ? 'double' : 'solid')};
   transition: 100ms all ease;
   will-change: border-width;
+  margin: 30px 50px;
 `;
 
 const Slider = styled.input`

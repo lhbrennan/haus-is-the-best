@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PlayBackSettingsContainer from '../PlayBackSettings/PlayBackSettingsContainer';
+import PlayBackSettings from '../PlayBackSettings/index';
 import Bars from '../Bars/Bars';
 import SaveLoadContainer from '../SaveLoad/SaveLoadContainer';
 
@@ -10,7 +10,7 @@ import Button from '../UI/Button';
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
-  justify-content: flex-start;
+  justify-content: center;
   margin: 0px 0px 25px 0px;
 `;
 
@@ -30,7 +30,7 @@ const MasterControl = ({
   padResponse,
 }) => (
   <Wrapper>
-    <PlayBackSettingsContainer />
+    <PlayBackSettings />
     <Bars />
 
     <Div>
