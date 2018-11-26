@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import QtrNoteInstrumentBlockContainer from '../QtrNoteInstrumentBlock/QtrNoteInstrumentBlockContainer';
+import QtrNoteInstrumentBlock from '../QtrNoteInstrumentBlock';
 
 const Div = styled.div`
   padding: 5px;
@@ -23,7 +23,7 @@ class QtrNoteGroupBlock extends React.Component {
     return (
       <Div beat={beat}>
         {instruments.map(instrument => (
-          <QtrNoteInstrumentBlockContainer
+          <QtrNoteInstrumentBlock
             numPads={resolution / 4}
             instrument={instrument}
             beat={beat}

@@ -1,5 +1,5 @@
 import React from 'react';
-import PadContainer from '../Pad/PadContainer';
+import Pad from '../Pad';
 
 class QtrNoteInstrumentBlock extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class QtrNoteInstrumentBlock extends React.Component {
 
     for (let i = 0; i < numPads; i++) {
       const stepNum = ((beat - 1) * 4) + (i + 1) - 1;
-      pads.push(<PadContainer
+      pads.push(<Pad
         velocity={pattern[instrument][stepNum]}
         beat={beat}
         subBeat={i + 1}

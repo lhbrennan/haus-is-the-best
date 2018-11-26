@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import NumBarsContainer from './NumBars/NumBarsContainer';
-import BarSelectorContainer from './BarSelector/BarSelectorContainer';
+import NumBars from './NumBars';
+import BarSelector from './BarSelector';
 import DuplicatePattern from './DuplicatePattern';
 
 const Wrapper = styled.div`
@@ -17,8 +17,8 @@ const Wrapper = styled.div`
 
 const Bars = () => (
   <Wrapper>
-    <NumBarsContainer />
-    <BarSelectorContainer />
+    <NumBars />
+    <BarSelector />
     <DuplicatePattern />
   </Wrapper>
 );

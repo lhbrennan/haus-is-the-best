@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PlayBackSettings from '../PlayBackSettings/index';
+import PlayBackSettings from '../PlayBackSettings';
 import Bars from '../Bars/Bars';
-import SaveLoadContainer from '../SaveLoad/SaveLoadContainer';
+import SaveLoad from '../SaveLoad';
 
 import Button from '../UI/Button';
 
@@ -42,7 +42,7 @@ const MasterControl = ({
         Pad Sound
       </Button> */}
     </Div>
-    <SaveLoadContainer />
+    <SaveLoad />
   </Wrapper>
 );
 

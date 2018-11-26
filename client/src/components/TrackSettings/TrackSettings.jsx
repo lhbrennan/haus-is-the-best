@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import InstrumentVolumeContainer from '../InstrumentVolume/InstrumentVolumeContainer';
+import InstrumentVolume from '../InstrumentVolume';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 const TrackSettings = ({ instruments }) => (
   <Wrapper>
     {instruments.map(instrument => (
-      <InstrumentVolumeContainer instrument={instrument} key={instrument} />
+      <InstrumentVolume instrument={instrument} key={instrument} />
     ))}
   </Wrapper>
 );

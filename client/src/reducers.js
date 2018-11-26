@@ -182,10 +182,6 @@ const rootReducer = combineReducers({
   visibleBar,
   resolution,
   // * Track/Pattern Settings
-  // patternAttributes: combineReducers({
-  //   pattern,
-  //   bars,
-  // }),
   pattern,
   bars,
   instruments,

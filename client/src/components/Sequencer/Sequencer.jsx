@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import InstrumentsList from '../TrackSettings';
-import GridContainer from '../Grid/GridContainer';
+import Grid from '../Grid';
 
 const Section = styled.section`
   display: flex;
@@ -13,7 +13,7 @@ const Section = styled.section`
 const Sequencer = () => (
   <Section>
     <InstrumentsList />
-    <GridContainer />
+    <Grid />
   </Section>
 );
 

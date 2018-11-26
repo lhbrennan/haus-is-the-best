@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import HeaderContainer from './Header';
-import MasterControlContainer from './MasterControl/MasterControlContainer';
+import MasterControl from './MasterControl';
 import Sequencer from './Sequencer/Sequencer';
 
 const Wrapper = styled.div`
@@ -24,7 +24,7 @@ const App = () => (
   <Wrapper>
     <HeaderContainer />
     <Main>
-      <MasterControlContainer />
+      <MasterControl />
       <Sequencer />
     </Main>
   </Wrapper>
