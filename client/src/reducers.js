@@ -1,6 +1,10 @@
 import { combineReducers } from 'redux';
-import { DefaultPattern, defaultVolumes, defaultInstruments } from './constants';
+import { defaultTracks, defaultInstruments, defaultVolumes, DefaultPattern } from './constants';
 import * as types from './actionTypes';
+
+// function tracks(state = defaultTracks, action) {
+
+// }
 
 function pattern(state = new DefaultPattern(), action) {
   const { type, instrument, stepNum, payload } = action;
@@ -28,6 +32,42 @@ function pattern(state = new DefaultPattern(), action) {
       return payload.pattern;
     case types.RESET_PATTERN:
       return new DefaultPattern();
+    default:
+      return state;
+  }
+}
+
+function volumes(state = defaultVolumes, action) {
+  const { volume, instrument, type } = action;
+  switch (type) {
+    case types.UPDATE_INSTRUMENT_VOLUME:
+      return Object.assign({}, state, { [instrument]: volume });
+    case types.LOAD_COMPOSITION:
+      return action.payload.volumes || state;
+    default:
+      return state;
+  }
+}
+
+function bars(state = 1, action) {
+  switch (action.type) {
+    case types.UPDATE_BARS:
+      return action.bars;
+    case types.LOAD_COMPOSITION:
+      return action.payload.bars || 1;
+    case types.RESET_PATTERN:
+      return 1;
+    case types.DUPLICATE_PATTERN:
+      return state * 2;
+    default:
+      return state;
+  }
+}
+
+function instruments(state = defaultInstruments, action) {
+  switch (action.type) {
+    case types.UPDATE_INSTRUMENTS:
+      return action.instruments;
     default:
       return state;
   }
@@ -66,15 +106,6 @@ function compositionName(state = '', action) {
   }
 }
 
-function instruments(state = defaultInstruments, action) {
-  switch (action.type) {
-    case types.UPDATE_INSTRUMENTS:
-      return action.instruments;
-    default:
-      return state;
-  }
-}
-
 function swing(state = 2.5, action) {
   switch (action.type) {
     case types.UPDATE_SWING:
@@ -100,33 +131,6 @@ function overallVolume(state = 1, action) {
     case types.UPDATE_OVERALL_VOLUME:
       console.log('new overallVolume', action.volume);
       return action.volume;
-    default:
-      return state;
-  }
-}
-
-function volumes(state = defaultVolumes, action) {
-  const { volume, instrument, type } = action;
-  switch (type) {
-    case types.UPDATE_INSTRUMENT_VOLUME:
-      return Object.assign({}, state, { [instrument]: volume });
-    case types.LOAD_COMPOSITION:
-      return action.payload.volumes || state;
-    default:
-      return state;
-  }
-}
-
-function bars(state = 1, action) {
-  switch (action.type) {
-    case types.UPDATE_BARS:
-      return action.bars;
-    case types.LOAD_COMPOSITION:
-      return action.payload.bars || 1;
-    case types.RESET_PATTERN:
-      return 1;
-    case types.DUPLICATE_PATTERN:
-      return state * 2;
     default:
       return state;
   }
@@ -182,6 +186,7 @@ const rootReducer = combineReducers({
   visibleBar,
   resolution,
   // * Track/Pattern Settings
+  // tracks,
   pattern,
   bars,
   instruments,
