@@ -1,111 +1,86 @@
-export function updateBpm(bpm) {
-  return {
-    type: 'UPDATE_BPM',
-    bpm,
-  };
-}
+import * as types from './actionTypes';
 
-export function updateOverallVolume(volume) {
-  return {
-    type: 'UPDATE_OVERALL_VOLUME',
-    volume,
-  };
-}
+// * ACTION CREATORS
+export const updateBpm = bpm => ({
+  type: types.UPDATE_BPM,
+  bpm,
+});
 
-export function updateSwing(swing) {
-  return {
-    type: 'UPDATE_SWING',
-    swing,
-  };
-}
+export const updateOverallVolume = volume => ({
+  type: types.UPDATE_OVERALL_VOLUME,
+  volume,
+});
 
-export function togglePlaying() {
-  return {
-    type: 'TOGGLE_PLAYING',
-  };
-}
+export const updateSwing = swing => ({
+  type: types.UPDATE_SWING,
+  swing,
+});
 
-export function updatePattern(instrument, beat, subBeat) {
+export const togglePlaying = () => ({
+  type: types.TOGGLE_PLAYING,
+});
+
+export const updatePattern = (instrument, beat, subBeat) => {
   const stepNum = ((beat - 1) * 4) + subBeat - 1;
   return {
-    type: 'UPDATE_PATTERN',
+    type: types.UPDATE_PATTERN,
     stepNum,
     instrument,
   };
-}
+};
 
-export function loadComposition(composition) {
-  return {
-    type: 'LOAD_COMPOSITION',
-    payload: composition,
-  };
-}
+export const loadComposition = composition => ({
+  type: types.LOAD_COMPOSITION,
+  payload: composition,
+});
 
-export function resetPattern() {
-  return {
-    type: 'RESET_PATTERN',
-  };
-}
+export const resetPattern = () => ({
+  type: types.RESET_PATTERN,
+});
 
-export function updateInstrumentVolume(newVolume, instrument) {
+export const updateInstrumentVolume = (newVolume, instrument) => {
   const volume = newVolume * newVolume; // use x-squared since linear does not sound good
   console.log(`changing ${instrument} volume to ${volume}`);
   return {
-    type: 'UPDATE_INSTRUMENT_VOLUME',
+    type: types.UPDATE_INSTRUMENT_VOLUME,
     volume,
     instrument,
   };
-}
+};
 
-export function queueEvent(instrument) {
-  return {
-    type: 'QUEUE_EVENT',
-    instrument,
-  };
-}
+export const queueEvent = instrument => ({
+  type: types.QUEUE_EVENT,
+  instrument,
+});
 
-export function dequeueEvent() {
-  return {
-    type: 'DEQUEUE_EVENT',
-  };
-}
+export const dequeueEvent = () => ({
+  type: types.DEQUEUE_EVENT,
+});
 
-export function togglePadResponse() {
-  return {
-    type: 'TOGGLE_PAD_RESPONSE',
-  };
-}
+export const togglePadResponse = () => ({
+  type: types.TOGGLE_PAD_RESPONSE,
+});
 
-export function updateBars(bars) {
-  return {
-    type: 'UPDATE_BARS',
-    bars,
-  };
-}
+export const updateBars = bars => ({
+  type: types.UPDATE_BARS,
+  bars,
+});
 
-export function selectBar(bar) {
-  return {
-    type: 'SELECT_BAR',
-    bar,
-  };
-}
+export const selectBar = bar => ({
+  type: types.SELECT_BAR,
+  bar,
+});
 
-export function updateUsername(username) {
-  return {
-    type: 'UPDATE_USERNAME',
-    username,
-  };
-}
+export const updateUsername = username => ({
+  type: types.UPDATE_USERNAME,
+  username,
+});
 
-export function updateCompositionName(compositionName) {
-  return {
-    type: 'UPDATE_COMPOSITION_NAME',
-    compositionName,
-  };
-}
+export const updateCompositionName = compositionName => ({
+  type: types.UPDATE_COMPOSITION_NAME,
+  compositionName,
+});
 
-export function duplicatePattern() {
-  return {
-    type: 'DUPLICATE_PATTERN',
-  };
-}
+export const duplicatePattern = () => ({
+  type: types.DUPLICATE_PATTERN,
+});

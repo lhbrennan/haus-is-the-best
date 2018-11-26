@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import { DefaultPattern, defaultVolumes } from './constants';
+import * as types from './actionTypes';
 
 function pattern(state = {}, action) {
   const { type, instrument, stepNum, payload } = action;
   const newPattern = Object.assign({}, state);
   switch (type) {
-    case 'UPDATE_PATTERN':
+    case types.UPDATE_PATTERN:
       if (newPattern[instrument][stepNum] === 0) {
         newPattern[instrument][stepNum] = 5;
       } else if (newPattern[instrument][stepNum] === 1) {
@@ -14,20 +15,18 @@ function pattern(state = {}, action) {
         newPattern[instrument][stepNum] -= 2;
       }
       return newPattern;
-    case 'DUPLICATE_PATTERN': {
-      console.log('old pattern', state)
+    case types.DUPLICATE_PATTERN: {
       const duplicatedPattern = {};
       const activeInstruments = Object.keys(state);
       activeInstruments.forEach((activeInstrument) => {
         const instrumentPattern = state[activeInstrument];
         duplicatedPattern[activeInstrument] = [...instrumentPattern, ...instrumentPattern];
       });
-      console.log('new pattern', duplicatedPattern);
       return duplicatedPattern;
     }
-    case 'LOAD_COMPOSITION':
+    case types.LOAD_COMPOSITION:
       return payload.pattern;
-    case 'RESET_PATTERN':
+    case types.RESET_PATTERN:
       return new DefaultPattern();
     default:
       return state;
@@ -36,9 +35,9 @@ function pattern(state = {}, action) {
 
 function bpm(state = 120, action) {
   switch (action.type) {
-    case 'UPDATE_BPM':
+    case types.UPDATE_BPM:
       return action.bpm;
-    case 'LOAD_COMPOSITION':
+    case types.LOAD_COMPOSITION:
       return action.payload.bpm;
     default:
       return state;
@@ -47,9 +46,9 @@ function bpm(state = 120, action) {
 
 function username(state = '', action) {
   switch (action.type) {
-    case 'UPDATE_USERNAME':
+    case types.UPDATE_USERNAME:
       return action.username;
-    case 'LOAD_COMPOSITION':
+    case types.LOAD_COMPOSITION:
       return action.payload.username;
     default:
       return state;
@@ -58,9 +57,9 @@ function username(state = '', action) {
 
 function compositionName(state = '', action) {
   switch (action.type) {
-    case 'UPDATE_COMPOSITION_NAME':
+    case types.UPDATE_COMPOSITION_NAME:
       return action.compositionName;
-    case 'LOAD_COMPOSITION':
+    case types.LOAD_COMPOSITION:
       return action.payload.compositionName;
     default:
       return state;
@@ -69,7 +68,7 @@ function compositionName(state = '', action) {
 
 function instruments(state = [], action) {
   switch (action.type) {
-    case 'UPDATE_INSTRUMENTS':
+    case types.UPDATE_INSTRUMENTS:
       return action.instruments;
     default:
       return state;
@@ -78,9 +77,9 @@ function instruments(state = [], action) {
 
 function swing(state = 2.5, action) {
   switch (action.type) {
-    case 'UPDATE_SWING':
+    case types.UPDATE_SWING:
       return action.swing;
-    case 'LOAD_COMPOSITION':
+    case types.LOAD_COMPOSITION:
       return action.payload.swing;
     default:
       return state;
@@ -89,7 +88,7 @@ function swing(state = 2.5, action) {
 
 function playing(state = false, action) {
   switch (action.type) {
-    case 'TOGGLE_PLAYING':
+    case types.TOGGLE_PLAYING:
       return !state;
     default:
       return state;
@@ -98,7 +97,7 @@ function playing(state = false, action) {
 
 function overallVolume(state = 1, action) {
   switch (action.type) {
-    case 'UPDATE_OVERALL_VOLUME':
+    case types.UPDATE_OVERALL_VOLUME:
       console.log('new overallVolume', action.volume);
       return action.volume;
     default:
@@ -109,9 +108,9 @@ function overallVolume(state = 1, action) {
 function volumes(state = defaultVolumes, action) {
   const { volume, instrument, type } = action;
   switch (type) {
-    case 'UPDATE_INSTRUMENT_VOLUME':
+    case types.UPDATE_INSTRUMENT_VOLUME:
       return Object.assign({}, state, { [instrument]: volume });
-    case 'LOAD_COMPOSITION':
+    case types.LOAD_COMPOSITION:
       return action.payload.volumes || state;
     default:
       return state;
@@ -120,13 +119,13 @@ function volumes(state = defaultVolumes, action) {
 
 function bars(state = 1, action) {
   switch (action.type) {
-    case 'UPDATE_BARS':
+    case types.UPDATE_BARS:
       return action.bars;
-    case 'LOAD_COMPOSITION':
+    case types.LOAD_COMPOSITION:
       return action.payload.bars || 1;
-    case 'RESET_PATTERN':
+    case types.RESET_PATTERN:
       return 1;
-    case 'DUPLICATE_PATTERN':
+    case types.DUPLICATE_PATTERN:
       return state * 2;
     default:
       return state;
@@ -142,9 +141,9 @@ function resolution(state = 16, action) {
 
 function eventQueue(state = [], action) {
   switch (action.type) {
-    case 'QUEUE_EVENT':
+    case types.QUEUE_EVENT:
       return [...state, action.instrument];
-    case 'DEQUEUE_EVENT':
+    case types.DEQUEUE_EVENT:
       return [...state].slice(1);
     default:
       return state;
@@ -153,7 +152,7 @@ function eventQueue(state = [], action) {
 
 function padResponse(state = true, action) {
   switch (action.type) {
-    case 'TOGGLE_PAD_RESPONSE':
+    case types.TOGGLE_PAD_RESPONSE:
       return !state;
     default:
       return state;
@@ -162,7 +161,7 @@ function padResponse(state = true, action) {
 
 function visibleBar(state = 1, action) {
   switch (action.type) {
-    case 'SELECT_BAR':
+    case types.SELECT_BAR:
       return action.bar;
     default:
       return state;
