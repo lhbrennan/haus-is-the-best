@@ -9,11 +9,12 @@ import Slider from '../UI/Slider';
 const Section = styled.section`
   display: flex;
   flex-flow: column;
-  flex: 0 0 330px;
+  flex: 0 0 130px;
   padding: 0px 10px;
   justify-content: flex-start;
   align-items: flex-start;
-  color: #82b1ff;
+  color: #FFFFFF;
+  background-color: #4A4A4A;
 `;
 
 const PlayBackSettings = ({

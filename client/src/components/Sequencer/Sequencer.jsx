@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import InstrumentsList from '../InstrumentsList/InstrumentsListContainer';
+import InstrumentsList from '../TrackSettings';
 import GridContainer from '../Grid/GridContainer';
 
 const Section = styled.section`

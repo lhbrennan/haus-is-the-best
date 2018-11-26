@@ -6,14 +6,14 @@ const Wrapper = styled.div`
 
 const Label = styled.div`
   text-align: left;
-  font-size: 18px;
-  padding: 8px;
+  font-size: 14px;
+  padding: 3px;
   text-transform: capitalize;
-  color: #FFEB95;
+  color: #FFFFFF;
 `;
 
 const SliderContainer = styled.div`
-  padding: 6px;
+  padding: 3px;
 `;
 
 const Slider = styled.input`

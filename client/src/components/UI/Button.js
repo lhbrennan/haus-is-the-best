@@ -8,7 +8,7 @@ const Button = styled.button`
   flex: 0 0 auto;
   height: 40px;
   margin: 0px 4px;
-  color: #82b1ff;
+  color: #FFFFFF;
 
   cursor: pointer;
   user-select: none;

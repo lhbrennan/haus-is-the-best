@@ -9,7 +9,7 @@ import createStore from './store';
 import { DefaultPattern } from './constants';
 
 const Wrapper = styled.div`
-  background-color: #011627;
+  background-color: #FFFFFF;
   height: 100vh;
   width: 100%
 `;

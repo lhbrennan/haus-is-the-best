@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   padding: 0px 10px;
   justify-content: flex-start;
   align-items: flex-end;
-  color: #82b1ff;
+  color: #FFFFFF;
 `;
 
 const Bars = () => (

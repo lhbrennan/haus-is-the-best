@@ -42,7 +42,7 @@ const DetailWrapper = styled.div`
 const Label = styled.label`
   font-size: 22px;
   margin-right: 7px;
-  color: #82b1ff;
+  color: #FFFFFF;
 `;
 
 const Input = styled.input`

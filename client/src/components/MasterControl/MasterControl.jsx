@@ -21,7 +21,7 @@ const Div = styled.div`
   padding: 0px 10px;
   justify-content: center;
   align-items: flex-end;
-  color: #82b1ff;
+  color: #FFFFFF;
 `;
 
 const MasterControl = ({

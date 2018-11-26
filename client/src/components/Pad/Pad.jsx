@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   background: ${({ velocity }) => {
-    if (velocity === 5) { return '#6A0000'; }
-    if (velocity === 3) { return '#B33A3A'; }
-    if (velocity === 1) { return '#FFB6B6'; }
-    return 'cadetblue';
+    if (velocity === 5) { return '#00B2FF'; }
+    if (velocity === 3) { return '#76d6ff'; }
+    if (velocity === 1) { return '#d8f3ff'; }
+    return '#FFFFFF';
   }};
   margin: 5px;
   border-radius: 3px;

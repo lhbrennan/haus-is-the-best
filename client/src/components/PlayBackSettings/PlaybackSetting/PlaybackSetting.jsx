@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 const Label = styled.label`
   display: flex;
   justify-content: flex-start;
-  font-size: 22px;
+  font-size: 14px;
   text-transform: uppercase;
   width: 100px;
 `;
