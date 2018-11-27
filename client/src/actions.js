@@ -10,32 +10,23 @@ export const updateSwing = createAction(types.SWING_UPDATE);
 
 export const togglePlaying = createAction(types.PLAYING_TOGGLE);
 
-export const updatePattern = (instrument, beat, subBeat) => {
+export const updatePattern = createAction(types.PATTERN_UPDATE, (instrument, beat, subBeat) => {
   const stepNum = ((beat - 1) * 4) + subBeat - 1;
-  return {
-    type: types.UPDATE_PATTERN,
-    payload: {
-      stepNum,
-      instrument,
-    },
-  };
-};
+  return { stepNum, instrument };
+});
 
 export const loadComposition = createAction(types.COMPOSITION_LOAD);
 
 export const resetPattern = createAction(types.PATTERN_RESET);
 
-export const updateInstrumentVolume = (newVolume, instrument) => {
-  const volume = newVolume * newVolume; // use x-squared since linear does not sound good
-  console.log(`changing ${instrument} volume to ${volume}`);
-  return {
-    type: types.INSTRUMENT_VOLUME_UPDATE,
-    payload: {
-      volume,
-      instrument,
-    },
-  };
-};
+export const updateInstrumentVolume = createAction(
+  types.INSTRUMENT_VOLUME_UPDATE,
+  (newVolume, instrument) => {
+    const volume = newVolume * newVolume; // use x-squared since linear does not sound good
+    return { volume, instrument };
+  },
+);
+
 export const queueEvent = createAction(types.QUEUE_EVENT);
 
 export const dequeueEvent = createAction(types.DEQUEUE_EVENT);

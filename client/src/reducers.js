@@ -11,7 +11,7 @@ function pattern(state = new DefaultPattern(), action) {
   const { type, payload } = action;
   const newPattern = Object.assign({}, state);
   switch (type) {
-    case types.UPDATE_PATTERN: {
+    case types.PATTERN_UPDATE: {
       const { instrument, stepNum } = payload;
       if (newPattern[instrument][stepNum] === 0) {
         newPattern[instrument][stepNum] = 5;
