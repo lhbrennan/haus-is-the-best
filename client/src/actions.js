@@ -21,10 +21,7 @@ export const updatePattern = (instrument, beat, subBeat) => {
   };
 };
 
-export const loadComposition = composition => ({
-  type: types.LOAD_COMPOSITION,
-  payload: composition,
-});
+export const loadComposition = createAction(types.COMPOSITION_LOAD);
 
 export const resetPattern = createAction(types.PATTERN_RESET);
 
@@ -32,20 +29,16 @@ export const updateInstrumentVolume = (newVolume, instrument) => {
   const volume = newVolume * newVolume; // use x-squared since linear does not sound good
   console.log(`changing ${instrument} volume to ${volume}`);
   return {
-    type: types.UPDATE_INSTRUMENT_VOLUME,
-    volume,
-    instrument,
+    type: types.INSTRUMENT_VOLUME_UPDATE,
+    payload: {
+      volume,
+      instrument,
+    },
   };
 };
+export const queueEvent = createAction(types.QUEUE_EVENT);
 
-export const queueEvent = instrument => ({
-  type: types.QUEUE_EVENT,
-  instrument,
-});
-
-export const dequeueEvent = () => ({
-  type: types.DEQUEUE_EVENT,
-});
+export const dequeueEvent = createAction(types.DEQUEUE_EVENT);
 
 export const togglePadResponse = createAction(types.PAD_RESPONSE_TOGGLE);
 

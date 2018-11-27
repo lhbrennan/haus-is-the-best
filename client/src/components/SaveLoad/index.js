@@ -30,7 +30,6 @@ const loadCompositionHandler = (username, compositionName, dispatch) => {
     },
   })
     .then(({ data }) => {
-      console.log('data', data);
       dispatch(loadComposition(data));
     })
     .catch((err) => {

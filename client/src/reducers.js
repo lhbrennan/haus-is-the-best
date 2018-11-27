@@ -31,7 +31,7 @@ function pattern(state = new DefaultPattern(), action) {
       });
       return duplicatedPattern;
     }
-    case types.LOAD_COMPOSITION:
+    case types.COMPOSITION_LOAD:
       return payload.pattern;
     case types.PATTERN_RESET:
       return new DefaultPattern();
@@ -41,11 +41,13 @@ function pattern(state = new DefaultPattern(), action) {
 }
 
 function volumes(state = defaultVolumes, action) {
-  const { volume, instrument, type } = action;
+  const { payload, type } = action;
   switch (type) {
-    case types.UPDATE_INSTRUMENT_VOLUME:
+    case types.INSTRUMENT_VOLUME_UPDATE: {
+      const {instrument, volume } = payload;
       return Object.assign({}, state, { [instrument]: volume });
-    case types.LOAD_COMPOSITION:
+    }
+    case types.COMPOSITION_LOAD:
       return action.payload.volumes || state;
     default:
       return state;
@@ -56,7 +58,7 @@ function bars(state = 1, action) {
   switch (action.type) {
     case types.BARS_UPDATE:
       return action.payload;
-    case types.LOAD_COMPOSITION:
+    case types.COMPOSITION_LOAD:
       return action.payload.bars || 1;
     case types.RESET_PATTERN:
       return 1;
@@ -80,7 +82,7 @@ function bpm(state = 120, action) {
   switch (action.type) {
     case types.BPM_UPDATE:
       return action.payload;
-    case types.LOAD_COMPOSITION:
+    case types.COMPOSITION_LOAD:
       return action.payload.bpm;
     default:
       return state;
@@ -91,7 +93,7 @@ function username(state = '', action) {
   switch (action.type) {
     case types.USERNAME_UPDATE:
       return action.payload;
-    case types.LOAD_COMPOSITION:
+    case types.COMPOSITION_LOAD:
       return action.payload.username;
     default:
       return state;
@@ -102,7 +104,7 @@ function compositionName(state = '', action) {
   switch (action.type) {
     case types.COMPOSITION_NAME_UPDATE:
       return action.payload;
-    case types.LOAD_COMPOSITION:
+    case types.COMPOSITION_LOAD:
       return action.payload.compositionName;
     default:
       return state;
@@ -113,7 +115,7 @@ function swing(state = 2.5, action) {
   switch (action.type) {
     case types.SWING_UPDATE:
       return action.payload;
-    case types.LOAD_COMPOSITION:
+    case types.COMPOSITION_LOAD:
       return action.payload.swing;
     default:
       return state;
@@ -149,7 +151,7 @@ function resolution(state = 16, action) {
 function eventQueue(state = [], action) {
   switch (action.type) {
     case types.QUEUE_EVENT:
-      return [...state, action.instrument];
+      return [...state, action.payload];
     case types.DEQUEUE_EVENT:
       return [...state].slice(1);
     default:
