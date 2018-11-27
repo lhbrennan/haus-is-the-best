@@ -39,8 +39,8 @@ const defaultTracks = {
       volume: 0.5,
       pattern: new Array(16).fill(0),
     },
-  }
-}
+  },
+};
 
 module.exports = {
   DefaultPattern,

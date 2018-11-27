@@ -14,8 +14,7 @@ const Wrapper = styled.div`
 
 class SaveLoad extends React.Component {
   componentDidMount() {
-    // const { loadComposition, username, compositionName } = this.props;
-    // loadComposition(username, compositionName);
+    // loadComposition('demo', 'house-1');
     console.log('Disabled autoloading of composition'); // Todo: update this when done refactoring reducers!
   }
 

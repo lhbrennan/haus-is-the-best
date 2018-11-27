@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { handleActions, combineActions } from 'redux-actions';
 import { defaultTracks, defaultInstruments, defaultVolumes, DefaultPattern } from './constants';
 import * as types from './actionTypes';
 
@@ -7,10 +8,11 @@ import * as types from './actionTypes';
 // }
 
 function pattern(state = new DefaultPattern(), action) {
-  const { type, instrument, stepNum, payload } = action;
+  const { type, payload } = action;
   const newPattern = Object.assign({}, state);
   switch (type) {
-    case types.UPDATE_PATTERN:
+    case types.UPDATE_PATTERN: {
+      const { instrument, stepNum } = payload;
       if (newPattern[instrument][stepNum] === 0) {
         newPattern[instrument][stepNum] = 5;
       } else if (newPattern[instrument][stepNum] === 1) {
@@ -19,7 +21,8 @@ function pattern(state = new DefaultPattern(), action) {
         newPattern[instrument][stepNum] -= 2;
       }
       return newPattern;
-    case types.DUPLICATE_PATTERN: {
+    }
+    case types.PATTERN_DUPLICATE: {
       const duplicatedPattern = {};
       const activeInstruments = Object.keys(state);
       activeInstruments.forEach((activeInstrument) => {
@@ -30,7 +33,7 @@ function pattern(state = new DefaultPattern(), action) {
     }
     case types.LOAD_COMPOSITION:
       return payload.pattern;
-    case types.RESET_PATTERN:
+    case types.PATTERN_RESET:
       return new DefaultPattern();
     default:
       return state;
@@ -51,13 +54,13 @@ function volumes(state = defaultVolumes, action) {
 
 function bars(state = 1, action) {
   switch (action.type) {
-    case types.UPDATE_BARS:
-      return action.bars;
+    case types.BARS_UPDATE:
+      return action.payload;
     case types.LOAD_COMPOSITION:
       return action.payload.bars || 1;
     case types.RESET_PATTERN:
       return 1;
-    case types.DUPLICATE_PATTERN:
+    case types.PATTERN_DUPLICATE:
       return state * 2;
     default:
       return state;
@@ -75,8 +78,8 @@ function instruments(state = defaultInstruments, action) {
 
 function bpm(state = 120, action) {
   switch (action.type) {
-    case types.UPDATE_BPM:
-      return action.bpm;
+    case types.BPM_UPDATE:
+      return action.payload;
     case types.LOAD_COMPOSITION:
       return action.payload.bpm;
     default:
@@ -86,8 +89,8 @@ function bpm(state = 120, action) {
 
 function username(state = '', action) {
   switch (action.type) {
-    case types.UPDATE_USERNAME:
-      return action.username;
+    case types.USERNAME_UPDATE:
+      return action.payload;
     case types.LOAD_COMPOSITION:
       return action.payload.username;
     default:
@@ -97,8 +100,8 @@ function username(state = '', action) {
 
 function compositionName(state = '', action) {
   switch (action.type) {
-    case types.UPDATE_COMPOSITION_NAME:
-      return action.compositionName;
+    case types.COMPOSITION_NAME_UPDATE:
+      return action.payload;
     case types.LOAD_COMPOSITION:
       return action.payload.compositionName;
     default:
@@ -108,8 +111,8 @@ function compositionName(state = '', action) {
 
 function swing(state = 2.5, action) {
   switch (action.type) {
-    case types.UPDATE_SWING:
-      return action.swing;
+    case types.SWING_UPDATE:
+      return action.payload;
     case types.LOAD_COMPOSITION:
       return action.payload.swing;
     default:
@@ -119,7 +122,7 @@ function swing(state = 2.5, action) {
 
 function playing(state = false, action) {
   switch (action.type) {
-    case types.TOGGLE_PLAYING:
+    case types.PLAYING_TOGGLE:
       return !state;
     default:
       return state;
@@ -128,9 +131,9 @@ function playing(state = false, action) {
 
 function overallVolume(state = 1, action) {
   switch (action.type) {
-    case types.UPDATE_OVERALL_VOLUME:
+    case types.OVERALL_VOLUME_UPDATE:
       console.log('new overallVolume', action.volume);
-      return action.volume;
+      return action.payload;
     default:
       return state;
   }
@@ -156,7 +159,7 @@ function eventQueue(state = [], action) {
 
 function padResponse(state = true, action) {
   switch (action.type) {
-    case types.TOGGLE_PAD_RESPONSE:
+    case types.PAD_RESPONSE_TOGGLE:
       return !state;
     default:
       return state;
@@ -165,8 +168,8 @@ function padResponse(state = true, action) {
 
 function visibleBar(state = 1, action) {
   switch (action.type) {
-    case types.SELECT_BAR:
-      return action.bar;
+    case types.BAR_SELECT:
+      return action.payload;
     default:
       return state;
   }

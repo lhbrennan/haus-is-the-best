@@ -1,31 +1,23 @@
+import { createAction } from 'redux-actions';
 import * as types from './actionTypes';
 
 // * ACTION CREATORS
-export const updateBpm = bpm => ({
-  type: types.UPDATE_BPM,
-  bpm,
-});
+export const updateBpm = createAction(types.BPM_UPDATE);
 
-export const updateOverallVolume = volume => ({
-  type: types.UPDATE_OVERALL_VOLUME,
-  volume,
-});
+export const updateOverallVolume = createAction(types.OVERALL_VOLUME_UPDATE);
 
-export const updateSwing = swing => ({
-  type: types.UPDATE_SWING,
-  swing,
-});
+export const updateSwing = createAction(types.SWING_UPDATE);
 
-export const togglePlaying = () => ({
-  type: types.TOGGLE_PLAYING,
-});
+export const togglePlaying = createAction(types.PLAYING_TOGGLE);
 
 export const updatePattern = (instrument, beat, subBeat) => {
   const stepNum = ((beat - 1) * 4) + subBeat - 1;
   return {
     type: types.UPDATE_PATTERN,
-    stepNum,
-    instrument,
+    payload: {
+      stepNum,
+      instrument,
+    },
   };
 };
 
@@ -34,9 +26,7 @@ export const loadComposition = composition => ({
   payload: composition,
 });
 
-export const resetPattern = () => ({
-  type: types.RESET_PATTERN,
-});
+export const resetPattern = createAction(types.PATTERN_RESET);
 
 export const updateInstrumentVolume = (newVolume, instrument) => {
   const volume = newVolume * newVolume; // use x-squared since linear does not sound good
@@ -57,30 +47,14 @@ export const dequeueEvent = () => ({
   type: types.DEQUEUE_EVENT,
 });
 
-export const togglePadResponse = () => ({
-  type: types.TOGGLE_PAD_RESPONSE,
-});
+export const togglePadResponse = createAction(types.PAD_RESPONSE_TOGGLE);
 
-export const updateBars = bars => ({
-  type: types.UPDATE_BARS,
-  bars,
-});
+export const updateBars = createAction(types.BARS_UPDATE);
 
-export const selectBar = bar => ({
-  type: types.SELECT_BAR,
-  bar,
-});
+export const selectBar = createAction(types.BAR_SELECT);
 
-export const updateUsername = username => ({
-  type: types.UPDATE_USERNAME,
-  username,
-});
+export const updateUsername = createAction(types.USERNAME_UPDATE);
 
-export const updateCompositionName = compositionName => ({
-  type: types.UPDATE_COMPOSITION_NAME,
-  compositionName,
-});
+export const updateCompositionName = createAction(types.COMPOSITION_NAME_UPDATE);
 
-export const duplicatePattern = () => ({
-  type: types.DUPLICATE_PATTERN,
-});
+export const duplicatePattern = createAction(types.PATTERN_DUPLICATE);
