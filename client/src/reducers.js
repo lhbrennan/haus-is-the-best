@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { handleActions, combineActions } from 'redux-actions';
+import { handleActions } from 'redux-actions';
 import { defaultTracks, defaultInstruments, defaultVolumes, DefaultPattern } from './constants';
 import * as types from './actionTypes';
 
@@ -78,16 +78,21 @@ function instruments(state = defaultInstruments, action) {
   }
 }
 
-function bpm(state = 120, action) {
-  switch (action.type) {
-    case types.BPM_UPDATE:
-      return action.payload;
-    case types.COMPOSITION_LOAD:
-      return action.payload.bpm;
-    default:
-      return state;
-  }
-}
+const bpm = handleActions({
+  BPM_UPDATE: (state, action) => action.payload,
+  COMPOSITION_LOAD: (state, action) => action.payload.bpm,
+}, 120);
+
+// function bpm(state = 120, action) {
+//   switch (action.type) {
+//     case types.BPM_UPDATE:
+//       return action.payload;
+//     case types.COMPOSITION_LOAD:
+//       return action.payload.bpm;
+//     default:
+//       return state;
+//   }
+// }
 
 function username(state = '', action) {
   switch (action.type) {
