@@ -259,7 +259,8 @@ export const getPattern = (state) => {
 // export const getBars = state => state.tracks.bars;
 export const getBars = state => state.bars;
 
-export const getInstruments = state => Object.keys(state.tracks.instruments);
+// export const getInstruments = state => Object.keys(state.tracks.instruments);
+export const getInstruments = state => state.instruments;
 
 // export const getVolumes = (state) => {
 //   const instruments = Object.keys(state.tracks.instruments);

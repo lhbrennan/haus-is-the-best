@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { dequeueEvent } from '../actions';
-import { getBars, getBpm, getVolumes } from '../reducers';
+import { getBars, getBpm, getVolumes, getInstruments } from '../reducers';
 
 class AudioPlayer extends React.Component {
   constructor(props) {
@@ -167,7 +167,7 @@ const mapStateToProps = state => (
     volumes: getVolumes(state),
     swing: state.swing,
     bpm: getBpm(state),
-    instruments: state.instruments,
+    instruments: getInstruments(state),
     eventQueue: state.eventQueue,
     bars: getBars(state),
   }

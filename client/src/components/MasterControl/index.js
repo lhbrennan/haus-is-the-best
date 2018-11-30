@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 
 import { resetPattern, togglePadResponse } from '../../actions';
-import { getVolumes } from '../../reducers';
+import { getVolumes, getBpm } from '../../reducers';
 import MasterControl from './MasterControl';
-import { getBpm } from '../../reducers';
 
 const mapStateToProps = state => ({
   pattern: state.pattern,
