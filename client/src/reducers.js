@@ -3,116 +3,118 @@ import { handleActions } from 'redux-actions';
 import { defaultTracks, defaultInstruments, defaultVolumes, DefaultPattern } from './constants';
 import * as types from './actionTypes';
 
-// const tracks = handleActions({
+const tracks = handleActions({
 
-//   PATTERN_UPDATE: (state, { payload: { instrument, stepNum } }) => {
-//     const newState = Object.assign({}, state);
-//     const newPattern = [...newState.instruments[instrument].pattern];
+  PATTERN_UPDATE: (state, { payload: { instrument, stepNum } }) => {
+    const newState = Object.assign({}, state);
+    const newPattern = [...newState.instruments[instrument].pattern];
 
-//     if (newPattern[stepNum] === 0) {
-//       newPattern[stepNum] = 5;
-//     } else if (newPattern[stepNum] === 1) {
-//       newPattern[stepNum] = 0;
-//     } else {
-//       newPattern[stepNum] -= 2;
+    if (newPattern[stepNum] === 0) {
+      newPattern[stepNum] = 5;
+    } else if (newPattern[stepNum] === 1) {
+      newPattern[stepNum] = 0;
+    } else {
+      newPattern[stepNum] -= 2;
+    }
+    newState.instruments[instrument].pattern = newPattern;
+    return newState;
+  },
+
+  PATTERN_DUPLICATE: (state) => {
+    const newState = Object.assign({}, state);
+
+    newState.bars *= 2;
+
+    const instruments = Object.keys(state.instruments);
+    instruments.forEach((instrument) => {
+      const { pattern } = state.instruments[instrument];
+      newState.instruments[instrument].pattern = [...pattern, ...pattern];
+    });
+    return newState;
+  },
+
+  INSTRUMENT_VOLUME_UPDATE: (state, { payload: { instrument, volume } }) => {
+    const newState = Object.assign({}, state);
+    newState.instruments[instrument].volume = volume;
+    return newState;
+  },
+
+  PATTERN_RESET: () => defaultTracks,
+
+  COMPOSITION_LOAD: () => {},
+
+}, defaultTracks);
+
+// function pattern(state = new DefaultPattern(), action) {
+//   const { type, payload } = action;
+//   const newPattern = Object.assign({}, state);
+//   switch (type) {
+//     case types.PATTERN_UPDATE: {
+//       const { instrument, stepNum } = payload;
+//       if (newPattern[instrument][stepNum] === 0) {
+//         newPattern[instrument][stepNum] = 5;
+//       } else if (newPattern[instrument][stepNum] === 1) {
+//         newPattern[instrument][stepNum] = 0;
+//       } else {
+//         newPattern[instrument][stepNum] -= 2;
+//       }
+//       return newPattern;
 //     }
-//     newState.instruments[instrument].pattern = newPattern;
-//     newState.bars *= 2;
-//     return newState;
-//   },
+//     case types.PATTERN_DUPLICATE: {
+//       const duplicatedPattern = {};
+//       const activeInstruments = Object.keys(state);
+//       activeInstruments.forEach((activeInstrument) => {
+//         const instrumentPattern = state[activeInstrument];
+//         duplicatedPattern[activeInstrument] = [...instrumentPattern, ...instrumentPattern];
+//       });
+//       return duplicatedPattern;
+//     }
+//     case types.COMPOSITION_LOAD:
+//       return payload.pattern;
+//     case types.PATTERN_RESET:
+//       return new DefaultPattern();
+//     default:
+//       return state;
+//   }
+// }
 
-//   PATTERN_DUPLICATE: (state) => {
-//     const newPattern = {};
-//     const instruments = Object.keys(state.instruments);
-//     instruments.forEach((instrument) => {
-//       const { pattern } = state.instruments[instrument];
-//       newPattern[instrument] = [...pattern, ...pattern];
-//     });
-//     return newPattern;
-//   },
+// function volumes(state = defaultVolumes, action) {
+//   const { payload, type } = action;
+//   switch (type) {
+//     case types.INSTRUMENT_VOLUME_UPDATE: {
+//       const {instrument, volume } = payload;
+//       return Object.assign({}, state, { [instrument]: volume });
+//     }
+//     case types.COMPOSITION_LOAD:
+//       return action.payload.volumes || state;
+//     default:
+//       return state;
+//   }
+// }
 
-//   INSTRUMENT_VOLUME_UPDATE: (state, { payload: { instrument, volume } }) => {
-//     const newState = Object.assign({}, state);
-//     newState.instruments[instrument].volume = volume;
-//     return newState;
-//   },
+// function bars(state = 1, action) {
+//   switch (action.type) {
+//     case types.BARS_UPDATE:
+//       return action.payload;
+//     case types.COMPOSITION_LOAD:
+//       return action.payload.bars || 1;
+//     case types.PATTERN_RESET:
+//       return 1;
+//     case types.PATTERN_DUPLICATE:
+//       return state * 2;
+//     default:
+//       return state;
+//   }
+// }
 
-//   PATTERN_RESET: () => defaultTracks,
-
-//   COMPOSITION_LOAD: () => {},
-
-// }, defaultTracks);
-
-function pattern(state = new DefaultPattern(), action) {
-  const { type, payload } = action;
-  const newPattern = Object.assign({}, state);
-  switch (type) {
-    case types.PATTERN_UPDATE: {
-      const { instrument, stepNum } = payload;
-      if (newPattern[instrument][stepNum] === 0) {
-        newPattern[instrument][stepNum] = 5;
-      } else if (newPattern[instrument][stepNum] === 1) {
-        newPattern[instrument][stepNum] = 0;
-      } else {
-        newPattern[instrument][stepNum] -= 2;
-      }
-      return newPattern;
-    }
-    case types.PATTERN_DUPLICATE: {
-      const duplicatedPattern = {};
-      const activeInstruments = Object.keys(state);
-      activeInstruments.forEach((activeInstrument) => {
-        const instrumentPattern = state[activeInstrument];
-        duplicatedPattern[activeInstrument] = [...instrumentPattern, ...instrumentPattern];
-      });
-      return duplicatedPattern;
-    }
-    case types.COMPOSITION_LOAD:
-      return payload.pattern;
-    case types.PATTERN_RESET:
-      return new DefaultPattern();
-    default:
-      return state;
-  }
-}
-
-function volumes(state = defaultVolumes, action) {
-  const { payload, type } = action;
-  switch (type) {
-    case types.INSTRUMENT_VOLUME_UPDATE: {
-      const {instrument, volume } = payload;
-      return Object.assign({}, state, { [instrument]: volume });
-    }
-    case types.COMPOSITION_LOAD:
-      return action.payload.volumes || state;
-    default:
-      return state;
-  }
-}
-
-function bars(state = 1, action) {
-  switch (action.type) {
-    case types.BARS_UPDATE:
-      return action.payload;
-    case types.COMPOSITION_LOAD:
-      return action.payload.bars || 1;
-    case types.PATTERN_RESET:
-      return 1;
-    case types.PATTERN_DUPLICATE:
-      return state * 2;
-    default:
-      return state;
-  }
-}
-
-function instruments(state = defaultInstruments, action) {
-  switch (action.type) {
-    case types.UPDATE_INSTRUMENTS:
-      return action.instruments;
-    default:
-      return state;
-  }
-}
+// function instruments(state = defaultInstruments, action) {
+//   switch (action.type) {
+//     case types.UPDATE_INSTRUMENTS:
+//       return action.instruments;
+//     default:
+//       return state;
+//   }
+// }
 
 const bpm = handleActions({
   BPM_UPDATE: (state, action) => action.payload,
@@ -232,11 +234,11 @@ const rootReducer = combineReducers({
   visibleBar,
   resolution,
   // * Track/Pattern Settings
-  // tracks,
-  pattern,
-  bars,
-  instruments,
-  volumes,
+  tracks,
+  // pattern,
+  // bars,
+  // instruments,
+  // volumes,
   // * Audio System
   eventQueue,
 });
@@ -247,28 +249,28 @@ export default rootReducer;
 // export const getCompositionName = state => state.getCompositionName;
 export const getBpm = state => state.bpm;
 
-// export const getPattern = (state) => {
-//   const instruments = Object.keys(state.tracks.instruments);
-//   const pattern = {};
-//   instruments.forEach((instrument) => {
-//     pattern[instrument] = state.tracks.instruments[instrument].pattern;
-//   });
-//   return pattern;
-// };
-export const getPattern = state => state.pattern;
+export const getPattern = (state) => {
+  const instruments = Object.keys(state.tracks.instruments);
+  const pattern = {};
+  instruments.forEach((instrument) => {
+    pattern[instrument] = state.tracks.instruments[instrument].pattern;
+  });
+  return pattern;
+};
+// export const getPattern = state => state.pattern;
 
-// export const getBars = state => state.tracks.bars;
-export const getBars = state => state.bars;
+export const getBars = state => state.tracks.bars;
+// export const getBars = state => state.bars;
 
-// export const getInstruments = state => Object.keys(state.tracks.instruments);
-export const getInstruments = state => state.instruments;
+export const getInstruments = state => Object.keys(state.tracks.instruments);
+// export const getInstruments = state => state.instruments;
 
-// export const getVolumes = (state) => {
-//   const instruments = Object.keys(state.tracks.instruments);
-//   const volumes = {};
-//   instruments.forEach((instrument) => {
-//     volumes[instrument] = state.tracks.instruments[instrument].volume;
-//   });
-//   return volumes;
-// };
-export const getVolumes = state => state.volumes;
+export const getVolumes = (state) => {
+  const instruments = Object.keys(state.tracks.instruments);
+  const volumes = {};
+  instruments.forEach((instrument) => {
+    volumes[instrument] = state.tracks.instruments[instrument].volume;
+  });
+  return volumes;
+};
+// export const getVolumes = state => state.volumes;
