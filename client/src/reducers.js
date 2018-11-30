@@ -261,11 +261,12 @@ export const getBars = state => state.bars;
 
 export const getInstruments = state => Object.keys(state.tracks.instruments);
 
-export const getVolumes = (state) => {
-  const instruments = Object.keys(state.tracks.instruments);
-  const volumes = {};
-  instruments.forEach((instrument) => {
-    volumes[instrument] = state.tracks.instruments[instrument].volume;
-  });
-  return volumes;
-};
+// export const getVolumes = (state) => {
+//   const instruments = Object.keys(state.tracks.instruments);
+//   const volumes = {};
+//   instruments.forEach((instrument) => {
+//     volumes[instrument] = state.tracks.instruments[instrument].volume;
+//   });
+//   return volumes;
+// };
+export const getVolumes = state => state.volumes;
