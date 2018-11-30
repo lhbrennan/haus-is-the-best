@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
+
+import { getPattern } from '../../reducers';
 import QtrNoteInstrumentBlock from './QtrNoteInstrumentBlock';
 
 const mapStateToProps = (state, ownProps) => ({
-  pattern: state.pattern,
+  pattern: getPattern(state),
   numPads: ownProps.numPads,
   instrument: ownProps.instrument,
   beat: ownProps.beat,

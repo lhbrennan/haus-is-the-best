@@ -247,14 +247,15 @@ export default rootReducer;
 // export const getCompositionName = state => state.getCompositionName;
 export const getBpm = state => state.bpm;
 
-export const getPattern = (state) => {
-  const instruments = Object.keys(state.tracks.instruments);
-  const pattern = {};
-  instruments.forEach((instrument) => {
-    pattern[instrument] = state.tracks.instruments[instrument].pattern;
-  });
-  return pattern;
-};
+// export const getPattern = (state) => {
+//   const instruments = Object.keys(state.tracks.instruments);
+//   const pattern = {};
+//   instruments.forEach((instrument) => {
+//     pattern[instrument] = state.tracks.instruments[instrument].pattern;
+//   });
+//   return pattern;
+// };
+export const getPattern = state => state.pattern;
 
 // export const getBars = state => state.tracks.bars;
 export const getBars = state => state.bars;
