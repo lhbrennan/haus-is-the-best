@@ -3,9 +3,45 @@ import { handleActions } from 'redux-actions';
 import { defaultTracks, defaultInstruments, defaultVolumes, DefaultPattern } from './constants';
 import * as types from './actionTypes';
 
-// function tracks(state = defaultTracks, action) {
+// const tracks = handleActions({
 
-// }
+//   PATTERN_UPDATE: (state, { payload: { instrument, stepNum } }) => {
+//     const newState = Object.assign({}, state);
+//     const newPattern = [...newState.instruments[instrument].pattern];
+
+//     if (newPattern[stepNum] === 0) {
+//       newPattern[stepNum] = 5;
+//     } else if (newPattern[stepNum] === 1) {
+//       newPattern[stepNum] = 0;
+//     } else {
+//       newPattern[stepNum] -= 2;
+//     }
+//     newState.instruments[instrument].pattern = newPattern;
+//     newState.bars *= 2;
+//     return newState;
+//   },
+
+//   PATTERN_DUPLICATE: (state) => {
+//     const newPattern = {};
+//     const instruments = Object.keys(state.instruments);
+//     instruments.forEach((instrument) => {
+//       const { pattern } = state.instruments[instrument];
+//       newPattern[instrument] = [...pattern, ...pattern];
+//     });
+//     return newPattern;
+//   },
+
+//   INSTRUMENT_VOLUME_UPDATE: (state, { payload: { instrument, volume } }) => {
+//     const newState = Object.assign({}, state);
+//     newState.instruments[instrument].volume = volume;
+//     return newState;
+//   },
+
+//   PATTERN_RESET: () => defaultTracks,
+
+//   COMPOSITION_LOAD: () => {},
+
+// }, defaultTracks);
 
 function pattern(state = new DefaultPattern(), action) {
   const { type, payload } = action;
@@ -60,7 +96,7 @@ function bars(state = 1, action) {
       return action.payload;
     case types.COMPOSITION_LOAD:
       return action.payload.bars || 1;
-    case types.RESET_PATTERN:
+    case types.PATTERN_RESET:
       return 1;
     case types.PATTERN_DUPLICATE:
       return state * 2;
@@ -206,3 +242,30 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+
+// export const getUsername = state => state.username;
+// export const getCompositionName = state => state.getCompositionName;
+export const getBpm = state => state.bpm;
+
+export const getPattern = (state) => {
+  const instruments = Object.keys(state.tracks.instruments);
+  const pattern = {};
+  instruments.forEach((instrument) => {
+    pattern[instrument] = state.tracks.instruments[instrument].pattern;
+  });
+  return pattern;
+};
+
+// export const getBars = state => state.tracks.bars;
+export const getBars = state => state.bars;
+
+export const getInstruments = state => Object.keys(state.tracks.instruments);
+
+export const getVolumes = (state) => {
+  const instruments = Object.keys(state.tracks.instruments);
+  const volumes = {};
+  instruments.forEach((instrument) => {
+    volumes[instrument] = state.tracks.instruments[instrument].volume;
+  });
+  return volumes;
+};

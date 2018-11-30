@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import { updateBpm, updateSwing, updateOverallVolume, togglePlaying } from '../../actions';
 import PlayBackSettings from './PlayBackSettings';
+import { getBpm } from '../../reducers';
+
 
 const mapStateToProps = state => ({
-  bpm: state.bpm,
+  bpm: getBpm(state),
   playing: state.playing,
   swing: state.swing,
   overallVolume: state.overallVolume,

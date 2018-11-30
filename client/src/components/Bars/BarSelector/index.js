@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
+
 import BarSelector from './BarSelector';
 import { selectBar } from '../../../actions';
+import { getBars } from '../../../reducers';
 
 const mapStateToProps = state => ({
-  bars: state.bars,
+  bars: getBars(state),
   visibleBar: state.visibleBar,
 });
 

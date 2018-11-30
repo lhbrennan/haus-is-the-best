@@ -14,10 +14,10 @@ const PlayButton = styled.button`
   height: 50px;
   border-style: solid;
   box-sizing: border-box;
-  border-color: transparent transparent transparent #FFEB95;
+  border-color: transparent transparent transparent #00B2FF;
   padding: 0;
   cursor: pointer;
-  background-color: #011627;
+  background-color: #FFFFFF;
   border-width: ${({ playing }) => (playing ? '0px 0px 0px 50px' : '25px 0px 25px 50px')};
   border-style: ${({ playing }) => (playing ? 'double' : 'solid')};
   transition: 100ms all ease;

@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
+
 import { updateBars } from '../../../actions';
 import NumBars from './NumBars';
+import { getBars } from '../../../reducers';
 
 const mapStateToProps = state => ({
-  bars: state.bars,
+  bars: getBars(state),
 });
 
 const mapDispatchToProps = dispatch => ({
