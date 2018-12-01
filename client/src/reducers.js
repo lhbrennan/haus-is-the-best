@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
 import { generateDefaultTracks } from './constants';
-import * as types from './actionTypes';
 
 const bpm = handleActions({
   BPM_UPDATE: (state, { payload }) => payload,
@@ -52,7 +51,6 @@ const tracks = handleActions({
   PATTERN_UPDATE: (state, { payload: { instrument, stepNum } }) => {
     const newState = Object.assign({}, state);
     const newPattern = [...newState.instruments[instrument].pattern];
-
     if (newPattern[stepNum] === 0) {
       newPattern[stepNum] = 5;
     } else if (newPattern[stepNum] === 1) {
