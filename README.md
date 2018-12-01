@@ -8,7 +8,7 @@ This application is a drum sequencer with precise audio event timing. It uses th
 
 1. mongod
 2. npm start
-3. npm run react-dev 
+3. npm run react-dev
 
 ## Built With
 
@@ -19,11 +19,13 @@ This application is a drum sequencer with precise audio event timing. It uses th
 * Express
 * MongoDB
 * Mongoose
+* Heroku
+* AWS S3
 
 ## Author
 
 **Luke Brennan**
 
-## Design Assistance
+## Design
 
 **Luke O'Connor**

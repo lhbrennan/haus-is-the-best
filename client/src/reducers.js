@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { defaultTracks, defaultInstruments, defaultVolumes, DefaultPattern } from './constants';
+import { generateDefaultTracks, defaultInstruments, defaultVolumes, DefaultPattern } from './constants';
 import * as types from './actionTypes';
 
 const tracks = handleActions({
@@ -39,11 +39,14 @@ const tracks = handleActions({
     return newState;
   },
 
-  PATTERN_RESET: () => defaultTracks,
+  PATTERN_RESET: () => generateDefaultTracks(),
 
-  COMPOSITION_LOAD: () => {},
+  COMPOSITION_LOAD: (state, { payload: { tracks: newTracks } }) => {
+    console.log(newTracks);
+    return newTracks;
+  },
 
-}, defaultTracks);
+}, generateDefaultTracks());
 
 // function pattern(state = new DefaultPattern(), action) {
 //   const { type, payload } = action;

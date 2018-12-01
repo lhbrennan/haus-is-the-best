@@ -4,21 +4,12 @@ import axios from 'axios';
 import SaveLoad from './SaveLoad';
 import { loadComposition } from '../../actions';
 
-const saveComposition = ({ pattern, swing, bpm, username, compositionName, volumes, bars }) => {
-  if (username === 'demo') {
+const saveComposition = (composition) => {
+  if (composition.username === 'demo') {
     console.log('Cannot overwrite demo compositions');
     return;
   }
-  console.log(`Saving Composition... swing: ${swing}, bpm: ${bpm}, bars: ${bars}`);
-  axios.post('/compositions', {
-    username,
-    compositionName,
-    pattern,
-    swing,
-    bpm,
-    volumes,
-    bars,
-  });
+  axios.post('/compositions', composition);
 };
 
 const loadCompositionHandler = (username, compositionName, dispatch) => {
@@ -37,10 +28,10 @@ const loadCompositionHandler = (username, compositionName, dispatch) => {
     });
 };
 
-const mapStateToProps = state => ({
-  saveComposition: () => saveComposition(state),
-  username: state.username,
-  compositionName: state.compositionName,
+const mapStateToProps = ({ tracks, swing, bpm, username, compositionName }) => ({
+  saveComposition: () => saveComposition({ tracks, swing, bpm, username, compositionName }),
+  username,
+  compositionName,
 });
 
 const mapDispatchToProps = dispatch => ({

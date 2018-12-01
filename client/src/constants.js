@@ -16,7 +16,7 @@ const defaultVolumes = {
 
 const defaultInstruments = ['kick', 'clap', 'snare', 'openHat', 'closedHat'];
 
-const defaultTracks = {
+const generateDefaultTracks = () => ({
   bars: 1,
   instruments: {
     kick: {
@@ -40,11 +40,11 @@ const defaultTracks = {
       pattern: new Array(16).fill(0),
     },
   },
-};
+});
 
 module.exports = {
   DefaultPattern,
   defaultVolumes,
   defaultInstruments,
-  defaultTracks,
+  generateDefaultTracks,
 };
