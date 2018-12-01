@@ -6,28 +6,6 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
-// const compositionSchema = mongoose.Schema({
-//   username: String,
-//   compositionName: String,
-//   pattern: {
-//     kick: Array,
-//     clap: Array,
-//     snare: Array,
-//     openHat: Array,
-//     closedHat: Array,
-//   },
-//   swing: Number,
-//   bpm: Number,
-//   volumes: {
-//     kick: Number,
-//     clap: Number,
-//     snare: Number,
-//     openHat: Number,
-//     closedHat: Number,
-//   },
-//   bars: Number,
-// });
-
 const compositionSchema = mongoose.Schema({
   username: String,
   compositionName: String,

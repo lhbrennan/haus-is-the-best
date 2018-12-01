@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 
 import Header from './Header';
 import { updateUsername, updateCompositionName } from '../../actions';
+import { getUsername, getCompositionName } from '../../reducers';
 
 const mapStateToProps = state => ({
-  username: state.username,
-  compositionName: state.compositionName,
+  username: getUsername(state),
+  compositionName: getCompositionName(state),
 });
 
 const mapDispatchToProps = dispatch => ({
