@@ -14,8 +14,7 @@ const username = handleActions({
 
 const compositionTitle = handleActions({
   COMPOSITION_TITLE_UPDATE: (state, { payload }) => {
-    console.log('new comp title', payload);
-    return payload;
+    return payload || 'Untitled';
   },
   COMPOSITION_LOAD: (state, { payload }) => payload.compositionTitle,
 }, 'Untitled');
@@ -81,7 +80,6 @@ const tracks = handleActions({
   },
   PATTERN_RESET: () => generateDefaultTracks(),
   COMPOSITION_LOAD: (state, { payload: { tracks: newTracks } }) => {
-    console.log(newTracks);
     return newTracks;
   },
 }, generateDefaultTracks());

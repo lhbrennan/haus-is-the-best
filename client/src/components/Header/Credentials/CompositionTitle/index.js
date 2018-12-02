@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { updateCompositionTitle } from '../../../actions';
+import { updateCompositionTitle } from '../../../../actions';
 
 import CompositionTitle from './CompositionTitle';
-import { getCompositionTitle } from '../../../reducers';
+import { getCompositionTitle } from '../../../../reducers';
 
 const mapStateToProps = state => ({
   compositionTitle: getCompositionTitle(state),

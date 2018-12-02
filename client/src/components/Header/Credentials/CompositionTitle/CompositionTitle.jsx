@@ -1,10 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Button from '../../../UI/Button';
+
+const Wrapper = styled.div`
+  display: flex;
+  margin: 5px 0;
+  align-items: center;
+`;
+
 const Input = styled.input``;
 
 const H2 = styled.h2`
   font-size: 30px;
+  margin: 0px;
 `;
 
 class CompositionTitle extends React.Component {
@@ -35,10 +44,10 @@ class CompositionTitle extends React.Component {
       return <input type="text" onBlur={this.handleBlur} />;
     }
     return (
-      <div>
+      <Wrapper>
         <H2>{compositionTitle}</H2>
-        <button type="button" onClick={this.handleClick}>Update</button>
-      </div>
+        <Button onClick={this.handleClick}>U</Button>
+      </Wrapper>
     );
   }
 }
