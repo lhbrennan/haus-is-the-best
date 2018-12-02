@@ -8,7 +8,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 const compositionSchema = mongoose.Schema({
   username: String,
-  compositionName: String,
+  compositionTitle: String,
   tracks: {
     bars: Number,
     instruments: {
@@ -41,10 +41,10 @@ const compositionSchema = mongoose.Schema({
 const Composition = mongoose.model('Composition', compositionSchema);
 
 const storeComposition = function (data) {
-  console.log('data to save', data);
-  const { username, compositionName } = data;
+  console.log('attempting to save to db: \n', data);
+  const { username, compositionTitle } = data;
   Composition.findOneAndUpdate(
-    { username, compositionName },
+    { username, compositionTitle },
     data,
     { upsert: true, new: true },
     (err, doc) => {
@@ -58,10 +58,11 @@ const storeComposition = function (data) {
   );
 };
 
-const fetchComposition = function (username, compositionName) {
+const fetchComposition = function (username, compositionTitle) {
+  console.log(`attempting to load from db ${compositionTitle} by ${username}`);
   return Composition.findOne({
     username,
-    compositionName,
+    compositionTitle,
   });
 };
 

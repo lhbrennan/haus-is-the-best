@@ -9,7 +9,7 @@ const Label = styled.div`
   font-size: 14px;
   padding: 3px;
   text-transform: capitalize;
-  color: #FFFFFF;
+  color: #4A4A4A;
 `;
 
 const SliderContainer = styled.div`

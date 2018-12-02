@@ -12,10 +12,13 @@ const username = handleActions({
   COMPOSITION_LOAD: (state, { payload }) => payload.username,
 }, '');
 
-const compositionName = handleActions({
-  COMPOSITION_NAME_UPDATE: (state, { payload }) => payload,
-  COMPOSITION_LOAD: (state, { payload }) => payload.compositionName,
-}, '');
+const compositionTitle = handleActions({
+  COMPOSITION_TITLE_UPDATE: (state, { payload }) => {
+    console.log('new comp title', payload);
+    return payload;
+  },
+  COMPOSITION_LOAD: (state, { payload }) => payload.compositionTitle,
+}, 'Untitled');
 
 const swing = handleActions({
   SWING_UPDATE: (state, { payload }) => payload,
@@ -86,7 +89,7 @@ const tracks = handleActions({
 const rootReducer = combineReducers({
   // * Credentials
   username,
-  compositionName,
+  compositionTitle,
   // * Playback Settings
   playing,
   bpm,
@@ -106,7 +109,7 @@ export default rootReducer;
 
 // * SELECTORS
 export const getUsername = state => state.username;
-export const getCompositionName = state => state.getCompositionName;
+export const getCompositionTitle = state => state.compositionTitle;
 export const getBpm = state => state.bpm;
 export const getBars = state => state.tracks.bars;
 export const getInstruments = state => Object.keys(state.tracks.instruments);

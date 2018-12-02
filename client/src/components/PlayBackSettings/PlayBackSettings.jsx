@@ -13,8 +13,7 @@ const Section = styled.section`
   padding: 0px 10px;
   justify-content: flex-start;
   align-items: flex-start;
-  color: #FFFFFF;
-  background-color: #4A4A4A;
+  color: #4A4A4A;
 `;
 
 const PlayBackSettings = ({

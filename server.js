@@ -33,9 +33,9 @@ app.get('/samples/:id', (req, res) => {
 });
 
 app.get('/compositions', (req, res) => {
-  const { username, compositionName } = req.query;
+  const { username, compositionTitle } = req.query;
   // you should send feedback to your client if there's an error
-  db.fetchComposition(username, compositionName)
+  db.fetchComposition(username, compositionTitle)
     .then((composition) => {
       res.status(200).send(composition);
     });

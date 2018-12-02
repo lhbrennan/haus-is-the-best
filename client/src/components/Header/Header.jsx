@@ -1,20 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import CompositionTitle from './CompositionTitle';
+
 const Header = styled.header`
+  width: 100%;
+  height: 100px;
   display: flex;
   flex-flow: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 70px;
-  background-color: #44596b;
-`;
-
-const InnerWrapper = styled.div`
-  display: flex;
-  flex: 0 0 1440px;
-  flex-flow: row;
-  justify-content: space-between;
 `;
 
 const Details = styled.div`
@@ -22,14 +18,6 @@ const Details = styled.div`
   flex-flow: column;
   justify-content: space-around;
   align-items: flex-end;
-`;
-
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 26px;
-  font-style: italic;
-
 `;
 
 const DetailWrapper = styled.div`
@@ -55,28 +43,18 @@ const Input = styled.input`
 
 const CompositionDetails = ({
   username,
-  compositionName,
   updateUsername,
-  updateCompositionName,
 }) => (
   <Header>
-    <InnerWrapper>
-      <Title>HOUSE IS A FEELING</Title>
-      <Details>
-        <DetailWrapper>
-          <Label>
-            COMPOSITION
-          </Label>
-          <Input type="text" onBlur={e => updateCompositionName(e.target.value)} defaultValue={compositionName} />
-        </DetailWrapper>
-        <DetailWrapper>
-          <Label>
-            USERNAME
-          </Label>
-          <Input type="text" onBlur={e => updateUsername(e.target.value)} defaultValue={username} />
-        </DetailWrapper>
-      </Details>
-    </InnerWrapper>
+    <Details>
+      <CompositionTitle />
+      <DetailWrapper>
+        <Label>
+          USERNAME
+        </Label>
+        <Input type="text" onBlur={e => updateUsername(e.target.value)} defaultValue={username} />
+      </DetailWrapper>
+    </Details>
   </Header>
 );
 

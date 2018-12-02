@@ -21,7 +21,7 @@ class SaveLoad extends React.Component {
   render() {
     const {
       username,
-      compositionName,
+      compositionTitle,
       saveComposition,
       loadComposition,
     } = this.props;
@@ -31,7 +31,7 @@ class SaveLoad extends React.Component {
         <Button onClick={saveComposition}>
           Save
         </Button>
-        <Button onClick={() => loadComposition(username, compositionName)}>
+        <Button onClick={() => loadComposition(username, compositionTitle)}>
           Load
         </Button>
       </Wrapper>

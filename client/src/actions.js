@@ -39,6 +39,6 @@ export const selectBar = createAction(types.BAR_SELECT);
 
 export const updateUsername = createAction(types.USERNAME_UPDATE);
 
-export const updateCompositionName = createAction(types.COMPOSITION_NAME_UPDATE);
+export const updateCompositionTitle = createAction(types.COMPOSITION_TITLE_UPDATE);
 
 export const duplicatePattern = createAction(types.PATTERN_DUPLICATE);

@@ -3,26 +3,26 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: ${({ playing }) => (playing ? '15px' : '15px 11px 15px 19px')};
+  border: 1px solid #C4C4C4;
+  border-radius: 50%;
 `;
 
 const PlayButton = styled.button`
-  width: 50px;
-  height: 50px;
-  border-style: solid;
-  box-sizing: border-box;
-  border-color: transparent transparent transparent #00B2FF;
+  width: 30px;
+  height: 30px;
   padding: 0;
-  cursor: pointer;
-  background-color: #FFFFFF;
-  border-width: ${({ playing }) => (playing ? '0px 0px 0px 50px' : '25px 0px 25px 50px')};
+
+  border-style: solid;
+  border-color: transparent transparent transparent #00B2FF;
+  border-width: ${({ playing }) => (playing ? '0px 0px 0px 30px' : '15px 0px 15px 30px')};
   border-style: ${({ playing }) => (playing ? 'double' : 'solid')};
-  transition: 100ms all ease;
-  will-change: border-width;
-  margin: 30px 50px;
+
+  outline: none;
+
+  cursor: pointer;
 `;
 
 const Slider = styled.input`
@@ -39,7 +39,7 @@ const PlayBox = ({
   overallVolume,
   updateOverallVolume,
 }) => (
-  <Wrapper>
+  <Wrapper playing={playing}>
     <PlayButton onClick={togglePlaying} playing={playing} />
     {/* <Slider
       type="range"

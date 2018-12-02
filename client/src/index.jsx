@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import App from './components/App';
 import AudioPlayer from './components/AudioPlayer';
 import configureStore from './store';
-import { DefaultPattern } from './constants';
 
 const Wrapper = styled.div`
   background-color: #FFFFFF;

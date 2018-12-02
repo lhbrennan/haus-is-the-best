@@ -9,15 +9,16 @@ const saveComposition = (composition) => {
     console.log('Cannot overwrite demo compositions');
     return;
   }
+  console.log(`saving compositionTitle: ${composition.compositionTitle}`);
   axios.post('/compositions', composition);
 };
 
-const loadCompositionHandler = (username, compositionName, dispatch) => {
-  console.log(`Loading ${compositionName} by ${username}`);
+const loadCompositionHandler = (username, compositionTitle, dispatch) => {
+  console.log(`Loading ${compositionTitle} by ${username}`);
   axios.get('/compositions', {
     params: {
       username,
-      compositionName,
+      compositionTitle,
     },
   })
     .then(({ data }) => {
@@ -28,14 +29,14 @@ const loadCompositionHandler = (username, compositionName, dispatch) => {
     });
 };
 
-const mapStateToProps = ({ tracks, swing, bpm, username, compositionName }) => ({
-  saveComposition: () => saveComposition({ tracks, swing, bpm, username, compositionName }),
+const mapStateToProps = ({ tracks, swing, bpm, username, compositionTitle }) => ({
+  saveComposition: () => saveComposition({ tracks, swing, bpm, username, compositionTitle }),
   username,
-  compositionName,
+  compositionTitle,
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadComposition: (username, compositionName) => loadCompositionHandler(username, compositionName, dispatch),
+  loadComposition: (username, compositionTitle) => loadCompositionHandler(username, compositionTitle, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveLoad);
