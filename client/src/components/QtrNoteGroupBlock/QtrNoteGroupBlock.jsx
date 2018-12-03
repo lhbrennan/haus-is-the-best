@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import QtrNoteInstrumentBlock from '../QtrNoteInstrumentBlock';
 
 const Div = styled.div`
-  padding: 5px;
   border-radius: 8px;
   /* background: ${({ beat }) => (beat % 2 === 0 ? 'gainsboro' : 'azure')}; */
 `;

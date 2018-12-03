@@ -64,14 +64,30 @@ const tracks = handleActions({
     return newState;
   },
   PATTERN_DUPLICATE: (state) => {
-    const newState = Object.assign({}, state);
-    newState.bars *= 2;
-    const instruments = Object.keys(state.instruments);
-    instruments.forEach((instrument) => {
-      const { pattern } = state.instruments[instrument];
-      newState.instruments[instrument].pattern = [...pattern, ...pattern];
-    });
-    return newState;
+    if (state.bars < 5) {
+      const newState = Object.assign({}, state);
+      newState.bars *= 2;
+      const instruments = Object.keys(state.instruments);
+      instruments.forEach((instrument) => {
+        const { pattern } = state.instruments[instrument];
+        newState.instruments[instrument].pattern = [...pattern, ...pattern];
+      });
+      return newState;
+    }
+    return state;
+  },
+  BARS_INCREMENT: (state) => {
+    if (state.bars < 8) {
+      const newState = Object.assign({}, state);
+      newState.bars++;
+      const instruments = Object.keys(state.instruments);
+      instruments.forEach((instrument) => {
+        const { pattern } = state.instruments[instrument];
+        newState.instruments[instrument].pattern = [...pattern, ...new Array(16).fill(0)];
+      });
+      return newState;
+    }
+    return state;
   },
   INSTRUMENT_VOLUME_UPDATE: (state, { payload: { instrument, volume } }) => {
     const newState = Object.assign({}, state);

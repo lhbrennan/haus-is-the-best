@@ -5,8 +5,8 @@ import Button from '../../../UI/Button';
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 5px 0;
-  align-items: center;
+  margin: 0 0 5px 0;
+  align-items: flex-end;
 `;
 
 const Input = styled.input``;

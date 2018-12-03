@@ -6,8 +6,9 @@ const Input = styled.input`
   width: 40px;
   text-align: center;
   border-radius: 3px;
-  padding: 3px 5px;
-  font-size: 16px;
+  font-size: 13px;
+  border: 1px solid #EAEAEA;
+  padding: 0;
 `;
 
 const TextInput = ({ defaultValue, handleBlur }) => (

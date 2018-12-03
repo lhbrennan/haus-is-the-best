@@ -6,10 +6,10 @@ import InstrumentVolume from '../InstrumentVolume';
 const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
-  flex: 0 0 120px;
+  flex: 0 0 130px;
   justify-content: space-around;
-  padding: 0px 10px;
   border-radius: 3px;
+  margin: 0 20px 0 0;
 `;
 
 const TrackSettings = ({ instruments }) => (

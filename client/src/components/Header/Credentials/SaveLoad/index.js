@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import SaveLoad from './SaveLoad';
-import { loadComposition } from '../../actions';
+import { loadComposition } from '../../../../actions';
 
 const saveComposition = (composition) => {
   if (composition.username === 'demo') {

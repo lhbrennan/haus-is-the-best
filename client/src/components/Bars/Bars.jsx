@@ -1,25 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import NumBars from './NumBars';
 import BarSelector from './BarSelector';
-import DuplicatePattern from './DuplicatePattern';
 
 const Wrapper = styled.div`
   display: flex;
-  flex-flow: row;
-  flex: 0 0 330px;
-  padding: 0px 10px;
-  justify-content: flex-start;
-  align-items: flex-end;
-  color: #FFFFFF;
+  flex-flow: column;
+  justify-content: flex-end;
+`;
+
+const Label = styled.label`
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0 0 5px 0;
+  font-weight: bold;
 `;
 
 const Bars = () => (
   <Wrapper>
-    <NumBars />
+    <Label>Bar</Label>
     <BarSelector />
-    <DuplicatePattern />
   </Wrapper>
 );
 

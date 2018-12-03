@@ -1,27 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PlayBackSettings from '../PlayBackSettings';
 import Bars from '../Bars/Bars';
-import SaveLoad from '../SaveLoad';
-
 import Button from '../UI/Button';
+import PlayBox from '../PlayBox';
+import DuplicatePattern from './DuplicatePattern';
 
 const Wrapper = styled.div`
   display: flex;
   flex-flow: row;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-end;
   margin: 0px 0px 25px 0px;
+  height: 100px;
+  padding: 0 50px;
 `;
 
 const Div = styled.div`
   display: flex;
   flex-flow: row;
   flex: 0 0 330px;
-  padding: 0px 10px;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: flex-end;
   color: #FFFFFF;
+  margin-left: auto;
 `;
 
 const MasterControl = ({
@@ -30,10 +32,11 @@ const MasterControl = ({
   padResponse,
 }) => (
   <Wrapper>
-    <PlayBackSettings />
+    <PlayBox />
     <Bars />
 
     <Div>
+      <DuplicatePattern />
       <Button onClick={resetPattern}>
         Reset Pattern
       </Button>
@@ -42,7 +45,6 @@ const MasterControl = ({
         Pad Sound
       </Button> */}
     </Div>
-    <SaveLoad />
   </Wrapper>
 );
 

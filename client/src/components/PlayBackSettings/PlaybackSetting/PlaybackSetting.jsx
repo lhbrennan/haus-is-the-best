@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   flex-flow: row;
   justify-content: flex-start;
   align-items: flex-start;
+  margin: 0 25px 0 0;
 `;
 
 const Label = styled.label`
@@ -13,7 +14,7 @@ const Label = styled.label`
   justify-content: flex-start;
   font-size: 14px;
   text-transform: uppercase;
-  width: 100px;
+  margin: 0 10px 0 0;
 `;
 
 const PlaybackSetting = ({ label, children }) => (

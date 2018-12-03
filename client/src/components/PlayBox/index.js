@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
-import { updateOverallVolume, togglePlaying } from '../../actions';
+import { togglePlaying } from '../../actions';
 import PlayBox from './PlayBox';
 
 const mapStateToProps = state => ({
   playing: state.playing,
-  overallVolume: state.overallVolume,
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateOverallVolume: volume => dispatch(updateOverallVolume(volume)),
   togglePlaying: () => dispatch(togglePlaying()),
 });
 

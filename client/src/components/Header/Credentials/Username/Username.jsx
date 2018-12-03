@@ -7,6 +7,7 @@ const Input = styled.input`
   border-radius: 5px;
   padding: 2px 5px;
   font-size: 16px;
+  border: 1px solid #EAEAEA;
 `;
 
 const Username = ({ username, updateUsername }) => (

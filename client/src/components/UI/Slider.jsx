@@ -4,16 +4,16 @@ import styled from 'styled-components';
 const Input = styled.input`
   width: 148px;
   height: 20px;
-  margin-top: 10px;
   transform-origin: 75px 75px;
+  margin: 0;
 `;
 
-const Slider = ({ value, handleChange }) => (
+const Slider = ({ value, handleChange, min = 0, max = 1, step = 0.05 }) => (
   <Input
     type="range"
-    min="0"
-    max="5"
-    step=".25"
+    min={min}
+    max={max}
+    step={step}
     onChange={handleChange}
     value={value}
   />

@@ -1,5 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import Pad from '../Pad';
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 270px;
+  margin: 0 0 10px 0;
+`;
 
 class QtrNoteInstrumentBlock extends React.Component {
   constructor(props) {
@@ -32,9 +41,9 @@ class QtrNoteInstrumentBlock extends React.Component {
 
   render() {
     return (
-      <div>
+      <Wrapper>
         {this.createPads()}
-      </div>
+      </Wrapper>
     );
   }
 }
