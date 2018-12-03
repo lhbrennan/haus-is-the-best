@@ -7,13 +7,23 @@ const Wrapper = styled.div`
   display: flex;
   margin: 0 0 5px 0;
   align-items: flex-end;
+  width: 200px;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  height: 35px;
+  font-size: 30px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  width: 200px
+`;
 
 const H2 = styled.h2`
   font-size: 30px;
-  margin: 0px;
+  margin: 0;
+  padding: 0;
 `;
 
 class CompositionTitle extends React.Component {
@@ -24,6 +34,13 @@ class CompositionTitle extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+  }
+
+  componentDidUpdate() {
+    const { isEditing } = this.state;
+    if (isEditing) {
+      document.getElementById('composition-title').focus();
+    }
   }
 
   handleClick() {
@@ -41,7 +58,11 @@ class CompositionTitle extends React.Component {
     const { compositionTitle } = this.props;
 
     if (isEditing) {
-      return <input type="text" onBlur={this.handleBlur} />;
+      return (
+        <Wrapper>
+          <Input id="composition-title" type="text" onBlur={this.handleBlur} />
+        </Wrapper>
+      );
     }
     return (
       <Wrapper>
