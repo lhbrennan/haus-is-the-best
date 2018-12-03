@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Button from '../../../UI/Button';
-
 const Wrapper = styled.div`
   display: flex;
   margin: 0 0 5px 0;
   align-items: flex-end;
   width: 200px;
+`;
+
+const IconButton = styled.div`
+  border: none;
+  margin: 0 0 5px 5px;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
@@ -67,7 +71,7 @@ class CompositionTitle extends React.Component {
     return (
       <Wrapper>
         <H2>{compositionTitle}</H2>
-        <Button onClick={this.handleClick}>U</Button>
+        <IconButton onClick={this.handleClick}><span className="far fa-edit" /></IconButton>
       </Wrapper>
     );
   }
