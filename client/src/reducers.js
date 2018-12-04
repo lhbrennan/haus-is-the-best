@@ -121,7 +121,7 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-// * SELECTORS
+// * STATE SELECTORS
 export const getUsername = state => state.username;
 export const getCompositionTitle = state => state.compositionTitle;
 export const getBpm = state => state.bpm;
@@ -143,4 +143,10 @@ export const getVolumes = (state) => {
     volumes[instrument] = state.tracks.instruments[instrument].volume;
   });
   return volumes;
+};
+
+// * DERIVED STATE SELECTORS
+export const getVelocity = (state, instrument, beat, subBeat) => {
+  const stepNum = ((beat - 1) * 4) + (subBeat) - 1;
+  return state.tracks.instruments[instrument].pattern[stepNum];
 };
