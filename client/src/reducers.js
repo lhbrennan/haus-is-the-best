@@ -26,6 +26,8 @@ const swing = handleActions({
 
 const playing = handleActions({
   PLAYING_TOGGLE: state => !state,
+  PATTERN_RESET: () => false,
+
 }, false);
 
 const overallVolume = handleActions({

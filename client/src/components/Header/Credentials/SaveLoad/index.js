@@ -5,7 +5,7 @@ import SaveLoad from './SaveLoad';
 import { loadComposition } from '../../../../actions';
 
 const saveComposition = (composition) => {
-  if (composition.username === 'demo') {
+  if (composition.username === 'house-heaven') {
     console.log('Cannot overwrite demo compositions');
     return;
   }
