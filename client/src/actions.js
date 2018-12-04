@@ -31,7 +31,7 @@ export const queueEvent = createAction(types.QUEUE_EVENT);
 
 export const dequeueEvent = createAction(types.DEQUEUE_EVENT);
 
-export const togglePadResponse = createAction(types.PAD_RESPONSE_TOGGLE);
+export const togglePadSound = createAction(types.PAD_SOUND_TOGGLE);
 
 export const incrementBars = createAction(types.BARS_INCREMENT);
 

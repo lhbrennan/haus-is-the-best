@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { resetPattern, togglePadResponse } from '../../actions';
+import { resetPattern } from '../../actions';
 import { getVolumes, getBpm, getPattern, getUsername } from '../../reducers';
 import MasterControl from './MasterControl';
 
@@ -10,12 +10,10 @@ const mapStateToProps = state => ({
   bpm: getBpm(state),
   username: getUsername(state),
   volumes: getVolumes(state),
-  padResponse: state.padResponse,
 });
 
 const mapDispatchToProps = dispatch => ({
   resetPattern: () => dispatch(resetPattern()),
-  togglePadResponse: () => dispatch(togglePadResponse()),
 });
 
 const MasterControlContainer = connect(

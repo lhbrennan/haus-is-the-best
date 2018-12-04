@@ -22,11 +22,11 @@ const Pad = (props) => {
     updatePattern,
     triggerSample,
     velocity,
-    padResponse,
+    padSound,
   } = props;
 
   const handler = () => {
-    if (!velocity && padResponse) {
+    if (!velocity && padSound) {
       triggerSample(instrument);
     }
     updatePattern(instrument, beat, subBeat);

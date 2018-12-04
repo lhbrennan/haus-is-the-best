@@ -19,7 +19,7 @@ class Grid extends React.Component {
 
   createQuarterNoteBlocks() {
     const {
-      pattern, resolution, instruments, triggerSample, padResponse, visibleBar,
+      pattern, resolution, instruments, triggerSample, padSound, visibleBar,
     } = this.props;
     const beats = [];
 
@@ -31,7 +31,7 @@ class Grid extends React.Component {
         beat={i + 1}
         key={i}
         triggerSample={triggerSample}
-        padResponse={padResponse}
+        padSound={padSound}
       />);
     }
     return beats;

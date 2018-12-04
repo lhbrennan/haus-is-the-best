@@ -1,13 +1,16 @@
 import { connect } from 'react-redux';
-import { updatePattern, queueEvent } from '../../actions';
+
 import Pad from './Pad';
+
+import { updatePattern, queueEvent } from '../../actions';
+import { getPadSound } from '../../reducers';
 
 const mapStateToProps = (state, ownProps) => ({
   instrument: ownProps.instrument,
   velocity: ownProps.velocity,
   beat: ownProps.beat,
   subBeat: ownProps.subBeat,
-  padResponse: state.padResponse,
+  padSound: getPadSound(state),
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -16,7 +16,7 @@ class QtrNoteGroupBlock extends React.Component {
 
   render() {
     const {
-      instruments, resolution, beat, triggerSample, padResponse,
+      instruments, resolution, beat, triggerSample, padSound,
     } = this.props;
 
     return (
@@ -28,7 +28,7 @@ class QtrNoteGroupBlock extends React.Component {
             beat={beat}
             key={instrument}
             triggerSample={triggerSample}
-            padResponse={padResponse}
+            padSound={padSound}
           />))
         }
       </Div>

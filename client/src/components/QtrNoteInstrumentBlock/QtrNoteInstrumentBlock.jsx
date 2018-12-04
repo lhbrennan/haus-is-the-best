@@ -19,7 +19,7 @@ class QtrNoteInstrumentBlock extends React.Component {
 
   createPads() {
     const {
-      pattern, numPads, beat, instrument, triggerSample, padResponse,
+      pattern, numPads, beat, instrument, triggerSample, padSound,
     } = this.props;
 
     const pads = [];
@@ -33,7 +33,7 @@ class QtrNoteInstrumentBlock extends React.Component {
         instrument={instrument}
         key={i}
         triggerSample={triggerSample}
-        padResponse={padResponse}
+        padSound={padSound}
       />);
     }
     return pads;

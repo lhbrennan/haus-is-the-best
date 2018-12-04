@@ -5,6 +5,7 @@ import Bars from '../Bars/Bars';
 import Button from '../UI/Button';
 import PlayBox from '../PlayBox';
 import DuplicatePattern from './DuplicatePattern';
+import TogglePadSound from './TogglePadSound';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,24 +27,16 @@ const Div = styled.div`
   margin-left: auto;
 `;
 
-const MasterControl = ({
-  resetPattern,
-  togglePadResponse,
-  padResponse,
-}) => (
+const MasterControl = ({ resetPattern }) => (
   <Wrapper>
     <PlayBox />
     <Bars />
-
     <Div>
       <DuplicatePattern />
       <Button onClick={resetPattern}>
         Reset Pattern
       </Button>
-
-      {/* <Button padResponse={padResponse} onClick={togglePadResponse}>
-        Pad Sound
-      </Button> */}
+      <TogglePadSound />
     </Div>
   </Wrapper>
 );

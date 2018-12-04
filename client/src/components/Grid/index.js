@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 
 import Grid from './Grid';
-import { getInstruments } from '../../reducers';
+import { getInstruments, getPadSound } from '../../reducers';
 
 const mapStateToProps = state => ({
   resolution: state.resolution,
   instruments: getInstruments(state),
-  padResponse: state.padResponse,
+  padSound: getPadSound(state),
   visibleBar: state.visibleBar,
 });
 

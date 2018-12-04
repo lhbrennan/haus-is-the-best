@@ -41,8 +41,8 @@ const eventQueue = handleActions({
   DEQUEUE_EVENT: state => [...state].slice(1),
 }, []);
 
-const padResponse = handleActions({
-  PAD_RESPONSE_TOGGLE: state => !state,
+const padSound = handleActions({
+  PAD_SOUND_TOGGLE: state => !state,
 }, true);
 
 const visibleBar = handleActions({
@@ -110,7 +110,7 @@ const rootReducer = combineReducers({
   swing,
   overallVolume,
   // * UI Settings
-  padResponse,
+  padSound,
   visibleBar,
   resolution,
   // * Track/Pattern Settings
@@ -126,6 +126,7 @@ export const getUsername = state => state.username;
 export const getCompositionTitle = state => state.compositionTitle;
 export const getBpm = state => state.bpm;
 export const getBars = state => state.tracks.bars;
+export const getPadSound = state => state.padSound;
 export const getInstruments = state => Object.keys(state.tracks.instruments);
 export const getPattern = (state) => {
   const instruments = Object.keys(state.tracks.instruments);

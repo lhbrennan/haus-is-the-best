@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getPattern } from '../../reducers';
+import { getPattern, getPadSound } from '../../reducers';
 import QtrNoteInstrumentBlock from './QtrNoteInstrumentBlock';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
   beat: ownProps.beat,
   key: ownProps.instrument,
   triggerSample: ownProps.triggerSample,
-  padResponse: ownProps.padResponse,
+  padSound: getPadSound(state),
 });
 
 // const mapDispatchToProps = dispatch => ({
