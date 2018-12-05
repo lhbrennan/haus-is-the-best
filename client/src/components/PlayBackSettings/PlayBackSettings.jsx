@@ -30,7 +30,7 @@ const PlayBackSettings = ({
 }) => (
   <Section>
     <PlaybackSetting label="BPM">
-      <TextInput defaultValue={bpm} handleBlur={e => updateBpm(e.target.value)} />
+      <TextInput value={bpm} handleBlur={updateBpm} />
     </PlaybackSetting>
     <PlaybackSetting label="Swing">
       <Slider

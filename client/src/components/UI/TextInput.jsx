@@ -11,8 +11,41 @@ const Input = styled.input`
   padding: 0;
 `;
 
-const TextInput = ({ defaultValue, handleBlur }) => (
-  <Input onBlur={handleBlur} defaultValue={defaultValue} />
-);
+class TextInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: this.props.value, // eslint-disable-line react/destructuring-assignment
+    };
+    this.handleBlur = this.handleBlur.bind(this);
+    this.updateValue = this.updateValue.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.value !== prevProps.value && this.props.value !== this.state.value) {
+      this.setState({ // eslint-disable-line react/no-did-update-set-state
+        value: this.props.value,
+      });
+    }
+  }
+
+  updateValue(e) {
+    console.log('new local value is', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+  }
+
+  handleBlur() {
+    console.log('blurring with', this.state.value);
+    this.props.handleBlur(this.state.value); // eslint-disable-line react/destructuring-assignment
+  }
+
+  render() {
+    return (
+      <Input onBlur={this.handleBlur} value={this.state.value} onChange={this.updateValue} />
+    );
+  }
+}
 
 export default TextInput;
