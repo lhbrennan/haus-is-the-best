@@ -11,7 +11,7 @@ const Input = styled.input`
   padding: 0;
 `;
 
-class TextInput extends React.Component {
+class NumInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,9 +43,14 @@ class TextInput extends React.Component {
 
   render() {
     return (
-      <Input onBlur={this.handleBlur} value={this.state.value} onChange={this.updateValue} />
+      <Input
+        type="number"
+        onBlur={this.handleBlur}
+        value={this.state.value}
+        onChange={this.updateValue}
+      />
     );
   }
 }
 
-export default TextInput;
+export default NumInput;

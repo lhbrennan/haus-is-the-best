@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import PlaybackSetting from './PlaybackSetting/PlaybackSetting';
-import TextInput from '../UI/TextInput';
+import NumInput from '../UI/NumInput';
 import Slider from '../UI/Slider';
 
 const Section = styled.section`
@@ -30,7 +30,7 @@ const PlayBackSettings = ({
 }) => (
   <Section>
     <PlaybackSetting label="BPM">
-      <TextInput value={bpm} handleBlur={updateBpm} />
+      <NumInput value={bpm} handleBlur={updateBpm} />
     </PlaybackSetting>
     <PlaybackSetting label="Swing">
       <Slider
