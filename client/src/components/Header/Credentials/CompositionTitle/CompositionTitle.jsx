@@ -53,8 +53,11 @@ class CompositionTitle extends React.Component {
 
   handleBlur(e) {
     this.setState({ isEditing: false });
-    console.log('new title', e.target.value);
-    this.props.handleBlur(e.target.value); // eslint-disable-line react/destructuring-assignment
+    const newTitle = e.target.value;
+    if (newTitle) {
+      console.log('setting new composition title-->', e.target.value);
+      this.props.handleBlur(e.target.value); // eslint-disable-line react/destructuring-assignment
+    }
   }
 
   render() {
@@ -64,7 +67,12 @@ class CompositionTitle extends React.Component {
     if (isEditing) {
       return (
         <Wrapper>
-          <Input id="composition-title" type="text" onBlur={this.handleBlur} />
+          <Input
+            id="composition-title"
+            type="text"
+            onBlur={this.handleBlur}
+            defaultValue={compositionTitle}
+          />
         </Wrapper>
       );
     }
