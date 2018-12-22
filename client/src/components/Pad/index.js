@@ -5,13 +5,31 @@ import Pad from './Pad';
 import { updatePattern, queueEvent } from '../../actions';
 import { getPadSound, getVelocity } from '../../reducers';
 
-const mapStateToProps = (state, ownProps) => ({
-  instrument: ownProps.instrument,
-  beat: ownProps.beat,
-  subBeat: ownProps.subBeat,
-  velocity: getVelocity(state, ownProps.instrument, ownProps.beat, ownProps.subBeat),
-  padSound: getPadSound(state),
-});
+const shouldAnimate = (activeSixteenthNote, beat, subBeat, playing, velocity) => (
+  activeSixteenthNote === ((beat - 1) * 4) + subBeat
+  && playing
+  && velocity
+);
+
+const mapStateToProps = (state, ownProps) => {
+  const { instrument, beat, subBeat } = ownProps;
+  const velocity = getVelocity(state, instrument, beat, subBeat);
+
+  return {
+    instrument,
+    beat,
+    subBeat,
+    velocity,
+    padSound: getPadSound(state),
+    animate: shouldAnimate(
+      state.activeSixteenthNote,
+      beat,
+      subBeat,
+      state.playing,
+      velocity,
+    ),
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   triggerSample: instrument => dispatch(queueEvent(instrument)),

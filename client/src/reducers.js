@@ -51,6 +51,17 @@ const visibleBar = handleActions({
   BAR_SELECT: (state, { payload }) => payload,
 }, 1);
 
+const activeSixteenthNote = handleActions({
+  ACTIVE_SIXTEENTH_NOTE_INCREMENT: (state, { payload: bars }) => {
+    const limit = bars * 16;
+    if (state === limit) {
+      return 1;
+    }
+    return state + 1;
+  },
+  PLAYING_TOGGLE: () => 1,
+}, 1);
+
 const tracks = handleActions({
   PATTERN_UPDATE: (state, { payload: { instrument, stepNum } }) => {
     const newState = Object.assign({}, state);
@@ -119,6 +130,8 @@ const rootReducer = combineReducers({
   tracks,
   // * Audio System
   eventQueue,
+  // * Animation System
+  activeSixteenthNote,
 });
 
 export default rootReducer;

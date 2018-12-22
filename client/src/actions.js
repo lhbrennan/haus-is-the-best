@@ -42,3 +42,5 @@ export const updateUsername = createAction(types.USERNAME_UPDATE);
 export const updateCompositionTitle = createAction(types.COMPOSITION_TITLE_UPDATE);
 
 export const duplicatePattern = createAction(types.PATTERN_DUPLICATE);
+
+export const incrementActiveSixteenthNote = createAction(types.ACTIVE_SIXTEENTH_NOTE_INCREMENT);

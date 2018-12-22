@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import styled from 'styled-components';
 
+import animator from './animator'; // * Leave this
+
 import App from './components/App';
 import AudioPlayer from './components/AudioPlayer';
-import configureStore from './store';
+import store from './store';
 
 const Wrapper = styled.div`
   background-color: #FFFFFF;
   height: 100vh;
   width: 100%
 `;
-
-const store = configureStore({}); // * takes persisted state object as argument
 
 ReactDOM.render(
   <Provider store={store}>

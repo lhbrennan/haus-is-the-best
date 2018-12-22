@@ -8,7 +8,8 @@ const Button = styled.button`
     if (velocity === 1) { return '#d8f3ff'; }
     return '#FFFFFF';
   }};
-  border-radius: 3px;
+  border-radius: ${({ animate }) => animate ? '5px' : '3px'};
+  border: ${({ animate }) => animate ? '3px solid red' : '1px solid #d1d1d1'};
   height: 60px;
   width: 60px;
   padding: 0;
@@ -23,6 +24,7 @@ const Pad = (props) => {
     triggerSample,
     velocity,
     padSound,
+    animate,
   } = props;
 
   const handler = () => {
@@ -33,7 +35,7 @@ const Pad = (props) => {
   }
 
   return (
-    <Button onClick={handler} velocity={velocity} />
+    <Button onClick={handler} velocity={velocity} animate={animate} />
   );
 };
 
